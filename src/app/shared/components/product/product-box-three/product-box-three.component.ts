@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { QuickViewComponent } from "../../modal/quick-view/quick-view.component";
 import { CartModalComponent } from "../../modal/cart-modal/cart-modal.component";
-import { Product } from "../../../classes/UserAds";
-import { ProductService } from "../../../services/product.service";
+import { UserAds } from "../../../classes/UserAds";
+import { UserAdsService } from "../../../services/product.service";
 
 @Component({
   selector: 'app-product-box-three',
@@ -11,14 +11,14 @@ import { ProductService } from "../../../services/product.service";
 })
 export class ProductBoxThreeComponent implements OnInit {
 
-  @Input() product: Product;
+  @Input() product: UserAds;
   @Input() currency: any = this.productService.Currency; // Default Currency
   @Input() cartModal: boolean = false; // Default False
   
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: UserAdsService) { }
 
   ngOnInit(): void {
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from "../../../services/product.service";
-import { Product } from "../../../classes/UserAds";
+import { UserAdsService } from "../../../services/product.service";
+import { UserAds } from "../../../classes/UserAds";
 
 @Component({
   selector: 'app-cart-variation',
@@ -12,9 +12,9 @@ export class CartVariationComponent implements OnInit, OnDestroy {
 
   @Input() direction: string = 'right'; // Default Direction Right
 
-  public products: Product[] = [];
+  public products: UserAds[] = [];
 
-  constructor(public productService: ProductService) {
+  constructor(public productService: UserAdsService) {
     this.productService.cartItems.subscribe(response => this.products = response);
   }
 

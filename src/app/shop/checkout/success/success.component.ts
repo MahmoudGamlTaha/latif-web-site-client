@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Order } from '../../../shared/classes/order';
 import { OrderService } from '../../../shared/services/order.service';
-import { ProductService } from '../../../shared/services/product.service';
+import { UserAdsService } from '../../../shared/services/product.service';
 
 @Component({
   selector: 'app-success',
@@ -12,7 +12,7 @@ export class SuccessComponent implements OnInit, AfterViewInit{
 
   public orderDetails : Order = {};
 
-  constructor(public productService: ProductService,
+  constructor(public productService: UserAdsService,
     private orderService: OrderService) { }
 
   ngOnInit(): void {	

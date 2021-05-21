@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { environment } from '../../../environments/environment';
-import { Product } from "../../shared/classes/UserAds";
-import { ProductService } from "../../shared/services/product.service";
+import { UserAds } from "../../shared/classes/UserAds";
+import { UserAdsService } from "../../shared/services/product.service";
 import { OrderService } from "../../shared/services/order.service";
 
 @Component({
@@ -15,13 +15,13 @@ import { OrderService } from "../../shared/services/order.service";
 export class CheckoutComponent implements OnInit {
 
   public checkoutForm:  FormGroup;
-  public products: Product[] = [];
+  public products: UserAds[] = [];
   public payPalConfig ? : IPayPalConfig;
   public payment: string = 'Stripe';
   public amount:  any;
 
   constructor(private fb: FormBuilder,
-    public productService: ProductService,
+    public productService: UserAdsService,
     private orderService: OrderService) { 
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],

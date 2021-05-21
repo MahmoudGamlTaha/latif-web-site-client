@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NewProductSlider } from '../../../data/slider';
-import { Product } from '../../../classes/UserAds';
-import { ProductService } from '../../../services/product.service';
+import { UserAds } from '../../../classes/UserAds';
+import { UserAdsService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-product-box-vertical-slider',
@@ -11,16 +11,21 @@ import { ProductService } from '../../../services/product.service';
 export class ProductBoxVerticalSliderComponent implements OnInit {
 
   @Input() title: string = 'New Product'; // Default
-  @Input() type: string = 'fashion'; // Default Fashion
+  @Input() type: string = 'PETS'; // Default Fashion
 
-  public products : Product[] = [];
+  public products : UserAds[] = [];
 
   public NewProductSliderConfig: any = NewProductSlider;
 
-  constructor(public productService: ProductService) { 
-    this.productService.getProducts.subscribe(response => 
-      this.products = response.filter(item => item.type == this.type)
-    );
+  constructor(public productService: UserAdsService) { 
+    this.productService.getProducts().subscribe((rawData:any) => {
+      this.products = rawData.response.data.filter(item =>{ return item.type == this.type});
+      console.log(this.type);
+      console.log(rawData.response.data);
+      console.log(this.products);
+
+    });
+    console.log(this.products);
   }
 
   ngOnInit(): void {

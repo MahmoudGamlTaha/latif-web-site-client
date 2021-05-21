@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Product } from '../../../../shared/classes/UserAds';
+import { UserAds } from '../../../../shared/classes/UserAds';
 
 @Component({
   selector: 'app-grid',
@@ -8,7 +8,7 @@ import { Product } from '../../../../shared/classes/UserAds';
 })
 export class GridComponent implements OnInit {
 
-  @Input() products: Product[] = [];
+  @Input() products: UserAds[] = [];
   @Input() paginate: any = {};
   @Input() layoutView: string = 'grid-view';
   @Input() sortBy: string;

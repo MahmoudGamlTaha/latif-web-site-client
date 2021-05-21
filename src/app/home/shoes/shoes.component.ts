@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CategorySlider, ProductSlider } from '../../shared/data/slider';
 import { UserAds } from '../../shared/classes/UserAds';
-import { ProductService } from '../../shared/services/product.service';
+import { UserAdsService } from '../../shared/services/product.service';
 
 @Component({
   selector: 'app-shoes',
@@ -12,22 +12,24 @@ export class ShoesComponent implements OnInit, OnDestroy {
 
   public themeLogo: string = 'https://res.cloudinary.com/highcoder/image/upload/v1621478193/pet-app/web/logo_xwhfvi.png'; // Change Logo
   
-  public products: UserAds[] = [];
+  public products: any;
   public productCollections: any[] = [];
-
+  
   public CategorySliderConfig: any = CategorySlider;
   public ProductSliderConfig: any = ProductSlider;
   
-  constructor(public productService: ProductService) {
-    this.productService.getProducts.subscribe(response => {
-      this.products = response.filter(item => item.type == 'shoes');
+  constructor(public productService: UserAdsService) {
+    this.productService.getProducts().subscribe((rawData:any)=> {
+      this.products =  rawData.response.data;//.filter(item => {return item.type != ''});
       // Get Product Collection
-      this.products.filter((item) => {
-        item.collection.filter((collection) => {
-          const index = this.productCollections.indexOf(collection);
-          if (index === -1) this.productCollections.push(collection);
-        })
-      })
+     // this.products.filter((item) => {
+       // item.collection.filter((collection) => {
+         // console.log(collection);
+         // const index = this.productCollections.indexOf(collection);
+         // if (index === -1) this.productCollections.push(collection);
+       // })
+      //})
+     // console.log(this.products);
     });
   }
 
@@ -49,6 +51,7 @@ export class ShoesComponent implements OnInit, OnDestroy {
   public categories = [{
     image: 'https://res.cloudinary.com/highcoder/image/upload/v1617372773/pet-app/drawable-xhdpi/fish_sx4r4h.png',
     title: 'Fishs'
+    
   }, {
     image: 'https://res.cloudinary.com/highcoder/image/upload/v1617372773/pet-app/drawable-xhdpi/hamster-facing-right_crcmun.png',
     title: 'Hamster'
@@ -70,7 +73,7 @@ export class ShoesComponent implements OnInit, OnDestroy {
   }*/];
 
   // Collection banner
-  public collections1 = [{
+  public serviceCollection = [{
     image: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Page-1_bjsles.png',
     save: '',
     title: 'Clinic'
@@ -78,7 +81,18 @@ export class ShoesComponent implements OnInit, OnDestroy {
     image: 'https://res.cloudinary.com/highcoder/image/upload/v1619480984/pet-app/drawable-xxxhdpi/housing_iw3wfv.png',
     save: '',
     title: 'Hostly'
-  }];
+  },
+  {
+    image: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Path_173_io6qem.png',
+    save: '',
+    title: 'Deliveries'
+  },
+  {
+    image: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Group_9862_jpx9ap.png',
+    save: '',
+    title: 'Shower&HairCut'
+  }
+];
 
   // Collection banner
   public collections2 = [{

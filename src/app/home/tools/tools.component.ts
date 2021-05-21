@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeSlider, ProductSlider } from '../../shared/data/slider';
-import { Product } from '../../shared/classes/UserAds';
-import { ProductService } from '../../shared/services/product.service';
+import { UserAds } from '../../shared/classes/UserAds';
+import { UserAdsService } from '../../shared/services/product.service';
 
 @Component({
   selector: 'app-tools',
@@ -13,12 +13,12 @@ export class ToolsComponent implements OnInit, OnDestroy {
 
   public themeLogo: string = 'assets/images/icon/logo-5.png';
   
-  public products: Product[] = [];
+  public products: UserAds[] = [];
   public productCollections: any[] = [];
 
   constructor(private _sanitizer:DomSanitizer,
-    public productService: ProductService) {
-    this.productService.getProducts.subscribe(response => {
+    public productService: UserAdsService) {
+    this.productService.getProducts().subscribe(response => {
       this.products = response.filter(item => item.type == 'tools');
       // Get Product Collection
       this.products.filter((item) => {

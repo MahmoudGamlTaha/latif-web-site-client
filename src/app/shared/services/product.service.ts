@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, startWith, delay } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { Product } from '../classes/UserAds';
+import { UserAds } from '../classes/UserAds';
+import { server } from 'src/environments/environment';
 
 const state = {
   products: JSON.parse(localStorage['products'] || '[]'),
@@ -15,40 +16,47 @@ const state = {
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class UserAdsService {
 
   public Currency = { name: 'SAR', currency: 'SAR', price: 1 } // Default Currency
   public OpenCart: boolean = false;
-  public Products
+  public userAds;
 
   constructor(private http: HttpClient,
     private toastrService: ToastrService) { }
 
   /*
     ---------------------------------------------
-    ---------------  Product  -------------------
+    ---------------  UserAds  -------------------
     ---------------------------------------------
   */
 
-  // Product
-  private get products(): Observable<Product[]> {
-    this.Products = this.http.get<Product[]>('assets/data/products.json').pipe(map(data => data));
-    this.Products.subscribe(next => { localStorage['products'] = JSON.stringify(next) });
-    return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
+  // UserAds
+  public getProducts(): Observable<any[]> {
+    //this.UserAdss = this.http.get<UserAds[]>('assets/data/products.json').pipe(map(data => data));
+    //this.UserAdss.subscribe(next => { localStorage['products'] = JSON.stringify(next) });
+    //return this.UserAdss = this.UserAdss.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
+    let adsUrl = server.url + 'api/public/ads/nearest';
+    //console.log(adsUrl);
+    this.userAds = this.http.get<any[]>(adsUrl);
+    return this.userAds;
   }
 
-  // Get Products
-  public get getProducts(): Observable<Product[]> {
-    return this.products;
+  // Get UserAdss
+  public get getUserAdss(): Observable<UserAds[]> {
+    this.getProducts();
+    return this.userAds;
   }
 
-  // Get Products By Slug
-  public getProductBySlug(slug: string): Observable<Product> {
-    return this.products.pipe(map(items => { 
+  // Get UserAdss By Slug
+  public getUserAdsBySlug(slug: string): Observable<UserAds> {
+  /*  return this.userAds.pipe(map(items => { 
       return items.find((item: any) => { 
-        return item.title.replace(' ', '-') === slug; 
+        return item.name.replace(' ', '-') === slug; 
       }); 
-    }));
+    }));*/
+    // implemet
+    return null;
   }
 
 
@@ -59,12 +67,12 @@ export class ProductService {
   */
 
   // Get Wishlist Items
-  public get wishlistItems(): Observable<Product[]> {
+  public get wishlistItems(): Observable<UserAds[]> {
     const itemsStream = new Observable(observer => {
       observer.next(state.wishlist);
       observer.complete();
     });
-    return <Observable<Product[]>>itemsStream;
+    return <Observable<UserAds[]>>itemsStream;
   }
 
   // Add to Wishlist
@@ -75,13 +83,13 @@ export class ProductService {
         ...product
       })
     }
-    this.toastrService.success('Product has been added in wishlist.');
+    this.toastrService.success('UserAds has been added in wishlist.');
     localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
     return true
   }
 
   // Remove Wishlist items
-  public removeWishlistItem(product: Product): any {
+  public removeWishlistItem(product: UserAds): any {
     const index = state.wishlist.indexOf(product);
     state.wishlist.splice(index, 1);
     localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
@@ -90,17 +98,17 @@ export class ProductService {
 
   /*
     ---------------------------------------------
-    -------------  Compare Product  -------------
+    -------------  Compare UserAds  -------------
     ---------------------------------------------
   */
 
   // Get Compare Items
-  public get compareItems(): Observable<Product[]> {
+  public get compareItems(): Observable<UserAds[]> {
     const itemsStream = new Observable(observer => {
       observer.next(state.compare);
       observer.complete();
     });
-    return <Observable<Product[]>>itemsStream;
+    return <Observable<UserAds[]>>itemsStream;
   }
 
   // Add to Compare
@@ -111,13 +119,13 @@ export class ProductService {
         ...product
       })
     }
-    this.toastrService.success('Product has been added in compare.');
+    this.toastrService.success('UserAds has been added in compare.');
     localStorage.setItem("compareItems", JSON.stringify(state.compare));
     return true
   }
 
   // Remove Compare items
-  public removeCompareItem(product: Product): any {
+  public removeCompareItem(product: UserAds): any {
     const index = state.compare.indexOf(product);
     state.compare.splice(index, 1);
     localStorage.setItem("compareItems", JSON.stringify(state.compare));
@@ -131,12 +139,12 @@ export class ProductService {
   */
 
   // Get Cart Items
-  public get cartItems(): Observable<Product[]> {
+  public get cartItems(): Observable<UserAds[]> {
     const itemsStream = new Observable(observer => {
       observer.next(state.cart);
       observer.complete();
     });
-    return <Observable<Product[]>>itemsStream;
+    return <Observable<UserAds[]>>itemsStream;
   }
 
   // Add to Cart
@@ -163,7 +171,7 @@ export class ProductService {
   }
 
   // Update Cart Quantity
-  public updateCartQuantity(product: Product, quantity: number): Product | boolean {
+  public updateCartQuantity(product: UserAds, quantity: number): UserAds | boolean {
     return state.cart.find((items, index) => {
       if (items.id === product.id) {
         const qty = state.cart[index].quantity + quantity
@@ -189,7 +197,7 @@ export class ProductService {
   }
 
   // Remove Cart items
-  public removeCartItem(product: Product): any {
+  public removeCartItem(product: UserAds): any {
     const index = state.cart.indexOf(product);
     state.cart.splice(index, 1);
     localStorage.setItem("cartItems", JSON.stringify(state.cart));
@@ -198,8 +206,8 @@ export class ProductService {
 
   // Total amount 
   public cartTotalAmount(): Observable<number> {
-    return this.cartItems.pipe(map((product: Product[]) => {
-      return product.reduce((prev, curr: Product) => {
+    return this.cartItems.pipe(map((product: UserAds[]) => {
+      return product.reduce((prev, curr: UserAds) => {
         let price = curr.price;
         if(curr.discount) {
           price = curr.price - (curr.price * curr.discount / 100)
@@ -211,14 +219,14 @@ export class ProductService {
 
   /*
     ---------------------------------------------
-    ------------  Filter Product  ---------------
+    ------------  Filter UserAds  ---------------
     ---------------------------------------------
   */
 
-  // Get Product Filter
-  public filterProducts(filter: any): Observable<Product[]> {
-    return this.products.pipe(map(product => 
-      product.filter((item: Product) => {
+  // Get UserAds Filter
+  public filterUserAdss(filter: any): Observable<UserAds[]> {
+    /*return this.products.pipe(map(product => 
+      product.filter((item: UserAds) => {
         if (!filter.length) return true
         const Tags = filter.some((prev) => { // Match Tags
           if (item.tags) {
@@ -229,11 +237,12 @@ export class ProductService {
         })
         return Tags
       })
-    ));
+    ));*/
+    return  new Observable<UserAds[]>();
   }
 
   // Sorting Filter
-  public sortProducts(products: Product[], payload: string): any {
+  public sortUserAdss(products: UserAds[], payload: string): any {
 
     if(payload === 'ascending') {
       return products.sort((a, b) => {
@@ -246,18 +255,18 @@ export class ProductService {
       })
     } else if (payload === 'a-z') {
       return products.sort((a, b) => {
-        if (a.title < b.title) {
+        if (a.name < b.name) {
           return -1;
-        } else if (a.title > b.title) {
+        } else if (a.name > b.name) {
           return 1;
         }
         return 0;
       })
     } else if (payload === 'z-a') {
       return products.sort((a, b) => {
-        if (a.title > b.title) {
+        if (a.name > b.name) {
           return -1;
-        } else if (a.title < b.title) {
+        } else if (a.name < b.name) {
           return 1;
         }
         return 0;
@@ -285,7 +294,7 @@ export class ProductService {
 
   /*
     ---------------------------------------------
-    ------------- Product Pagination  -----------
+    ------------- UserAds Pagination  -----------
     ---------------------------------------------
   */
   public getPager(totalItems: number, currentPage: number = 1, pageSize: number = 16) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductService } from "../../shared/services/product.service";
-import { Product } from "../../shared/classes/UserAds";
+import { UserAdsService } from "../../shared/services/product.service";
+import { UserAds } from "../../shared/classes/UserAds";
 
 @Component({
   selector: 'app-compare',
@@ -10,10 +10,10 @@ import { Product } from "../../shared/classes/UserAds";
 })
 export class CompareComponent implements OnInit {
 
-  public products: Product[] = [];
+  public products: UserAds[] = [];
 
   constructor(private router: Router, 
-    public productService: ProductService) {
+    public productService: UserAdsService) {
     this.productService.compareItems.subscribe(response => this.products = response);
   }
 

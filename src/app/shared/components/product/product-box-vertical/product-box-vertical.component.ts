@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from "../../../classes/UserAds";
+import { UserAds } from "../../../classes/UserAds";
 
 @Component({
   selector: 'app-product-box-vertical',
@@ -8,9 +8,8 @@ import { Product } from "../../../classes/UserAds";
 })
 export class ProductBoxVerticalComponent implements OnInit {
 
-  @Input() product : Product;
+  @Input() product : UserAds;
   @Input() currency : any;
-
   public ImageSrc : string
   
   constructor() { }

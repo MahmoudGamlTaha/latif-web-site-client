@@ -2,8 +2,8 @@ import { Component, OnInit, Injectable, PLATFORM_ID, Inject } from '@angular/cor
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { ProductService } from "../../services/product.service";
-import { Product } from "../../classes/UserAds";
+import { UserAdsService } from "../../services/product.service";
+import { UserAds } from "../../classes/UserAds";
 
 @Component({
   selector: 'app-settings',
@@ -12,7 +12,7 @@ import { Product } from "../../classes/UserAds";
 })
 export class SettingsComponent implements OnInit {
 
-  public products: Product[] = [];
+  public products: UserAds[] = [];
   public search: boolean = false;
   
   public languages = [{ 
@@ -39,7 +39,7 @@ export class SettingsComponent implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
-    public productService: ProductService) {
+    public productService: UserAdsService) {
     this.productService.cartItems.subscribe(response => this.products = response);
   }
 

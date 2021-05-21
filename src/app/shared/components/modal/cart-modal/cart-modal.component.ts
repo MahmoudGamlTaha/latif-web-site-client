@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input, AfterViewI
   Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProductService } from "../../../services/product.service";
-import { Product } from "../../../classes/UserAds";
+import { UserAdsService } from "../../../services/product.service";
+import { UserAds } from "../../../classes/UserAds";
 
 @Component({
   selector: 'app-cart-modal',
@@ -12,7 +12,7 @@ import { Product } from "../../../classes/UserAds";
 })
 export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input() product: Product;
+  @Input() product: UserAds;
   @Input() currency : any;
   
   @ViewChild("cartModal", { static: false }) CartModal: TemplateRef<any>;
@@ -23,7 +23,7 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private modalService: NgbModal,
-    private productService: ProductService) {
+    private productService: UserAdsService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +33,7 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async openModal(product) {
-    await this.productService.getProducts.subscribe(response => this.products = response);
+    await this.productService.getProducts().subscribe(response => this.products = response);
     this.products = await this.products.filter(items => items.category == product.category && items.id != product.id);
     const status = await this.productService.addToCart(product);
     if(status) {

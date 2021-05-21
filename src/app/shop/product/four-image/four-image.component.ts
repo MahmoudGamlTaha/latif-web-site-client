@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from '../../../shared/classes/UserAds';
-import { ProductService } from '../../../shared/services/product.service';
+import { UserAds } from '../../../shared/classes/UserAds';
+import { UserAdsService } from '../../../shared/services/product.service';
 import { SizeModalComponent } from "../../../shared/components/modal/size-modal/size-modal.component";
 
 @Component({
@@ -11,7 +11,7 @@ import { SizeModalComponent } from "../../../shared/components/modal/size-modal/
 })
 export class FourImageComponent implements OnInit {
 
-  public product: Product = {};
+  public product: UserAds;
   public counter: number = 1;
   public activeSlide: any = 0;
   public selectedSize: any;
@@ -19,7 +19,7 @@ export class FourImageComponent implements OnInit {
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
   
   constructor(private route: ActivatedRoute, private router: Router,
-    public productService: ProductService) { 
+    public productService: UserAdsService) { 
       this.route.data.subscribe(response => this.product = response.data );
     }
 

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input,
   Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Product } from "../../../classes/UserAds";
+import { UserAds } from "../../../classes/UserAds";
 
 @Component({
   selector: 'app-size-modal',
@@ -11,7 +11,7 @@ import { Product } from "../../../classes/UserAds";
 })
 export class SizeModalComponent implements OnInit, OnDestroy  {
   
-  @Input() product: Product;
+  @Input() product: UserAds;
 
   @ViewChild("sizeChart", { static: false }) SizeChart: TemplateRef<any>;
 

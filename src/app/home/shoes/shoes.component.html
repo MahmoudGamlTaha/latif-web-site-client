@@ -1,4 +1,4 @@
-<app-header-three [themeLogo]="themeLogo"></app-header-three>
+<app-header-one [themeLogo]="themeLogo"></app-header-one>
 
 <!-- Home slider start-->
 <section class="p-0">
@@ -46,39 +46,20 @@
 <!-- categories End -->
 
 <!-- about section-->
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <div class="title3">
-                    <h4>about us</h4>
-                    <h2 class="title-inner3">welcome to latif app</h2>
-                    <div class="line"></div>
-                </div>
-                <div class="about-text">
-                    <p>
-                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                      voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- about section end -->
 
-<!-- collection banner start-->
+<!-- collection banner start--
 <section class="section-b-space p-t-0">
   <div class="container">
     <div class="row partition2">
-      <div class="col-md-6" *ngFor="let collection of collections1">
+      <div class="col-md-6" *ngFor="let collection of serviceCollection">
         <a [routerLink]="['/shop/collection/left/sidebar']" [queryParams]="{ category: 'pets'}">
           <div class="collection-banner p-right text-center">
             <img [src]="collection.image" class="img-fluid size" alt="collection-banner" >
             <div class="contain-banner">
               <div>
                 <h4 class="text-white">{{collection.save}}</h4>
-                <h2>{{collection.title}}</h2>
+                <h3>{{collection.title}}</h3>
               </div>
             </div>
           </div>
@@ -94,7 +75,7 @@
     <div class="container">
         <div class="title3">
             <h4>our collection</h4>
-            <h2 class="title-inner3">special products</h2>
+            <h2 class="title-inner3">special Services</h2>
             <div class="line"></div>
         </div>
         <div class="row">
@@ -123,15 +104,15 @@
 <section class="p-0">
   <div class="container-fluid">
       <div class="row category-border">
-          <div class="col-sm-4 border-padding" *ngFor="let collection of collections2">
+          <div class="col-sm" *ngFor="let collection of serviceCollection">
               <div class="category-banner">
                   <div>
-                      <img [src]="collection.image" class="img-fluid" alt="">
+                      <img [src]="collection.image" class="img-fluid size2" alt="">
                   </div>
                   <div class="category-box">
                       <a [routerLink]="['/shop/collection/left/sidebar']"
                          [queryParams]="{ category: 'shoes'}">
-                          <h2>{{collection.title}}</h2>
+                          <h5>{{collection.title}}</h5>
                       </a>
                   </div>
               </div>
@@ -147,26 +128,26 @@
       <div class="row multiple-slider">
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
-              [title]="'New product'"
-              [type]="'shoes'">    
+              [title]="'Pets'"
+              [type]="'PETS'">    
             </app-product-box-vertical-slider>
           </div>
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
-              [title]="'Sell product'"
-              [type]="'shoes'">    
+              [title]="'Pet Care'"
+              [type]="'PET_CARE'">    
             </app-product-box-vertical-slider>
           </div>
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
-              [title]="'Feature Product'"
-              [type]="'shoes'">    
+              [title]="'Services'"
+              [type]="'SERVICE'">    
             </app-product-box-vertical-slider>
           </div>
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
-              [title]="'Best Product'"
-              [type]="'shoes'">    
+              [title]="'Accesories'"
+              [type]="'ACCESSORIES'">    
             </app-product-box-vertical-slider>
           </div>
       </div>

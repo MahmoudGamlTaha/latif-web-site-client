@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../shared/classes/UserAds';
-import { ProductService } from '../../../shared/services/product.service';
+import { UserAds } from '../../../shared/classes/UserAds';
+import { UserAdsService } from '../../../shared/services/product.service';
 
 @Component({
   selector: 'app-product-tabs',
@@ -9,10 +9,10 @@ import { ProductService } from '../../../shared/services/product.service';
 })
 export class ProductTabsComponent implements OnInit {
 
-  public products: Product[] = [];
+  public products: UserAds[] = [];
 
-  constructor(public productService: ProductService) { 
-    this.productService.getProducts.subscribe(response => this.products = response);
+  constructor(public productService: UserAdsService) { 
+    this.productService.getProducts().subscribe(response => this.products = response);
   }
 
   ngOnInit(): void {

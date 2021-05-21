@@ -1,9 +1,9 @@
-import { Product } from './UserAds';
+import { UserAds } from './UserAds';
 
 // Order
 export interface Order {
     shippingDetails?: any;
-    product?: Product;
+    product?: UserAds;
     orderId?: any;
     totalAmount?: any;
 }

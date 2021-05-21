@@ -3,8 +3,8 @@ import { Component, OnInit, OnDestroy, ViewChild, TemplateRef, Input,
 import { isPlatformBrowser } from '@angular/common';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { Product } from "../../../classes/UserAds";
-import { ProductService } from '../../../../shared/services/product.service';
+import { UserAds } from "../../../classes/UserAds";
+import { UserAdsService } from '../../../../shared/services/product.service';
 
 @Component({
   selector: 'app-quick-view',
@@ -13,7 +13,7 @@ import { ProductService } from '../../../../shared/services/product.service';
 })
 export class QuickViewComponent implements OnInit, OnDestroy  {
 
-  @Input() product: Product;
+  @Input() product: UserAds;
   @Input() currency: any;  
   @ViewChild("quickView", { static: false }) QuickView: TemplateRef<any>;
 
@@ -24,7 +24,7 @@ export class QuickViewComponent implements OnInit, OnDestroy  {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private router: Router, private modalService: NgbModal,
-    public productService: ProductService) { }
+    public productService: UserAdsService) { }
 
   ngOnInit(): void {
   }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { ProductService } from "../../../shared/services/product.service";
-import { Product } from '../../../shared/classes/UserAds';
+import { UserAdsService } from "../../../shared/services/product.service";
+import { UserAds } from '../../../shared/classes/UserAds';
 
 @Component({
   selector: 'app-collection-left-sidebar',
@@ -13,7 +13,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   
   public grid: string = 'col-xl-3 col-md-6';
   public layoutView: string = 'grid-view';
-  public products: Product[] = [];
+  public products: UserAds[] = [];
   public brands: any[] = [];
   public colors: any[] = [];
   public size: any[] = [];
@@ -28,7 +28,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public loader: boolean = true;
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private viewScroller: ViewportScroller, public productService: ProductService) {   
+    private viewScroller: ViewportScroller, public productService: UserAdsService) {   
       // Get Query params..
       this.route.queryParams.subscribe(params => {
 
@@ -44,9 +44,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
         this.pageNo = params.page ? params.page : this.pageNo;
 
         // Get Filtered Products..
-        this.productService.filterProducts(this.tags).subscribe(response => {         
+    //    this.productService.filterProducts(this.tags).subscribe(response => {         
           // Sorting Filter
-          this.products = this.productService.sortProducts(response, this.sortBy);
+        //  this.products = this.productService.sortProducts(response, this.sortBy);
           // Category Filter
           if(params.category)
             this.products = this.products.filter(item => item.type == this.category);
@@ -56,7 +56,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
           this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
           this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
         })
-      })
+      //})
   }
 
   ngOnInit(): void {

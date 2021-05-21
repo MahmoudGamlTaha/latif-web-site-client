@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Product } from '../../../../shared/classes/UserAds';
+import { UserAds } from '../../../../shared/classes/UserAds';
 
 @Component({
   selector: 'app-brands',
@@ -8,7 +8,7 @@ import { Product } from '../../../../shared/classes/UserAds';
 })
 export class BrandsComponent implements OnInit {
 
-  @Input() products: Product[] = [];
+  @Input() products: UserAds[] = [];
   @Input() brands: any[] = [];
 
   @Output() brandsFilter: EventEmitter<any> = new EventEmitter<any>();
@@ -24,11 +24,8 @@ export class BrandsComponent implements OnInit {
   get filterbyBrand() {
     const uniqueBrands = [];
     this.products.filter((product) => {
-      if (product.brand) {
-        const index = uniqueBrands.indexOf(product.brand)
-        if (index === -1) uniqueBrands.push(product.brand)
-      }
-    })
+     
+    });
     return uniqueBrands
   }
 

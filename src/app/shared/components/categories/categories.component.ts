@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../classes/UserAds';
-import { ProductService } from '../../services/product.service';
+import { UserAds } from '../../classes/UserAds';
+import { UserAdsService } from '../../services/product.service';
 
 @Component({
   selector: 'app-categories',
@@ -9,11 +9,11 @@ import { ProductService } from '../../services/product.service';
 })
 export class CategoriesComponent implements OnInit {
 
-  public products: Product[] = [];
+  public products: UserAds[] = [];
   public collapse: boolean = true;
 
-  constructor(public productService: ProductService) { 
-    this.productService.getProducts.subscribe(product => this.products = product);
+  constructor(public productService: UserAdsService) { 
+    this.productService.getProducts().subscribe(product => this.products = product);
   }
 
   ngOnInit(): void {

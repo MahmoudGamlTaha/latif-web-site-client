@@ -16,6 +16,11 @@ export interface UserAds {
     createdBy?: users;
     extra?: extraInfo[];
     images?: Images[];
+    category_id:number;
+    categoryName:string;
+    variants:Variants[];
+    title:string;
+    sale:boolean;
 }
 
 export interface Variants {

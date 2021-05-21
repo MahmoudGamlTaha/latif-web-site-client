@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { ProductService } from "../../../shared/services/product.service";
-import { Product } from '../../../shared/classes/UserAds';
+import { UserAdsService } from "../../../shared/services/product.service";
+import { UserAds } from '../../../shared/classes/UserAds';
 import * as _ from 'lodash'
 
 @Component({
@@ -32,7 +32,7 @@ export class CollectionInfinitescrollComponent implements OnInit {
   public addItemCount = 8;
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private viewScroller: ViewportScroller, public productService: ProductService) {   
+    private viewScroller: ViewportScroller, public productService: UserAdsService) {   
       // Get Query params..
       this.route.queryParams.subscribe(params => {
         this.products = [];
@@ -49,13 +49,13 @@ export class CollectionInfinitescrollComponent implements OnInit {
         this.sortBy = params.sortBy ? params.sortBy : 'ascending';
 
         // Get Filtered Products..
-        this.productService.filterProducts(this.tags).subscribe(response => {
+       // this.productService.filterProducts(this.tags).subscribe(response => {
 
           // All Products
-          this.all_products = response;
+        //  this.all_products = response;
 
           // Sorting Filter
-          this.all_products = this.productService.sortProducts(response, this.sortBy);
+        //  this.all_products = this.productService.sortProducts(response, this.sortBy);
 
           // Category Filter
           if(params.category)
@@ -64,10 +64,10 @@ export class CollectionInfinitescrollComponent implements OnInit {
           // Price Filter
           this.all_products = this.all_products.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice)
     
-          this.addItems();
+       //   this.addItems();
           
         })
-      })
+     // })
   }
 
   ngOnInit(): void {
