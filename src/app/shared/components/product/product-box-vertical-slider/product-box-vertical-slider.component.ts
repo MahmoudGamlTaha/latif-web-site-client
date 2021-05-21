@@ -13,7 +13,7 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
   @Input() title: string = 'New Product'; // Default
   @Input() type: string = 'PETS'; // Default Fashion
 
-  public products : UserAds[] = [];
+  public products : any[] = [];
 
   public NewProductSliderConfig: any = NewProductSlider;
 

@@ -29,11 +29,7 @@ export class ProductBoxFourComponent implements OnInit {
   // Get Product Color
   Color(variants) {
     const uniqColor = [];
-    for (let i = 0; i < Object.keys(variants).length; i++) {
-      if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
-        uniqColor.push(variants[i].color)
-      }
-    }
+   
     return uniqColor
   }
 

@@ -1,7 +1,7 @@
 <div class="img-wrapper">
     <div class="img-block">
         <div class="lable-wrapper">
-            <span class="lable1" *ngIf="product.new">new</span>
+            <span class="lable1" *ngIf="product.price == 0">donation</span>
             <span class="lable2" *ngIf="product.sale">{{ product?.discount }}% off</span>
         </div>
         <div class="front">
@@ -13,7 +13,7 @@
         </div>
         <div class="back" *ngIf="onHowerChangeImage">
             <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
-                <img [src]="ImageSrc ? ImageSrc : product.images[1]" class="img-fluid lazy-loading" alt="{{ product.images[1].alt }}">
+                <img [src]="ImageSrc ? ImageSrc : product.images[1]" class="img-fluid lazy-loading" alt="{{ product.type }}">
             </a>
         </div>
         <div class="cart-info">
