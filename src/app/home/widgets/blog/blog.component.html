@@ -4,17 +4,18 @@
       <div class="col-md-12">
         <a [routerLink]="'/pages/blog/details'">
           <div class="classic-effect">
-            <img [src]="blog.image" class="img-fluid" alt="blog">
+            <img *ngIf="blog.image != null; else default" [src]="blog.image" class="img-fluid" alt="blog">
+            <img src="assets/images/product/placeholder.jpg" #default class="img-fluid blogImgSize">
             <span></span>
           </div>
         </a>
         <div class="blog-details">
-          <h4>{{blog.date}}</h4>
+          <h4>{{blog.createdDate}}</h4>
           <a [routerLink]="'/pages/blog/details'">
             <p>{{blog.title}}</p>
           </a>
           <hr class="style1">
-          <h6> {{ 'by:' +blog.by}} , {{ '2 Comment' }}</h6>
+          <h6> {{ 'by:' +blog.user?.firstName+' '+ blog.user?.lastName}} <!--, {{ '2 Comment' }} --></h6>
         </div>
       </div>
     </ng-template>

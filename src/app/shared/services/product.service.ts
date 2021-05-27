@@ -30,7 +30,6 @@ export class UserAdsService {
     ---------------  UserAds  -------------------
     ---------------------------------------------
   */
-
   // UserAds
   public getProducts(): Observable<any[]> {
     //this.UserAdss = this.http.get<UserAds[]>('assets/data/products.json').pipe(map(data => data));
@@ -41,7 +40,9 @@ export class UserAdsService {
     this.userAds = this.http.get<any[]>(adsUrl);
     return this.userAds;
   }
-
+  public getFilterAds(): Observable<any[]>{
+    return this.userAds;
+  }
   // Get UserAdss
   public get getUserAdss(): Observable<UserAds[]> {
     this.getProducts();
@@ -49,14 +50,12 @@ export class UserAdsService {
   }
 
   // Get UserAdss By Slug
-  public getUserAdsBySlug(slug: string): Observable<UserAds> {
-  /*  return this.userAds.pipe(map(items => { 
-      return items.find((item: any) => { 
-        return item.name.replace(' ', '-') === slug; 
+  public getUserAdsBySlug(slug: number): Observable<UserAds> {
+    return this.userAds.pipe(map((items:any) => { 
+      return items.response.data.find((item: any) => { 
+        return item.id === slug; 
       }); 
-    }));*/
-    // implemet
-    return null;
+    }));
   }
 
 

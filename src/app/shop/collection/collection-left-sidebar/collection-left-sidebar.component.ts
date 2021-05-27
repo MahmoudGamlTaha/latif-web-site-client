@@ -30,8 +30,8 @@ export class CollectionLeftSidebarComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router,
     private viewScroller: ViewportScroller, public productService: UserAdsService) {   
       // Get Query params..
+      console.log(route.queryParams);
       this.route.queryParams.subscribe(params => {
-
         this.brands = params.brand ? params.brand.split(",") : [];
         this.colors = params.color ? params.color.split(",") : [];
         this.size  = params.size ? params.size.split(",")  : [];

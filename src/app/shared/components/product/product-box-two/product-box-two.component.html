@@ -4,9 +4,9 @@
 		<span class="lable4" *ngIf='product.price > 0'>sale</span>
 	</div>
 	<div class="front">
-        <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+        <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
             <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
-                 [lazyLoad]="ImageSrc ? ImageSrc : product.images[0]" 
+                 [lazyLoad]=" product.images[0] ? ImageSrc : product.images[0]" 
                  class="img-fluid lazy-loading" alt="">
         </a>
 	</div>

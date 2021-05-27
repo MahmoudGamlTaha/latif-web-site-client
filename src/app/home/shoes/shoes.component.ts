@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CategorySlider, ProductSlider } from '../../shared/data/slider';
 import { UserAds } from '../../shared/classes/UserAds';
 import { UserAdsService } from '../../shared/services/product.service';
+import { BlogService } from 'src/app/shared/services/blog.service';
 
 @Component({
   selector: 'app-shoes',
@@ -14,25 +15,26 @@ export class ShoesComponent implements OnInit, OnDestroy {
   
   public products: any;
   public productCollections: any[] = [];
-  
+  public current_page:number = 0;
   public CategorySliderConfig: any = CategorySlider;
   public ProductSliderConfig: any = ProductSlider;
   
-  constructor(public productService: UserAdsService) {
-    this.productService.getProducts().subscribe((rawData:any)=> {
-      this.products =  rawData.response.data;//.filter(item => {return item.type != ''});
-      // Get Product Collection
-     // this.products.filter((item) => {
-       // item.collection.filter((collection) => {
-         // console.log(collection);
-         // const index = this.productCollections.indexOf(collection);
-         // if (index === -1) this.productCollections.push(collection);
-       // })
-      //})
-     // console.log(this.products);
-    });
+  constructor(public productService: UserAdsService, public blogService: BlogService) {
+    this.getProduct();
+    this.getBlog();
   }
+public getProduct(){
+    this.productService.getProducts().subscribe((rawData:any)=> {
+    this.products =  rawData.response.data;
+  });
+}
 
+public getBlog(){
+  console.log(5555);
+  this.blogService.getBlogs(this.current_page).subscribe((item:any) => {
+    this.blogs = item.response.data;
+  });
+}
   // sliders
   public sliders = [{
     title: 'special offer',
