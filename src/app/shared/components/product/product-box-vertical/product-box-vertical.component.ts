@@ -12,7 +12,9 @@ export class ProductBoxVerticalComponent implements OnInit {
   @Input() currency : any;
   public ImageSrc : string
   
-  constructor() { }
+  constructor() { 
+   this.ImageSrc = this.product.image;
+  }
 
   ngOnInit(): void {
   }

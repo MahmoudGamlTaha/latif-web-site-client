@@ -5,6 +5,7 @@ import { map, startWith, delay } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { UserAds } from '../classes/UserAds';
 import { server } from 'src/environments/environment';
+import { adsFilter } from '../classes/adsFilter';
 
 const state = {
   products: JSON.parse(localStorage['products'] || '[]'),
@@ -40,9 +41,24 @@ export class UserAdsService {
     this.userAds = this.http.get<any[]>(adsUrl);
     return this.userAds;
   }
-  public getFilterAds(): Observable<any[]>{
+  public getFilterAds(adsFilter:adsFilter): Observable<any[]>{
+    let adsUrl = server.url + 'api/public/ads/nearest?pageSize=20';
+    if(adsFilter.category > 0){
+      adsUrl += '&category='+ adsFilter.category; 
+    }
+    if(adsFilter.type!= 'ALL'){
+      adsUrl +='&type='+ adsFilter.type;
+    }
+    console.log(adsUrl);
+    this.userAds = this.http.get<any[]>(adsUrl);
     return this.userAds;
   }
+   public getAdsById(id:number): Observable<any>{
+     let adById = server.url + 'api/public/ads/ad-by-Id?id='+id;
+     console.log(adById);
+      return  this.http.get<any>(adById);
+    }
+  
   // Get UserAdss
   public get getUserAdss(): Observable<UserAds[]> {
     this.getProducts();

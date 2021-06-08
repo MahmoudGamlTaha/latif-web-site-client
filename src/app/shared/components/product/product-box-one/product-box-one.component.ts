@@ -11,7 +11,7 @@ import { UserAdsService } from "../../../services/product.service";
 })
 export class ProductBoxOneComponent implements OnInit {
 
-  @Input() product: UserAds;
+  @Input() product: any;
   @Input() currency: any = this.productService.Currency; // Default Currency 
   @Input() thumbnail: boolean = false; // Default False 
   @Input() onHowerChangeImage: boolean = false; // Default False
@@ -21,43 +21,24 @@ export class ProductBoxOneComponent implements OnInit {
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
 
-  public ImageSrc : string
+  public ImageSrc : string;
 
   constructor(private productService: UserAdsService) { }
 
   ngOnInit(): void {
+    console.log(this.product.extra['selling_type']);
+    this.ImageSrc = this.product.image;;
     if(this.loader) {
       setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
     }
   }
 
-  // Get Product Color
-  Color(variants) {
-    const uniqColor = [];
-    for (let i = 0; i < Object.keys(variants).length; i++) {
-      if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
-        uniqColor.push(variants[i].color)
-      }
-    }
-    return uniqColor
-  }
-
+  
   // Change Variants
-  ChangeVariants(color, product) {
-    product.variants.map((item) => {
-      if (item.color === color) {
-        product.images.map((img) => {
-          if (img.image_id === item.image_id) {
-            this.ImageSrc = img.src;
-          }
-        })
-      }
-    })
-  }
 
   // Change Variants Image
   ChangeVariantsImage(src) {
-    this.ImageSrc = src;
+    this.ImageSrc = src.image;
   }
 
   addToCart(product: any) {

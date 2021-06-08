@@ -11,8 +11,8 @@ import { SizeModalComponent } from "../../../../shared/components/modal/size-mod
   styleUrls: ['./product-left-sidebar.component.scss']
 })
 export class ProductLeftSidebarComponent implements OnInit {
-
-  public product: UserAds;
+  public adsId:number;
+  public product: any;
   public counter: number = 1;
   public activeSlide: any = 0;
   public selectedSize: any;
@@ -25,10 +25,18 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
     public productService: UserAdsService) { 
-      this.route.data.subscribe(response => this.product = response.data );
+      this.route.data.subscribe(response => {
+        console.log(response);
+        this.adsId = response.snapshot.params.slug;
+         this.productService.getAdsById(this.adsId).subscribe((item) => {
+           this.product = item.response.data;
+        })      
+      } );
+      console.log(this.product); 
     }
 
   ngOnInit(): void {
+    
   }
 
   // Get Product Color

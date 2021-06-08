@@ -3,6 +3,7 @@ import { CategorySlider, ProductSlider } from '../../shared/data/slider';
 import { UserAds } from '../../shared/classes/UserAds';
 import { UserAdsService } from '../../shared/services/product.service';
 import { BlogService } from 'src/app/shared/services/blog.service';
+import { CategoryService } from 'src/app/shared/services/category.service';
 
 @Component({
   selector: 'app-shoes',
@@ -14,23 +15,30 @@ export class ShoesComponent implements OnInit, OnDestroy {
   public themeLogo: string = 'https://res.cloudinary.com/highcoder/image/upload/v1621478193/pet-app/web/logo_xwhfvi.png'; // Change Logo
   
   public products: any;
+  public petCategories:any;
   public productCollections: any[] = [];
   public current_page:number = 0;
   public CategorySliderConfig: any = CategorySlider;
   public ProductSliderConfig: any = ProductSlider;
   
-  constructor(public productService: UserAdsService, public blogService: BlogService) {
+  constructor(public productService: UserAdsService, public blogService: BlogService, public categoryService: CategoryService) {
     this.getProduct();
     this.getBlog();
+    this.getPetCategories();
   }
 public getProduct(){
     this.productService.getProducts().subscribe((rawData:any)=> {
     this.products =  rawData.response.data;
   });
 }
-
+public getPetCategories(){
+  
+  this.categoryService.getPetCategory().subscribe((rawData:any)=> {
+     this.petCategories = rawData.response.data;
+     console.log(this.petCategories);
+  });
+}
 public getBlog(){
-  console.log(5555);
   this.blogService.getBlogs(this.current_page).subscribe((item:any) => {
     this.blogs = item.response.data;
   });

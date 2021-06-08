@@ -19,19 +19,20 @@
             <div class="col">
                 <div class="slide-6 no-arrow">
                     <owl-carousel-o [options]="CategorySliderConfig">
-                        <ng-container *ngFor="let category of categories">
+                        <ng-container *ngFor="let category of petCategories">
+                          
                             <ng-template carouselSlide>
                                 <div class="category-block">
                                     <a [routerLink]="['/shop/collection/left/sidebar']"
-                                       [queryParams]="{ category: 'shoes'}">
+                                       [queryParams]="{ category: category.category.id}">
                                         <div class="category-image">
-                                            <img [src]="category.image" alt="" class="w-auto">
+                                            <img [src]="category.category.iconSelect" alt="category.category.name" class="w-auto">
                                         </div>
                                     </a>
                                     <div class="category-details">
                                         <a [routerLink]="['/shop/collection/left/sidebar']"
-                                           [queryParams]="{ category: 'shoes'}">
-                                            <h5>{{ category.title }}</h5>
+                                           [queryParams]="{ category: category.category.id}">
+                                            <h5>{{ category.category.name }}</h5>
                                         </a>
                                     </div>
                                 </div>

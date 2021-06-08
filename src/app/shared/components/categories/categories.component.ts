@@ -13,7 +13,7 @@ export class CategoriesComponent implements OnInit {
   public collapse: boolean = true;
 
   constructor(public productService: UserAdsService) { 
-    this.productService.getProducts().subscribe(product => this.products = product);
+    this.productService.getProducts().subscribe((items:any) => this.products = items.response.data);
   }
 
   ngOnInit(): void {

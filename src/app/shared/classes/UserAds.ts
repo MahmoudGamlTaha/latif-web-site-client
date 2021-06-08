@@ -21,6 +21,7 @@ export interface UserAds {
     variants:Variants[];
     title:string;
     sale:boolean;
+    image:string;
 }
 
 export interface Variants {
