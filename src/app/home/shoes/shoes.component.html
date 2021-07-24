@@ -2,47 +2,42 @@
 
 <!-- Home slider start-->
 <section class="p-0">
-  <app-slider 
-    [sliders]="sliders" 
-    [textClass]="'text-center'"
-    [category]="''"
-    [buttonClass]="'black-btn'"
-    [buttonText]="'shop now'"> 
+  <app-slider [sliders]="sliders" [textClass]="'text-center'" [category]="''" [buttonClass]="'black-btn'"
+    [buttonText]="'shop now'">
   </app-slider>
 </section>
 <!-- Home slider End -->
 
 <!-- Categories start-->
 <div class="container">
-    <section class="section-b-space border-section border-top-0">
-        <div class="row">
-            <div class="col">
-                <div class="slide-6 no-arrow">
-                    <owl-carousel-o [options]="CategorySliderConfig">
-                        <ng-container *ngFor="let category of petCategories">
-                          
-                            <ng-template carouselSlide>
-                                <div class="category-block">
-                                    <a [routerLink]="['/shop/collection/left/sidebar']"
-                                       [queryParams]="{ category: category.category.id}">
-                                        <div class="category-image">
-                                            <img [src]="category.category.iconSelect" alt="category.category.name" class="w-auto">
-                                        </div>
-                                    </a>
-                                    <div class="category-details">
-                                        <a [routerLink]="['/shop/collection/left/sidebar']"
-                                           [queryParams]="{ category: category.category.id}">
-                                            <h5>{{ category.category.name }}</h5>
-                                        </a>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </ng-container>
-                    </owl-carousel-o>
+  <section class="section-b-space border-section border-top-0">
+    <div class="row">
+      <div class="col">
+        <div class="slide-6 no-arrow">
+          <owl-carousel-o [options]="CategorySliderConfig">
+            <ng-container *ngFor="let category of petCategories">
+
+              <ng-template carouselSlide>
+                <div class="category-block">
+                  <a [routerLink]="['/shop/collection/left/sidebar']" [queryParams]="{ category: category.category.id}">
+                    <div class="category-image">
+                      <img [src]="category.category.iconSelect" alt="category.category.name" class="img-fluid">
+                    </div>
+                  </a>
+                  <div class="category-details">
+                    <a [routerLink]="['/shop/collection/left/sidebar']"
+                      [queryParams]="{ category: category.category.id}">
+                      <h5>{{ category.category.name }}</h5>
+                    </a>
+                  </div>
                 </div>
-            </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </div>
 <!-- categories End -->
 
@@ -73,52 +68,48 @@
 
 <!-- Product slider start-->
 <section class="section-b-space p-t-0">
-    <div class="container">
-        <div class="title3">
-            <h4>our collection</h4>
-            <h2 class="title-inner3">special Services</h2>
-            <div class="line"></div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <owl-carousel-o class="product-4 product-m no-arrow" [options]="ProductSliderConfig">
-                  <ng-container *ngFor="let product of products | slice:0:16">
-                    <ng-template carouselSlide>
-                      <div class="product-box">
-                        <app-product-box-four 
-                          [product]="product" 
-                          [currency]="productService?.Currency"
-                          [onHowerChangeImage]="true"
-                          [cartModal]="true">
-                        </app-product-box-four>
-                      </div>
-                    </ng-template>
-                  </ng-container>
-                </owl-carousel-o>
-            </div>
-        </div>
+  <div class="container">
+    <div class="title3">
+      <h4>our collection</h4>
+      <h2 class="title-inner3">special Services</h2>
+      <div class="line"></div>
     </div>
+    <div class="row">
+      <div class="col">
+        <owl-carousel-o class="product-4 product-m no-arrow" [options]="ProductSliderConfig">
+          <ng-container *ngFor="let product of products | slice:0:16">
+            <ng-template carouselSlide>
+              <div class="product-box">
+                <app-product-box-four [product]="product" [currency]="productService?.Currency"
+                  [onHowerChangeImage]="true" [cartModal]="true">
+                </app-product-box-four>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
 </section>
 <!-- Product slider End -->
 
 <!-- collection banner start -->
 <section class="p-0">
   <div class="container-fluid">
-      <div class="row category-border">
-          <div class="col-sm" *ngFor="let collection of serviceCollection">
-              <div class="category-banner">
-                  <div>
-                      <img [src]="collection.image" class="img-fluid size2" alt="">
-                  </div>
-                  <div class="category-box">
-                      <a [routerLink]="['/shop/collection/left/sidebar']"
-                         [queryParams]="{ category: 'shoes'}">
-                          <h5>{{collection.title}}</h5>
-                      </a>
-                  </div>
-              </div>
+    <div class="row category-border">
+      <div class="col-sm" *ngFor="let collection of serviceCollection">
+        <div class="category-banner">
+          <div>
+            <img [src]="collection.image" class="img-fluid size2" alt="">
           </div>
+          <div class="category-box">
+            <a [routerLink]="['/shop/collection/left/sidebar']" [queryParams]="{ category: 'shoes'}">
+              <h5>{{collection.title}}</h5>
+            </a>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </section>
 <!-- collection banner End -->
@@ -126,32 +117,24 @@
 <!-- product slider -->
 <section class="section-b-space">
   <div class="container">
-      <div class="row multiple-slider">
-          <div class="col-lg-3 col-sm-6">
-            <app-product-box-vertical-slider 
-              [title]="'Pets'"
-              [type]="'PETS'">    
-            </app-product-box-vertical-slider>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <app-product-box-vertical-slider 
-              [title]="'Pet Care'"
-              [type]="'PET_CARE'">    
-            </app-product-box-vertical-slider>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <app-product-box-vertical-slider 
-              [title]="'Services'"
-              [type]="'SERVICE'">    
-            </app-product-box-vertical-slider>
-          </div>
-          <div class="col-lg-3 col-sm-6">
-            <app-product-box-vertical-slider 
-              [title]="'Accesories'"
-              [type]="'ACCESSORIES'">    
-            </app-product-box-vertical-slider>
-          </div>
+    <div class="row multiple-slider">
+      <div class="col-lg-3 col-sm-6">
+        <app-product-box-vertical-slider [title]="'Pets'" [type]="'PETS'">
+        </app-product-box-vertical-slider>
       </div>
+      <div class="col-lg-3 col-sm-6">
+        <app-product-box-vertical-slider [title]="'Pet Care'" [type]="'PET_CARE'">
+        </app-product-box-vertical-slider>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <app-product-box-vertical-slider [title]="'Services'" [type]="'SERVICE'">
+        </app-product-box-vertical-slider>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <app-product-box-vertical-slider [title]="'Accesories'" [type]="'ACCESSORIES'">
+        </app-product-box-vertical-slider>
+      </div>
+    </div>
   </div>
 </section>
 <!-- product slider end -->
@@ -159,16 +142,15 @@
 <!-- category size -->
 <section class="p-0">
   <div class="container">
-      <div class="row background">
-          <div class="col" *ngFor="let size of sizes">
-              <a [routerLink]="['/shop/collection/left/sidebar']"
-                 [queryParams]="{ category: 'shoes'}">
-                  <div class="contain-bg">
-                      <h4>{{size}}</h4>
-                  </div>
-              </a>
+    <div class="row background">
+      <div class="col" *ngFor="let size of sizes">
+        <a [routerLink]="['/shop/collection/left/sidebar']" [queryParams]="{ category: 'shoes'}">
+          <div class="contain-bg">
+            <h4>{{size}}</h4>
           </div>
+        </a>
       </div>
+    </div>
   </div>
 </section>
 <!-- category size end-->
@@ -189,11 +171,8 @@
               <div class="no-slider row">
                 <ng-container *ngFor="let product of getCollectionProducts(collection) | slice:0:4">
                   <div class="product-box">
-                    <app-product-box-four 
-                      [product]="product" 
-                      [currency]="productService?.Currency"
-                      [onHowerChangeImage]="true"
-                      [cartModal]="true">
+                    <app-product-box-four [product]="product" [currency]="productService?.Currency"
+                      [onHowerChangeImage]="true" [cartModal]="true">
                     </app-product-box-four>
                   </div>
                 </ng-container>
@@ -229,9 +208,9 @@
 
 <!-- service -->
 <div class="container">
-    <section class="service border-section small-section border-top-0">
-      <app-services></app-services>
-    </section>
+  <section class="service border-section small-section border-top-0">
+    <app-services></app-services>
+  </section>
 </div>
 <!-- service end -->
 

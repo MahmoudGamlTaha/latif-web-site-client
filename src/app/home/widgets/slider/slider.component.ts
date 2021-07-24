@@ -7,7 +7,7 @@ import { HomeSlider } from '../../../shared/data/slider';
   styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
-  
+
   @Input() sliders: any[];
   @Input() class: string;
   @Input() textClass: string;
@@ -15,7 +15,9 @@ export class SliderComponent implements OnInit {
   @Input() buttonText: string;
   @Input() buttonClass: string;
 
-  constructor() { }
+  constructor() {
+    console.log("i here")
+  }
 
   ngOnInit(): void {
   }

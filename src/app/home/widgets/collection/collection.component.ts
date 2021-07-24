@@ -12,11 +12,12 @@ export class CollectionComponent implements OnInit {
   @Input() category: string;
   @Input() class: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-   public CollectionSliderConfig: any = CollectionSlider;
+  public CollectionSliderConfig: any = CollectionSlider;
 
 }
