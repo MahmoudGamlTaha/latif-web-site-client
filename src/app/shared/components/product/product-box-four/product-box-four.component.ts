@@ -11,7 +11,7 @@ import { UserAdsService } from "../../../services/product.service";
 })
 export class ProductBoxFourComponent implements OnInit {
 
-  @Input() product: UserAds;
+  @Input() product: any;
   @Input() currency: any = this.productService.Currency; // Default Currency 
   @Input() onHowerChangeImage: boolean = false; // Default False
   @Input() cartModal: boolean = false; // Default False
@@ -21,9 +21,12 @@ export class ProductBoxFourComponent implements OnInit {
 
   public ImageSrc : string
 
-  constructor(private productService: UserAdsService) { }
+  constructor(private productService: UserAdsService) { 
+  
+  }
 
   ngOnInit(): void {
+    this.ImageSrc = this.product.image
   }
 
   // Get Product Color
@@ -35,7 +38,7 @@ export class ProductBoxFourComponent implements OnInit {
 
   // Change Variants
   ChangeVariants(color, product) {
-    product.variants.map((item) => {
+    product.images.map((item) => {
       if (item.color === color) {
         product.images.map((img) => {
           if (img.image_id === item.image_id) {

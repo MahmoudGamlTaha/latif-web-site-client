@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "multikart": {
+    "latif-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -27,7 +27,7 @@
               "rxjs/Subject",
               "rxjs/Subscription"
             ],
-            "outputPath": "dist/multikart/browser",
+            "outputPath": "dist/latif-app/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -79,18 +79,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "multikart:build"
+            "browserTarget": "latif-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "multikart:build:production"
+              "browserTarget": "latif-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "multikart:build"
+            "browserTarget": "latif-app:build"
           }
         },
         "test": {
@@ -127,18 +127,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "multikart:serve"
+            "devServerTarget": "latif-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "multikart:serve:production"
+              "devServerTarget": "latif-app:serve:production"
             }
           }
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/multikart/server",
+            "outputPath": "dist/latif-app/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json"
           },
@@ -159,21 +159,21 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "multikart:build",
-            "serverTarget": "multikart:server"
+            "browserTarget": "latif-app:build",
+            "serverTarget": "latif-app:server"
           },
           "configurations": {
             "production": {
-              "browserTarget": "multikart:build:production",
-              "serverTarget": "multikart:server:production"
+              "browserTarget": "latif-app:build:production",
+              "serverTarget": "latif-app:server:production"
             }
           }
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "multikart:build:production",
-            "serverTarget": "multikart:server:production",
+            "browserTarget": "latif-app:build:production",
+            "serverTarget": "latif-app:server:production",
             "routes": [
               "/"
             ]
@@ -185,7 +185,7 @@
       }
     }
   },
-  "defaultProject": "multikart",
+  "defaultProject": "latif-app",
   "cli": {
     "analytics": false
   }

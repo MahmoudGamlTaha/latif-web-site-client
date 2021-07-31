@@ -6,5 +6,6 @@ export const environment = {
 };
 
 export const server = {
-  url:'https://latifapp.herokuapp.com/'
+  url:'https://latifapp.herokuapp.com/',
+  name:'latifApp website'
 }
