@@ -7,7 +7,7 @@
                 <div>
                   <div class="media" *ngFor="let product of products | slice:0:3 ">
                     <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
-                      <img class="img-fluid w-auto"
+                      <img class="img-fluid w-auto img-slide-size"
                            [defaultImage]="'assets/images/product/placeholder.jpg'" 
                            [lazyLoad]="product.images[0].image" alt="">
                     </a>
@@ -31,7 +31,7 @@
                 <div>
                   <div class="media" *ngFor="let product of products | slice:3:6 ">
                     <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
-                      <img class="img-fluid w-auto" 
+                      <img class="img-fluid w-auto img-slide-size" 
                            [defaultImage]="'assets/images/product/placeholder.jpg'" 
                            [lazyLoad]="product.images[0]" alt="">
                     </a>

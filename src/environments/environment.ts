@@ -11,7 +11,7 @@ export const environment = {
 
 export const server = {
   url:'https://latifapp.herokuapp.com/',
-  name:'latifApp website'
+  name:'latif-app website'
 }
 /*
  * For easier debugging in development mode, you can import the following file

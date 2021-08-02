@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { server } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header-one',
@@ -11,10 +12,12 @@ export class HeaderOneComponent implements OnInit {
   @Input() themeLogo: string = 'assets/images/icon/logo.png'; // Default Logo
   @Input() topbar: boolean = true; // Default True
   @Input() sticky: boolean = false; // Default false
-  
+  siteName:string;
   public stick: boolean = false;
 
-  constructor() { }
+  constructor() { 
+    this.siteName = server.name;
+  }
 
   ngOnInit(): void {
   }
