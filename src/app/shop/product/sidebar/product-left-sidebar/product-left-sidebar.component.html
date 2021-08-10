@@ -1,5 +1,9 @@
 <app-breadcrumb [title]="product?.name" [breadcrumb]="'Product'"></app-breadcrumb>
 <!-- section start -->
+<div *ngIf="loading else loaded">
+  loading ...
+</div>
+</div>
 <section class="section-b-space">
   <div class="collection-wrapper">
     <div class="container">
@@ -23,6 +27,7 @@
                 </app-product-box-vertical-slider>
           </div>
         </div>
+        <ng-template #loaded>
         <div class="col-lg-9 col-sm-12 col-xs-12">
           <div class="container-fluid">
             <div class="row">
@@ -210,6 +215,7 @@
             </div>
           </section>
         </div>
+      </ng-template>
       </div>
     </div>
   </div>

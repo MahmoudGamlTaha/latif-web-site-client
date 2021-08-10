@@ -19,7 +19,10 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
 
   constructor(public productService: UserAdsService) { 
     this.productService.getProducts().subscribe((rawData:any) => {
-      this.products = rawData.response.data.filter(item =>{ return item.type == this.type});
+      this.products = rawData.response.data.filter(
+        item =>
+        { return item.type == this.type}
+        );
     });
   }
 

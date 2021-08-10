@@ -1,5 +1,5 @@
 // Products
-export interface UserAds {
+export class UserAds {
     id?: number;
     name?: string;
     description?: string;
@@ -18,6 +18,7 @@ export interface UserAds {
     images?: Images[];
     category_id:number;
     categoryName:string;
+    categoryNameAr:string;
     variants:Variants[];
     title:string;
     sale:boolean;
@@ -55,3 +56,11 @@ export interface Images {
     src?: string;
     variant_id?: any[];
 }
+/*
+export interface Images {
+    id:number;
+    image:string;
+    external_link:boolean;
+    userAdsId:number;
+}
+*/

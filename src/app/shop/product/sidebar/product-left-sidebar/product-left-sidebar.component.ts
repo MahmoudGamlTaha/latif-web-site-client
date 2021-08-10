@@ -17,6 +17,7 @@ export class ProductLeftSidebarComponent implements OnInit {
   public activeSlide: any = 0;
   public selectedSize: any;
   public mobileSidebar: boolean = false;
+  public loading:boolean;
 
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
   
@@ -24,12 +25,14 @@ export class ProductLeftSidebarComponent implements OnInit {
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
 
   constructor(private route: ActivatedRoute, private router: Router,
-    public productService: UserAdsService) { 
+    public productService: UserAdsService) {
+      this.loading = true; 
       this.route.data.subscribe(response => {
         console.log(response);
         this.adsId = response.snapshot.params.slug;
          this.productService.getAdsById(this.adsId).subscribe((item) => {
            this.product = item.response.data;
+           this.loading = false;
         })      
       } );
       console.log(this.product); 

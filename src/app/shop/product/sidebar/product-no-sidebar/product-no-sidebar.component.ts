@@ -4,6 +4,11 @@ import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../..
 import { UserAds } from '../../../../shared/classes/UserAds';
 import { UserAdsService } from '../../../../shared/services/product.service';
 import { SizeModalComponent } from "../../../../shared/components/modal/size-modal/size-modal.component";
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
+import { delay } from 'rxjs/operators';
+import { disposeEmitNodes } from 'typescript';
+import { CommonModule } from '@angular/common'; 
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-no-sidebar',
@@ -13,6 +18,7 @@ import { SizeModalComponent } from "../../../../shared/components/modal/size-mod
 export class ProductNoSidebarComponent implements OnInit {
 
   public product: UserAds;
+  public product_id:number;
   public counter: number = 1;
   public activeSlide: any = 0;
   public selectedSize: any;
@@ -21,29 +27,59 @@ export class ProductNoSidebarComponent implements OnInit {
 
   public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
-
+  public loading:boolean;
   constructor(private route: ActivatedRoute, private router: Router,
     public productService: UserAdsService) { 
-      this.route.data.subscribe(response => this.product = response.data );
+       this.loading = true;
     }
-
+ getProductById(id:number){
+  console.log(id);
+  this.productService.getAdsById(id).subscribe((res:any) =>{
+    this.product = new UserAds();
+    let retProduct = res.response.data;
+    console.log(retProduct);
+    this.product.id = retProduct.id;
+   this.product.city = retProduct.city;
+    this.product.type = retProduct.type;
+    this.product.name = retProduct.name; 
+    this.product.categoryName =  retProduct.categoryName;
+    this.product.createdBy = retProduct.createdBy;
+    this.product.description = retProduct.description;
+    this.product.extra = retProduct.extra;
+    this.product.title = retProduct.name;
+    this.product.images = retProduct.images;
+    console.log(retProduct.images);
+    this.product.categoryNameAr = retProduct.categoryNameAr;
+    this.product.short_description = retProduct.short_description;
+    this.product.price = retProduct.price;
+    this.product.description = retProduct.description;
+    this.loading = false;
+  });
+}
   ngOnInit(): void {
+    let params = this.route.snapshot.params; 
+    if(!this.route.snapshot.params){
+      return;
+    }
+    this.product_id = params.slug;
+    this.getProductById(this.product_id);
+    console.log(this.product);
   }
 
   // Get Product Color
   Color(variants) {
-    const uniqColor = []
+   /* const uniqColor = []
     for (let i = 0; i < Object.keys(variants).length; i++) {
       if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
         uniqColor.push(variants[i].color)
       }
     }
-    return uniqColor
+    return uniqColor*/
   }
 
   // Get Product Size
   Size(variants) {
-    const uniqSize = []
+   const uniqSize = []
     for (let i = 0; i < Object.keys(variants).length; i++) {
       if (uniqSize.indexOf(variants[i].size) === -1 && variants[i].size) {
         uniqSize.push(variants[i].size)
@@ -86,5 +122,7 @@ export class ProductNoSidebarComponent implements OnInit {
   addToWishlist(product: any) {
     this.productService.addToWishlist(product);
   }
-
+   delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 }

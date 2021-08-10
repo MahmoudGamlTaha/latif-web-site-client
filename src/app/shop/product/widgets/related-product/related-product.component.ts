@@ -14,8 +14,10 @@ export class RelatedProductComponent implements OnInit {
   public products: UserAds[] = [];
 
   constructor(public productService: UserAdsService) { 
-    this.productService.getProducts().subscribe(response => 
+    this.productService.getProducts().subscribe((data:any) => {
+      let response = data.response.data;
       this.products = response.filter(item => item.type == this.type)
+    }
     );
   }
 

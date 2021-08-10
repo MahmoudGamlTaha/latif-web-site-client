@@ -54,10 +54,14 @@ export class UserAdsService {
     return this.userAds;
   }
    public getAdsById(id:number): Observable<any>{
-     let adById = server.url + 'api/public/ads/ad-by-Id?id='+id;
-     console.log(adById);
-      return  this.http.get<any>(adById);
-    }
+        let adById = server.url + 'api/public/ads/ad-by-Id?id='+id;
+        console.log(adById);
+        this.http.get<any>(adById).subscribe((items:any)=>{
+          console.log(items);
+        });
+       return this.http.get<any>(adById);
+        //return productDetails;
+      }
   
   // Get UserAdss
   public get getUserAdss(): Observable<UserAds[]> {

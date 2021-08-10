@@ -4,6 +4,9 @@ import { ViewportScroller } from '@angular/common';
 import { UserAdsService } from "../../../shared/services/product.service";
 import { UserAds } from '../../../shared/classes/UserAds';
 import { adsFilter } from 'src/app/shared/classes/adsFilter';
+import { CommonModule } from '@angular/common'; 
+import { BrowserModule } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-collection-left-sidebar',
@@ -26,7 +29,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public paginate: any = {}; // Pagination use only
   public sortBy: string; // Sorting Order
   public mobileSidebar: boolean = false;
-  public loader: boolean = true;
+  public loading: boolean = true;
   public adsFilter: adsFilter; 
   constructor(private route: ActivatedRoute, private router: Router,
     private viewScroller: ViewportScroller, public productService: UserAdsService) {   
@@ -50,6 +53,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
           }
            this.productService.getFilterAds(this.adsFilter).subscribe((items:any)=>{
              this.products = items.response.data;
+             this.loading = false;
              console.log(this.products);
            });
            console.log(this.products);
