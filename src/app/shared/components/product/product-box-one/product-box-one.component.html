@@ -5,7 +5,7 @@
       <span class="lable2" *ngIf="product.extra">for sale</span>
     </div>
     <div class="front">
-      <a [routerLink]="['/shop/product/left/sidebar?slug=', product.id]">
+      <a [routerLink]="['/shop/product-user/', product.id]">
         <img 
           [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
           [lazyLoad]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
@@ -14,7 +14,7 @@
       </a>
     </div>
     <div class="back" *ngIf="onHowerChangeImage">
-      <a [routerLink]="['/shop/product/left/sidebar?slug=', product.id]">
+      <a [routerLink]="['/shop/product-user/', product.id]">
         <img [src]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" class="img-fluid lazy-loading imgSize" alt="">
       </a>
     </div>

@@ -1,19 +1,20 @@
 <!-- side-bar single product slider start -->
 <div class="theme-card">
     <h5 class="title-border">{{ title }}</h5>
+    
     <owl-carousel-o [options]="NewProductSliderConfig" class="offer-slider">
         <ng-container *ngFor="let product of products | slice:0:3 ">  
             <ng-template carouselSlide>
                 <div>
                   <div class="media" *ngFor="let product of products | slice:0:3 ">
-                    <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
+                    <a [routerLink]="['/shop/product-user/', product.id]">
                       <img class="img-fluid w-auto img-slide-size"
                            [defaultImage]="'assets/images/product/placeholder.jpg'" 
-                           [lazyLoad]="product.images[0].image" alt="">
+                           [lazyLoad]="product.images==null?null:product.images[0]" alt="">
                     </a>
                     <div class="media-body align-self-center">
                       <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
-                      <a [routerLink]="['/shop/product/left/sidebar?id=', product.id]">
+                      <a [routerLink]="['/shop/product-user/', product.id]">
                       <h6>{{ product.name | titlecase }}</h6></a>
                       <h4>
                         {{ product?.price * productService.Currency?.price | discount:product | currency:productService.Currency?.currency:'symbol' }}
@@ -30,14 +31,14 @@
             <ng-template carouselSlide>
                 <div>
                   <div class="media" *ngFor="let product of products | slice:3:6 ">
-                    <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
+                    <a [routerLink]="['/shop/product-user/', product.id]">
                       <img class="img-fluid w-auto img-slide-size" 
                            [defaultImage]="'assets/images/product/placeholder.jpg'" 
-                           [lazyLoad]="product.images[0]" alt="">
+                           [lazyLoad]="product.images==null?null:product.images[0].image" alt="">
                     </a>
                     <div class="media-body align-self-center">
                       <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
-                      <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
+                      <a [routerLink]="['/shop/product-user/', product.id]">
                       <h6>{{ product.name | titlecase }}</h6></a>
                       <h4>
                         {{ product?.price * productService.Currency?.price | discount:product | currency:productService.Currency?.currency:'symbol' }}

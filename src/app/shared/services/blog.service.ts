@@ -26,14 +26,10 @@ export class BlogService {
   */
 
   // UserAds
-  public getBlogs(page:number): Observable<any[]> {
-    //this.UserAdss = this.http.get<UserAds[]>('assets/data/products.json').pipe(map(data => data));
-    //this.UserAdss.subscribe(next => { localStorage['products'] = JSON.stringify(next) });
-    //return this.UserAdss = this.UserAdss.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
+  public getBlogs(page:number): Observable<any> {
     let blogUrl = server.url + 'api/public/blogs?page='+page;
-    //console.log(adsUrl);
     console.log(blogUrl);
-    this.blogs = this.http.get<any[]>(blogUrl);
+    this.blogs = this.http.get<any>(blogUrl);
     return this.blogs;
   }
 

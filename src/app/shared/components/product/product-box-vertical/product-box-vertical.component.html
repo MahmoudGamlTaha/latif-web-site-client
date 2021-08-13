@@ -1,5 +1,5 @@
 <div class="media">
-    <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
+    <a [routerLink]="['shop/product-user/', product.id]">
         <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
              [lazyLoad]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'"  
              class="img-fluid lazy-loading" alt="">
@@ -8,7 +8,7 @@
 		<div class="rating">
 			<bar-rating [rate]="5" [readOnly]="true"></bar-rating>
 		</div>
-        <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
+        <a [routerLink]="['shop/product-user/', product.id]">
             <h6>{{ product.name | titlecase }}</h6>
         </a>
 		<h4>{{ product?.price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}</h4>

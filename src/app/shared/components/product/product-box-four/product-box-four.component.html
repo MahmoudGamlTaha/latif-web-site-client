@@ -5,14 +5,14 @@
             <span class="lable2" *ngIf="product.sale">{{ product?.discount }}% off</span>
         </div>
         <div class="front">
-            <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
+            <a [routerLink]="['/shop/product-user/', product.id]">
                 <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
                      [lazyLoad]="product.images!= null && product.images[0] ? product.images[0] :ImageSrc"  
                      class="img-fluid lazy-loading product-size" alt="">
             </a>
         </div>
         <div class="back" *ngIf="onHowerChangeImage">
-            <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
+            <a [routerLink]="['/shop/product-user/', product.id]">
                 <img [src]=" product.images!= null && product.images.length > 1 ? product.images[1] : ImageSrc" class="img-fluid lazy-loading product-size" alt="{{ product.type }}">
             </a>
         </div>

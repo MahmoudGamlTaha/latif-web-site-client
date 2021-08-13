@@ -1,5 +1,5 @@
 // Products
-export interface UserAds {
+export class UserAds {
     id?: number;
     name?: string;
     description?: string;
@@ -18,10 +18,12 @@ export interface UserAds {
     images?: Images[];
     category_id:number;
     categoryName:string;
+    categoryNameAr:string;
     variants:Variants[];
     title:string;
     sale:boolean;
     image:string;
+    CreatedDate:Date;
 }
 
 export interface Variants {
@@ -34,6 +36,8 @@ export interface Variants {
 }
 export interface users {
  id?:number;
+ firstName:string;
+ lastName:string;
  email:string;
  city:string;
  phone:string;

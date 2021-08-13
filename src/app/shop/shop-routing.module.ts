@@ -35,7 +35,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'product/no/sidebar/:slug',
+    path: 'product-user/:slug',
     component: ProductNoSidebarComponent,
     resolve: {
       data: Resolver
