@@ -4,6 +4,7 @@ import { UserAds } from '../../shared/classes/UserAds';
 import { UserAdsService } from '../../shared/services/product.service';
 import { BlogService } from 'src/app/shared/services/blog.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
+import { CategoryType } from 'src/app/shared/classes/categoryType';
 
 @Component({
   selector: 'app-shoes',
@@ -25,6 +26,16 @@ export class ShoesComponent implements OnInit, OnDestroy {
     this.getProduct();
     this.getBlog();
     this.getPetCategories();
+    this.getServiceCategoy();
+  }
+  ngOnInit(): void {
+    // Change color for this layout
+    document.documentElement.style.setProperty('--theme-deafult', '#FF4C3B');
+  }
+
+  ngOnDestroy(): void {
+    // Remove Color
+    document.documentElement.style.removeProperty('--theme-deafult');
   }
 public getProduct(){
     this.productService.getProducts().subscribe((rawData:any)=> {
@@ -42,6 +53,12 @@ public getBlog(){
   this.blogService.getBlogs(this.current_page).subscribe((item:any) => {
     this.blogs = item.response.data;
   });
+}
+public getServiceCategoy(){
+  this.categoryService.getCategoryByTypeId(CategoryType.SERVICES).subscribe((item:any) =>{
+       this.serviceCollection = item.response.data;
+       console.log(this.serviceCollection);
+  })
 }
   // sliders
   public sliders = [{
@@ -83,26 +100,30 @@ public getBlog(){
   }*/];
 
   // Collection banner
-  public serviceCollection = [{
-    image: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Page-1_bjsles.png',
+  public serviceCollection:any /*= [{
+    icon: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Page-1_bjsles.png',
     save: '',
-    title: 'Clinic'
+    name: 'Clinic',
+    id  : 12
   }, {
-    image: 'https://res.cloudinary.com/highcoder/image/upload/v1619480984/pet-app/drawable-xxxhdpi/housing_iw3wfv.png',
+    icon: 'https://res.cloudinary.com/highcoder/image/upload/v1619480984/pet-app/drawable-xxxhdpi/housing_iw3wfv.png',
     save: '',
-    title: 'Hostly'
+    name: 'Hostly',
+    id  :5
   },
   {
-    image: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Path_173_io6qem.png',
+    icon: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Path_173_io6qem.png',
     save: '',
-    title: 'Deliveries'
+    name: 'Deliveries',
+    id:10
   },
   {
-    image: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Group_9862_jpx9ap.png',
+    icon: 'https://res.cloudinary.com/highcoder/image/upload/v1619480961/pet-app/drawable-xhdpi/Group_9862_jpx9ap.png',
     save: '',
-    title: 'Shower&HairCut'
+    name: 'Shower&HairCut',
+    id:2
   }
-];
+];*/
 
   // Collection banner
   public collections2 = [{
@@ -158,15 +179,7 @@ public getBlog(){
     image: 'assets/images/logos/8.png',
   }];
 
-  ngOnInit(): void {
-    // Change color for this layout
-    document.documentElement.style.setProperty('--theme-deafult', '#FF4C3B');
-  }
-
-  ngOnDestroy(): void {
-    // Remove Color
-    document.documentElement.style.removeProperty('--theme-deafult');
-  }
+  
 
   // Product Tab collection
   getCollectionProducts(collection) {

@@ -8,7 +8,8 @@
                 <div class="row blog-media" *ngFor="let blog of blogs;">
                     <div class="col-xl-6">
                         <div class="blog-left">
-                            <a [routerLink]="'/pages/blog/details/{{blog.id}}'"><img src="{{blog.image}}" class="img-fluid img-blog-size" alt=""/></a>
+                            <a [routerLink]="['/pages/blog/details/',blog.id]"
+                            ><img src="{{blog.image}}" class="img-fluid img-blog-size" alt=""/></a>
                         </div>
                     </div>
                     <div class="col-xl-6">

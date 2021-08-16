@@ -24,6 +24,7 @@ export class BlogLeftSidebarComponent implements OnInit {
       {
       
         let blog:Blog = new Blog();
+        blog.id = element.id;
         blog.category = element.category;
         blog.categoryId = element.category_id; 
         blog.categoryAr = element.categoryAr == null?blog.category:element.categoryAr;

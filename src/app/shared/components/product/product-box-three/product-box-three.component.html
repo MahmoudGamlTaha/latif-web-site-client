@@ -3,8 +3,7 @@
     <div class="front">
         <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
             <img  [defaultImage]="'assets/images/product/placeholder.jpg'"
-                  [lazyLoad]="product.images[0].src" class="img-fluid"
-                  alt="{{ product.images[0].alt }}">
+                  [lazyLoad]="product.images[0].image" class="img-fluid">
         </a>
     </div>
     <div class="cart-info cart-wrap">

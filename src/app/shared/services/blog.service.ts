@@ -40,14 +40,10 @@ export class BlogService {
   }
 
   // Get UserAdss By Slug
-  public getUserAdsBySlug(slug: string): Observable<UserAds> {
-  /*  return this.userAds.pipe(map(items => { 
-      return items.find((item: any) => { 
-        return item.name.replace(' ', '-') === slug; 
-      }); 
-    }));*/
-    // implemet
-    return null;
+  public getBlogById(id: number): Observable<any> {
+     let blogDetailUrl = server.url + 'api/public/blogs/id='+id;
+     let observer = this.http.get<any>(blogDetailUrl);
+     return observer; 
   }
 
 

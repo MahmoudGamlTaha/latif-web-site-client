@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NewProductSlider } from '../../../data/slider';
 import { UserAds } from '../../../classes/UserAds';
 import { UserAdsService } from '../../../services/product.service';
+import { adsFilter } from 'src/app/shared/classes/adsFilter';
 
 @Component({
   selector: 'app-product-box-vertical-slider',
@@ -19,14 +20,16 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
 
   constructor(public productService: UserAdsService) { 
     this.loading = true;
-    this.productService.getProducts().subscribe((rawData:any) => {
-      this.products = rawData.response.data.filter(item =>{ return item.type == this.type});
-      this.loading = false;
-    });
-   
   }
 
   ngOnInit(): void {
+    let filter:adsFilter = {}  ;
+    filter.type = this.type;
+    this.productService.getFilterAds(filter).subscribe((rawData:any) => {
+      this.products = rawData.response.data;//.filter(item =>{ return item.type == this.type});
+      console.log(this.products);
+      this.loading = false;
+    });
   }
 
 }

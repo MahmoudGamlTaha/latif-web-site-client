@@ -108,12 +108,12 @@
           <div class="col-sm" *ngFor="let collection of serviceCollection">
               <div class="category-banner">
                   <div class="col-sm">
-                      <img [src]="collection.image" class="img-fluid icon-size" alt=""/>
+                      <img [src]="collection.category.icon" class="img-fluid icon-size" alt=""/>
                   </div>
                   <div class="category-box">
                       <a [routerLink]="['/shop/collection/left/sidebar']"
-                         [queryParams]="{ category: collection.title}">
-                          <h5>{{collection.title}}</h5>
+                         [queryParams]="{ category: collection.category.id}">
+                          <h5>{{collection.category.name}}</h5>
                       </a>
                   </div>
               </div>
@@ -133,6 +133,7 @@
               [type]="'PETS'">    
             </app-product-box-vertical-slider>
           </div>
+          
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
               [title]="'Pet Care'"
@@ -176,7 +177,7 @@
 <!-- Tab product start-->
 <div class="title1 section-t-space">
   <h4>exclusive products</h4>
-  <h2 class="title-inner1">special products</h2>
+  <h2 class="title-inner1">special user Ads</h2>
 </div>
 <section class="section-b-space p-t-0">
   <div class="container">

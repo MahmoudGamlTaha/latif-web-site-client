@@ -5,19 +5,19 @@
     <div class="front">
       <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
         <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
-             [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src"  
-             class="img-fluid lazy-loading" alt="{{ product?.images[0].alt }}">
+             [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].image"  
+             class="img-fluid lazy-loading" >
       </a>
     </div>
     <div class="back" *ngIf="onHowerChangeImage && product.images.length > 1">
       <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-        <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading" alt="{{ product?.images[1].alt }}">
+        <img [src]="ImageSrc ? ImageSrc : product.images[1].image" class="img-fluid lazy-loading" alt="{{ product?.images[1].alt }}">
       </a>
     </div>
     <ul class="product-thumb-list" *ngIf="thumbnail">
-      <li class="grid_thumb_img" [class.active]="ImageSrc == image.src" *ngFor="let image of product.images">
-        <a href="javascript:void(0)" (mouseover)="ChangeVariantsImage(image.src)">
-          <img [lazyLoad]="image.src">
+      <li class="grid_thumb_img" [class.active]="ImageSrc == image.image" *ngFor="let image of product.images">
+        <a href="javascript:void(0)" (mouseover)="ChangeVariantsImage(image.image)">
+          <img [lazyLoad]="image.image">
         </a>
       </li>
     </ul>

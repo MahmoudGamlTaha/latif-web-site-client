@@ -2,16 +2,16 @@
   <ng-container *ngFor="let blog of blogs">
     <ng-template carouselSlide>
       <div class="col-md-12">
-        <a [routerLink]="'/pages/blog/details'">
+        <a [routerLink]="['/pages/blog/details', blog.id]">
           <div class="classic-effect">
-            <img *ngIf="blog.image != null; else default" [src]="blog.image" class="img-fluid" alt="blog.title">
+            <img *ngIf="blog.image != null; else default" [src]="blog.image" class="img-fluid blogImgSize" alt="blog.title">
            <ng-template #default> <img src="assets/images/product/placeholder.jpg"  class="img-fluid blogImgSize"></ng-template>
             <span></span>
           </div>
         </a>
         <div class="blog-details">
           <h4>{{blog.createdDate}}</h4>
-          <a [routerLink]="'/pages/blog/details'">
+          <a [routerLink]="['/pages/blog/details', blog.id]">
             <p>{{blog.title}}</p>
           </a>
           <hr class="style1">

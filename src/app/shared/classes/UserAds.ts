@@ -15,7 +15,7 @@ export class UserAds {
     quantity?: number;
     createdBy?: users;
     extra?: extraInfo[];
-    images?: Images[];
+    images?: adsImage[];
     category_id:number;
     categoryName:string;
     categoryNameAr:string;
@@ -42,7 +42,8 @@ export interface users {
  city:string;
  phone:string;
  avatar:string;
- adsCount:number
+ adsCount:number;
+ joinDate:Date;
 }
 
 export interface extraInfo{
@@ -51,7 +52,12 @@ name?: string;
 name_ar:string;
 value: string
 }
-
+export class adsImage{
+    image:string;
+    id:number;
+    external_link:boolean;
+    userAdsId:number;
+}
 export interface Images {
     image_id?: number;
     id?: number;

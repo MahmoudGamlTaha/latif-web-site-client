@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../../shared/data/slider';
-import { UserAds } from '../../../../shared/classes/UserAds';
+import { Images, UserAds } from '../../../../shared/classes/UserAds';
 import { UserAdsService } from '../../../../shared/services/product.service';
 import { SizeModalComponent } from "../../../../shared/components/modal/size-modal/size-modal.component";
 import { SelectMultipleControlValueAccessor } from '@angular/forms';
@@ -39,22 +39,34 @@ export class ProductNoSidebarComponent implements OnInit {
     let retProduct = res.response.data;
     console.log(retProduct);
     this.product.id = retProduct.id;
-   this.product.city = retProduct.city;
+    this.product.city = retProduct.city;
     this.product.type = retProduct.type;
     this.product.name = retProduct.name; 
     this.product.categoryName =  retProduct.categoryName;
+    if(retProduct.createdBy != null){
     this.product.createdBy = retProduct.createdBy;
+    this.product.createdBy.adsCount = retProduct.createdBy.adsCount??0;
+    this.product.createdBy.city = retProduct.createdBy.city;
+    this.product.createdBy.firstName = retProduct.createdBy.firstName;
+    this.product.createdBy.lastName = retProduct.createdBy.lastName== null?"":retProduct.createdBy.lastName;
+    this.product.createdBy.id = retProduct.createdBy.id;
+    this.product.createdBy.joinDate = retProduct.createdBy.registrationDate;
+    }
     this.product.description = retProduct.description;
     this.product.extra = retProduct.extra;
     this.product.title = retProduct.name;
-    this.product.images = retProduct.images;
-    console.log(retProduct.images);
+    this.product.images= retProduct.images.image ==null?{image:"/assets/images/product/placeholder.jpg"}:retProduct.images;
+    this.product.image = retProduct.image==null?"/assets/images/product/placeholder.jpg":retProduct.image;
+    if(retProduct.images.image == null){
+      this.product.images = [];
+    }
     this.product.categoryNameAr = retProduct.categoryNameAr;
     this.product.short_description = retProduct.short_description;
     this.product.price = retProduct.price;
     this.product.description = retProduct.description;
     this.product.CreatedDate = retProduct.created_at;
     this.loading = false;
+    console.log(this.product);
   });
 }
   ngOnInit(): void {
@@ -64,7 +76,6 @@ export class ProductNoSidebarComponent implements OnInit {
     }
     this.product_id = params.slug;
     this.getProductById(this.product_id);
-    console.log(this.product);
   }
 
   // Get Product Color

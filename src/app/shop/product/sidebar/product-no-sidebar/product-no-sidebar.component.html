@@ -2,7 +2,7 @@
 <!-- section start -->
 <section class="section-b-space">
     <div *ngIf="loading else loaded">
-        loading ...
+        <img src="assets/images/loader.gif"/>
     </div>
     <ng-template #loaded >
   <div class="collection-wrapper">
@@ -48,12 +48,12 @@
                     <h3>
                       <!--  {{ (product?.price | discount:product) * productService.Currency?.price | currency: productService.Currency?.currency:'symbol' }}-->
                     </h3>
-                    <ul class="color-variant" *ngIf="(product?.extra).length">
+                 <!--  <ul class="color-variant" *ngIf="(product?.extra).length">
                         <li [class]="color" [class.active]="activeSlide == i.toString()" *ngFor="let color of Color(product?.variants); index as i" 
                             [ngStyle]="{'background-color': color}"
                             (click)="owlCar.to(activeSlide = i.toString())">
                         </li>
-                    </ul>
+                    </ul> -->
                     
                     <app-stock-inventory [stock]="1"></app-stock-inventory>
                     <div class="product-description border-product">
@@ -81,19 +81,25 @@
                         </div>
                     </div>
                     <div class="product-buttons">
-                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="addToCart(product)">add to cart</a>
-                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="buyNow(product)">buy now</a>
+                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="addToCart(product)">chat</a>
+                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="buyNow(product)">report</a>
                     </div>
                     <div class="border-product">
                         <h6 class="product-title">product details</h6>
                         <p>{{ product.short_description.substring(0, 200)+'...' }}</p>
+                    </div>
+                    <div class="border-product" *ngIf="product.createdBy != null">
+                        <h6 class="product-title">seller Info</h6>
+                        <p>seller Name    :   {{ product.createdBy.firstName }}  {{product.createdBy?.lastName}}</p>
+                        <p>ads count   :   {{product.createdBy.adsCount}} ads</p>
+                        <p>join Date from : {{product.createdBy.joinDate}}</p>
                     </div>
                     <div class="border-product">
                         <h6 class="product-title">category</h6>
                         <p>{{ product.categoryNameAr?product.categoryName:product.categoryNameAr }}</p>
                     </div>
                     <div class="border-product">
-                        <h6 class="product-title">Date</h6>
+                        <h6 class="product-title">post date</h6>
                         <p>{{ product.CreatedDate}}</p>
                     </div>
                     <div class="border-product">
@@ -103,7 +109,7 @@
                             <form class="d-inline-block">
                                 <button class="wishlist-btn" (click)="addToWishlist(product)">
                                     <i class="fa fa-heart"></i>
-                                    <span class="title-font">Add To WishList</span>
+                                    <span class="title-font">Add To favorite</span>
                                 </button>
                             </form>
                         </div>
@@ -119,20 +125,24 @@
                 <div class="col-sm-12 col-lg-12">
                 <ngb-tabset [type]="'tabs'" class="nav-material">
                     <ngb-tab>
-                        <ng-template ngbTabTitle>Description</ng-template>
+                        <ng-template ngbTabTitle>product info</ng-template>
                         <ng-template ngbTabContent>
-                            <p>{{ product.description }}</p>
-                        </ng-template>
-                    </ngb-tab>
-                    <ngb-tab>
-                        <ng-template ngbTabTitle>Video</ng-template>
-                        <ng-template ngbTabContent>
-                            <div class="mt-3 text-center">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <div class="border-product" *ngFor="let info of product.extra">
+                                <h6 class="product-title"><b>{{info.name}}</b> : {{ info.value==null?"N/A":info.value}}</h6>
                             </div>
                         </ng-template>
                     </ngb-tab>
                     <ngb-tab>
+                        <ng-template ngbTabTitle>Description</ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="mt-3 text-center">
+                         <!--   <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        --> 
+                        {{product.description}}   
+                        </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <!--<ngb-tab>
                         <ng-template ngbTabTitle>Write Review</ng-template>
                         <ng-template ngbTabContent>
                             <form class="theme-form">
@@ -173,7 +183,7 @@
                             </div>
                             </form>
                         </ng-template>
-                    </ngb-tab>
+                    </ngb-tab> -->
                 </ngb-tabset>
                 </div>
             </div>
