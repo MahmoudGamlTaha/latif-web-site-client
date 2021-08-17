@@ -29,7 +29,7 @@
                                         <div class="owl-thumb" [class.active]="i == activeSlide">
                                         <img [defaultImage]="'assets/images/product/placeholder.jpg'" 
                                            [lazyLoad]="image.image" 
-                                           [alt]="image.alt" class="img-fluid details-imgs" [src]="image.image" (click)="owlCar.to(activeSlide = i.toString())">
+                                           [alt]="product.title" class="img-fluid details-imgs" [src]="image.image" (click)="owlCar.to(activeSlide = i.toString())">
                                         </div>
                                     </ng-template>
                                 </ng-container>

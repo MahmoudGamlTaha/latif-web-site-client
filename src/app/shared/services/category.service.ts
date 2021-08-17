@@ -13,6 +13,10 @@ export class CategoryService{
     private toastrService: ToastrService) { }
   
  public getCategoryByTypeId(type:number): Observable<any[]>{
+   if(type == 0){
+     let url = server.url + 'api/public/ads-type/list';
+     return this.http.get<any[]>(url);  
+   }
     let url = server.url + 'api/public/cat-by-adType/type='+type;
     return this.http.get<any[]>(url);
  }

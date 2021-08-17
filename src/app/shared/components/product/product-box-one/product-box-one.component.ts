@@ -26,7 +26,6 @@ export class ProductBoxOneComponent implements OnInit {
   constructor(private productService: UserAdsService) { }
 
   ngOnInit(): void {
-    console.log(this.product.extra['selling_type']);
     this.ImageSrc = this.product.image;;
     if(this.loader) {
       setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
