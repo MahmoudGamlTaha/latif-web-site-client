@@ -3,6 +3,4 @@ export enum CategoryType{
  Accessories = 2, 
  SERVICES = 3,
  Clinic = 4
-
-
 }

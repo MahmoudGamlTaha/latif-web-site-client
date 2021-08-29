@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 // Menu
 export interface Menu {
 	path?: string;
+	queryParam?:string;
 	title?: string;
 	type?: string;
 	megaMenu?: boolean;
@@ -12,6 +13,7 @@ export interface Menu {
 	badge?: boolean;
 	badgeText?: string;
 	children?: Menu[];
+	id?:number;
 }
 
 @Injectable({

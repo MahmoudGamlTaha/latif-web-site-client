@@ -1,7 +1,7 @@
 <app-header-one [themeLogo]="themeLogo"></app-header-one>
 
 <!-- Home slider start-->
-<section class="p-0">
+<!-- <section class="p-0">
   <app-slider 
     [sliders]="sliders" 
     [textClass]="'text-center'"
@@ -9,7 +9,7 @@
     [buttonClass]="'black-btn'"
     [buttonText]="'shop now'"> 
   </app-slider>
-</section>
+</section> -- >
 <!-- Home slider End -->
 
 <!-- Categories start-->
@@ -108,8 +108,10 @@
           <div class="col-sm" *ngFor="let collection of serviceCollection">
               <div class="category-banner">
                   <div class="col-sm">
-                      <img [src]="collection.category.icon" class="img-fluid icon-size" alt=""/>
-                  </div>
+                      <a href="{{'/shop/collection/left/sidebar/category='}}{{collection.category.id}}" style="cursor: pointer;">
+                         <img [src]="collection.category.iconSelect" class="img-fluid icon-size" alt="{{collection.category.name}}">
+                     </a>
+                    </div>
                   <div class="category-box">
                       <a [routerLink]="['/shop/collection/left/sidebar']"
                          [queryParams]="{ category: collection.category.id}">
@@ -229,7 +231,7 @@
 <!-- blog section End -->
 
 <!-- service -->
-<div class="container">
+<!--<div class="container">
     <section class="service border-section small-section border-top-0">
       <app-services></app-services>
     </section>
@@ -238,6 +240,7 @@
 
 
 <!--  logo section start-->
+<!--
 <section class="section-b-space">
   <div class="container">
     <div class="row">

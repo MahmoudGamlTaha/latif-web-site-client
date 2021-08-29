@@ -18,6 +18,7 @@ export class CategoryService{
      return this.http.get<any[]>(url);  
    }
     let url = server.url + 'api/public/cat-by-adType/type='+type;
+    console.log(url);
     return this.http.get<any[]>(url);
  }
  public getPetCategory(): Observable<any[]>{

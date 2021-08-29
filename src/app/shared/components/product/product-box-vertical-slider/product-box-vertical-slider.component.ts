@@ -27,7 +27,6 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
     filter.type = this.type;
     this.productService.getFilterAds(filter).subscribe((rawData:any) => {
       this.products = rawData.response.data;//.filter(item =>{ return item.type == this.type});
-      console.log(this.products);
       this.loading = false;
     });
   }

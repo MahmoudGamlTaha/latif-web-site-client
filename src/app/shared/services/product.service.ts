@@ -49,9 +49,9 @@ export class UserAdsService {
     if(adsFilter.type!= 'ALL'){
       adsUrl +='&type='+ adsFilter.type;
     }
+    
     console.log(adsUrl);
-    this.userAds = this.http.get<any[]>(adsUrl);
-    return this.userAds;
+    return this.http.get<any[]>(adsUrl);
   }
    public getAdsById(id:number): Observable<any>{
      let adById = server.url + 'api/public/ads/ad-by-Id?id='+id;

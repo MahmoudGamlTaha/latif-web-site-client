@@ -2506,9 +2506,25 @@ header {
         }
         .lable-block {
             .lable3 {
-                border-radius: 100%;
+                border-radius: 50%;
                 background-color: var(--theme-deafult);
                 text-align: center;
+                font-size: 13px;
+                font-weight: 700;
+                position: absolute;
+                padding: 9px 4px;
+                text-transform: uppercase;
+                color: $white;
+                top: 7px;
+                left: 7px;
+                z-index: 1;
+            }
+            .lable2 {
+                background-color: var(--theme-deafult);
+                text-align: center;
+                border-top-left-radius: 100%;
+                border-top-right-radius:100% ;
+                opacity: 20%;
                 font-size: 13px;
                 font-weight: 700;
                 position: absolute;

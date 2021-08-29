@@ -1,5 +1,5 @@
 <app-breadcrumb [title]="'Collection'" [breadcrumb]="'Collection'"></app-breadcrumb>
-<!-- section start -->
+<!-- section start --> 
 <section class="section-b-space">
     <div class="collection-wrapper">
         <div class="container">
@@ -46,8 +46,11 @@
                         <!-- side-bar banner end here -->
                     </div>
                 </div>
+               
                 <div class="collection-content col">
+                  
                     <div class="page-main-content">
+                      
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="top-banner-wrapper">
@@ -86,18 +89,21 @@
                                         </a>
                                     </li>
                                 </ul>
+                              
                                 <div class="collection-product-wrapper" id="products">
                                     <app-grid [products]="products" [paginate]="paginate" [layoutView]="layoutView" [sortBy]="sortBy" (setGrid)="updateGridLayout($event)" (setLayout)="updateLayoutView($event)" (sortedBy)="sortByFilter($event)">
                                     </app-grid>
-                                    <div class="product-wrapper-grid" [ngClass]="layoutView">
+                                   <div class="product-wrapper-grid" [ngClass]="layoutView">
                                         <div class="row">
+                                           
                                             <div class="col-grid-box" [ngClass]="grid" *ngFor="let product of products">
                                                 <div class="product-box">
                                                     <app-product-box-one [product]="product" [currency]="productService?.Currency" [thumbnail]="false" [cartModal]="true" [loader]="true">
                                                     </app-product-box-one>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 text-center section-b-space mt-5 no-found" *ngIf="!products.length">
+                                         
+                                            <div class="col-sm-12 text-center section-b-space mt-5 no-found" *ngIf="!products.length && !loader">
                                                 <img src="assets/images/empty-search.jpg" class="img-fluid mb-4">
                                                 <h3>Sorry! Couldn't find the product you were looking For!!! </h3>
                                                 <p>Please check if you have misspelt something or try searching with other words.</p>
@@ -105,15 +111,19 @@
                                             </div>
                                         </div>
                                     </div>
+                              
                                     <app-pagination [products]="products" [paginate]="paginate" (setPage)="setPage($event)">
                                     </app-pagination>
                                 </div>
+                            
                             </div>
                         </div>
                     </div>
                 </div>
+           
             </div>
         </div>
+  
     </div>
 </section>
 <!-- section End -->

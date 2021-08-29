@@ -1,10 +1,13 @@
 <!-- side-bar single product slider start -->
 <div class="theme-card">
     <h5 class="title-border">{{ title }}</h5>
-    
+    <div *ngIf="loading else loaded">
+      <img src="assets/images/loader.gif"/>
+  </div>
     <owl-carousel-o [options]="NewProductSliderConfig" class="offer-slider">
+      <ng-template #loaded>
         <ng-container *ngFor="let product of products | slice:0:3 ">  
-            <ng-template carouselSlide>
+            <ng-template carouselSlide >
                 <div>
                   <div class="media" *ngFor="let product of products | slice:0:3 ">
                     <a [routerLink]="['/shop/product-user/', product.id]">
@@ -53,6 +56,7 @@
                 </div>
             </ng-template>
         </ng-container>
+      </ng-template>
     </owl-carousel-o>
 </div>
 <!-- side-bar single product slider end -->

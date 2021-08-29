@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { response } from 'express';
 import { UserAds } from '../../../../shared/classes/UserAds';
 import { UserAdsService } from '../../../../shared/services/product.service';
 
@@ -14,9 +15,10 @@ export class RelatedProductComponent implements OnInit {
   public products: UserAds[] = [];
 
   constructor(public productService: UserAdsService) { 
-    this.productService.getProducts().subscribe(response => 
-      this.products = response.filter(item => item.type == this.type)
-    );
+    this.productService.getProducts().subscribe((response:any) =>{ 
+      let items = response.response.data; 
+      this.products = items.filter(item => item.type == this.type)
+    });
   }
 
   ngOnInit(): void {

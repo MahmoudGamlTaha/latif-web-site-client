@@ -22,16 +22,17 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public maxPrice: number = 1200;
   public tags: any[] = [];
   public category: string;
+  public type:string;
   public pageNo: number = 1;
   public paginate: any = {}; // Pagination use only
   public sortBy: string; // Sorting Order
   public mobileSidebar: boolean = false;
-  public loader: boolean = true;
+  public loader: boolean;
   public adsFilter: adsFilter; 
   constructor(private route: ActivatedRoute, private router: Router,
     private viewScroller: ViewportScroller, public productService: UserAdsService) {   
       // Get Query params..
-      console.log(route.queryParams);
+    
         this.adsFilter = {type : "ALL"}  
         this.route.queryParams.subscribe(params => {
         this.brands = params.brand ? params.brand.split(",") : [];
@@ -42,7 +43,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
         this.tags = [...this.brands, ...this.colors, ...this.size]; // All Tags Array
         
         this.category = params.category ? params.category : 0;
-
+        this.type = params.type?params.type : 0;
         this.sortBy   = params.sortBy ? params.sortBy : 'ascending';
         this.pageNo   = params.page ? params.page : this.pageNo;
           if(params.category){
@@ -50,10 +51,10 @@ export class CollectionLeftSidebarComponent implements OnInit {
           }
            this.productService.getFilterAds(this.adsFilter).subscribe((items:any)=>{
              this.products = items.response.data;
+             this.loader = false;  
              console.log(this.products);
            });
-           console.log(this.products);
-            // Price Filter
+                      // Price Filter
           //this.products = this.products.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice) 
           // Paginate Products
         //  this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
@@ -63,6 +64,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loader = true;
   }
 
 
@@ -131,6 +133,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   // product Pagination
   setPage(page: number) {
+    console.log(page);
     this.router.navigate([], { 
       relativeTo: this.route,
       queryParams: { page: page },

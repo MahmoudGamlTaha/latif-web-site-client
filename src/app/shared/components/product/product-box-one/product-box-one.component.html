@@ -1,8 +1,10 @@
-<div *ngIf="!loader">
+<div *ngIf="loader">
+  <img src="assets/images/loader.gif"/>
+</div>
   <div class="img-wrapper">
     <div class="lable-block">
       <span class="lable3" *ngIf="product.price == 0">Adoption</span>
-      <span class="lable2" *ngIf="product.extra">for sale</span>
+      <span class="lable2" *ngIf="product.price > 0">for sale</span>
     </div>
     <div class="front">
       <a [routerLink]="['/shop/product-user/', product.id]">

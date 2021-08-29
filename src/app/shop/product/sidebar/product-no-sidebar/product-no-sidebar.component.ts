@@ -54,7 +54,7 @@ export class ProductNoSidebarComponent implements OnInit {
     this.product.description = retProduct.description;
     this.product.extra = retProduct.extra;
     this.product.title = retProduct.name;
-    this.product.images= retProduct.images[0].image == null?[image => "assets/images/product/placeholder.jpg"]:retProduct.images;
+    this.product.images= retProduct.images.length == 0?[image => "assets/images/product/placeholder.jpg"]:retProduct.images;
     this.product.image = retProduct.image==null?"assets/images/product/placeholder.jpg":retProduct.image;
     this.product.categoryNameAr = retProduct.categoryNameAr;
     this.product.short_description = retProduct.short_description;

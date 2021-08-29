@@ -138,27 +138,13 @@ public getServiceCategoy(){
   }];
 
   // Blog
-  public blogs = [{
+  public blogs = [/*{
     image: 'assets/images/blog/33.jpg',
     date: '25 January 2018',
     title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
     by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/34.jpg',
-    date: '26 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/35.jpg',
-    date: '27 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/36.jpg',
-    date: '28 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }];
+  }*/ 
+  ];
 
   // Logo
   public logos = [{
