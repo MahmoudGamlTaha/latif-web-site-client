@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CategorySlider, ProductSlider } from '../../shared/data/slider';
-import { UserAds } from '../../shared/classes/UserAds';
-import { UserAdsService } from '../../shared/services/product.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { BlogService } from 'src/app/shared/services/blog.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { CategoryType } from 'src/app/shared/classes/categoryType';
+import { UserAds } from '../../shared/classes/UserAds';
+import { UserAdsService } from '../../shared/services/product.service';
 
 @Component({
   selector: 'app-shoes',
@@ -46,7 +47,7 @@ public getPetCategories(){
   
   this.categoryService.getPetCategory().subscribe((rawData:any)=> {
      this.petCategories = rawData.response.data;
-     console.log(this.petCategories);
+     
   });
 }
 public getBlog(){
@@ -57,7 +58,7 @@ public getBlog(){
 public getServiceCategoy(){
   this.categoryService.getCategoryByTypeId(CategoryType.SERVICES).subscribe((item:any) =>{
        this.serviceCollection = item.response.data;
-       console.log(this.serviceCollection);
+       
   })
 }
   // sliders

@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+// @import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "~ngx-bootstrap/datepicker/bs-datepicker";
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+.iti {
+    width: 100%;
+    direction: ltr;
+    input{
+        padding: 17px 25px 17px 50px!important
+    }
+}
+
+.iti__country-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: 54px!important
+}

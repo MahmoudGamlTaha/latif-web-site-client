@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../../shared/data/slider';
+
+import { SizeModalComponent } from "../../../../shared/components/modal/size-modal/size-modal.component";
 import { UserAds } from '../../../../shared/classes/UserAds';
 import { UserAdsService } from '../../../../shared/services/product.service';
-import { SizeModalComponent } from "../../../../shared/components/modal/size-modal/size-modal.component";
 
 @Component({
   selector: 'app-product-left-sidebar',
@@ -26,13 +27,13 @@ export class ProductLeftSidebarComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router,
     public productService: UserAdsService) { 
       this.route.data.subscribe(response => {
-        console.log(response);
+        
         this.adsId = response.snapshot.params.slug;
          this.productService.getAdsById(this.adsId).subscribe((item) => {
            this.product = item.response.data;
         })      
       } );
-      console.log(this.product); 
+       
     }
 
   ngOnInit(): void {

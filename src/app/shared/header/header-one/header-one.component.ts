@@ -1,4 +1,9 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+
+import { AuthService } from '../../services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { CookiesData } from '../../services/cookies/CookiesData.service';
+import { Router } from '@angular/router';
 import { server } from 'src/environments/environment';
 
 @Component({
@@ -15,11 +20,19 @@ export class HeaderOneComponent implements OnInit {
   siteName:string;
   public stick: boolean = false;
 
-  constructor() { 
+  userProfile ;
+
+  constructor(
+    private cookie:CookiesData,
+    private cookieService: CookieService,
+    private router: Router,
+    private _authService:AuthService
+  ) { 
     this.siteName = server.name;
   }
 
   ngOnInit(): void {
+    this.userProfile = JSON.parse(this.cookie.getUserProfile())
   }
 
   // @HostListener Decorator
@@ -33,4 +46,15 @@ export class HeaderOneComponent implements OnInit {
   	}
   }
 
+  onLogout(){
+    if(this.userProfile.id){
+      // this._authService.logout(this.userProfile.id).subscribe(res =>{
+      //   console.log('res: ', res);
+      // })
+      this.cookieService.deleteAll();
+      this.router.navigate(['/'])
+      window.location.reload()
+    }
+  
+  }
 }

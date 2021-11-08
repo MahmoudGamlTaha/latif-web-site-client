@@ -20,18 +20,35 @@
               <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
             </li>
             <li class="onhover-dropdown mobile-account">
-              <i class="fa fa-user" aria-hidden="true"></i> My Account
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <ng-container *ngIf="userProfile; else elseTemplate">
+                {{userProfile.firstName}}
+              </ng-container>
+              <ng-template #elseTemplate>
+                My Account
+              </ng-template>
+              
+            
               <ul class="onhover-show-div">
-                <li>
-                  <a data-lng="en">
-                    Login
-                  </a>
+                <ng-container *ngIf="!userProfile">
+                
+                  <li>
+                    <a [routerLink]="[ '/pages/login' ]">Login</a>
+                  </li>
+                  <li>
+                    <a [routerLink]="[ '/pages/register' ]">Register</a>
+                  </li>
+                </ng-container>
+                <ng-container *ngIf="userProfile">
+                  <li>
+                    <a [routerLink]="[ '/pages/profile' ]">Profile</a>
                 </li>
-                <li>
-                  <a data-lng="es">
-                    Logout
-                  </a>
-                </li>
+                  <li >
+                    <a href="javascript:void(0)" (click)="onLogout()">
+                      Logout
+                    </a>
+                  </li>
+                </ng-container>
               </ul>
             </li>
           </ul>

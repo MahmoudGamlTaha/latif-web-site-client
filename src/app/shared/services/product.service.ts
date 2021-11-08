@@ -37,7 +37,7 @@ export class UserAdsService {
     //this.UserAdss.subscribe(next => { localStorage['products'] = JSON.stringify(next) });
     //return this.UserAdss = this.UserAdss.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
     let adsUrl = server.url + 'api/public/ads/nearest';
-    //console.log(adsUrl);
+    //
     this.userAds = this.http.get<any[]>(adsUrl);
     return this.userAds;
   }
@@ -50,12 +50,12 @@ export class UserAdsService {
       adsUrl +='&type='+ adsFilter.type;
     }
     
-    console.log(adsUrl);
+    
     return this.http.get<any[]>(adsUrl);
   }
    public getAdsById(id:number): Observable<any>{
      let adById = server.url + 'api/public/ads/ad-by-Id?id='+id;
-     console.log(adById);
+     
       return  this.http.get<any>(adById);
     }
   

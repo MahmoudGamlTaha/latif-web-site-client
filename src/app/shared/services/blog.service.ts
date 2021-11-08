@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { UserAds } from '../classes/UserAds';
@@ -28,7 +28,7 @@ export class BlogService {
   // UserAds
   public getBlogs(page:number): Observable<any> {
     let blogUrl = server.url + 'api/public/blogs?page='+page;
-    console.log(blogUrl);
+    
     this.blogs = this.http.get<any>(blogUrl);
     return this.blogs;
   }

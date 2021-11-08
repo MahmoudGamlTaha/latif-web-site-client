@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavService, Menu } from '../../services/nav.service';
-import { Router } from '@angular/router';
-import { CategoryType } from '../../classes/categoryType';
+import { Menu, NavService } from '../../services/nav.service';
+
 import { CategoryService } from '../../services/category.service';
+import { CategoryType } from '../../classes/categoryType';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -28,7 +29,7 @@ export class MenuComponent implements OnInit {
     this.categoryService.getCategoryByTypeId(type).subscribe((categories :any)=>{
       let categoryTypes = categories.response.data;
       categoryTypes.forEach(element => {
-       // console.log(element.name);
+       // 
         let menu:Menu = this.createMenuItem(element, "type","sub");
          
         this.categoryService.getCategoryByTypeId(menu.id).subscribe((subs:any)=>{
@@ -46,7 +47,7 @@ export class MenuComponent implements OnInit {
           menu.children = [];*/
           
         this.menuItems.push(menu);
-        console.log(this.menuItems);
+        
       });
     })
   }
@@ -64,7 +65,7 @@ export class MenuComponent implements OnInit {
     menu.badge = false;
   
     if(menuType == 'link'){
-      console.log(menu.path);
+      
     }
     menu.type = menuType;
    

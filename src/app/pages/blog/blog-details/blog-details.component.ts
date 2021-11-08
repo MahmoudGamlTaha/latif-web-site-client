@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
 import { Blog } from 'src/app/shared/classes/blogs';
 import { BlogService } from 'src/app/shared/services/blog.service';
 
@@ -33,7 +34,7 @@ export class BlogDetailsComponent implements OnInit {
         this.blog.categoryId = item.category_id;
         this.blog.description = item.description;
         this.blog.CreatedAt = item.createdDate;
-        console.log(item);
+        
        
         if(item.user != null){
           this.blog.createdBy = item.user;
@@ -44,11 +45,11 @@ export class BlogDetailsComponent implements OnInit {
           this.blog.createdBy.firstName = item.user.firstName;
           this.blog.createdBy.lastName = item.user.lastName == null?"":item.user.lastName;
           this.blog.createdBy.joinDate = item.user.registrationDate;
-          console.log(this.blog.createdBy);
+          
  
         }
     });
- //   console.log(this.blog);
+ //   
    }
 
 }

@@ -6,27 +6,97 @@
             <div class="col-lg-12">
                 <h3>create account</h3>
                 <div class="theme-card">
-                    <form class="theme-form">
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <label for="email">First Name</label>
-                                <input type="text" class="form-control" id="fname" placeholder="First Name" required="">
+                    <form class="theme-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+                        <div class="form-row align-items-center">
+                            <div class="col-md-6 form-group">
+                                <label for="name">Name</label>
+                                <input type="text" minlength="2" class="form-control" id="name" name="name" required
+                                    ngModel #name="ngModel">
+                                <small class="text-danger mt-2 d-block" *ngIf="f.invalid && f.touched && name.invalid">
+                                    Name Should be more than 2 characters
+                                </small>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required
+                                    ngModel #password="ngModel" minlength="6" autocomplete="new-password">
+                                <small class="text-danger mt-2 d-block"
+                                    *ngIf="f.invalid && f.touched && password.invalid">
+                                    Name Should be more than 6 characters
+                                </small>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Retype password</label>
+                                <input type="password" class="form-control" name="confirmPassword" ngModel required
+                                    #confirmPassword="ngModel" minlength="6">
+                                <small class="text-danger mt-2 d-block"
+                                    *ngIf="confirmPassword.touched && confirmPassword.value !== password.value">
+                                    Password mismatch
+                                </small>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" required ngModel
+                                    #email='ngModel' autocomplete="new-email">
+                                <small class="text-danger mt-2 d-block" *ngIf="f.invalid && f.touched && email.invalid">
+                                    Please write valid email
+                                </small>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="Address">Address</label>
+                                <input type="text" class="form-control" id="Address" name="address" required ngModel
+                                    #address="ngModel" minlength="5">
+                                <small class="text-danger mt-2 d-block"
+                                    *ngIf="f.invalid && f.touched && address.invalid">
+                                    Address Should be more than 5 characters
+                                </small>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="mobile">Mobile</label>
+                                <ngx-intl-tel-input
+                                    [preferredCountries]="[CountryISO.Egypt, CountryISO.UnitedKingdom]"
+                                    [enableAutoCountrySelect]="false"
+                                    [enablePlaceholder]="false"
+                                    [searchCountryFlag]="true"
+                                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                    [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Egypt"
+                                    [maxLength]="15" [phoneValidation]="true" name="phone" ngModel id="mobile" required
+                                    #phone="ngModel">
+                                </ngx-intl-tel-input>
+                                <small class="text-danger mt-2 d-block" *ngIf="f.invalid && f.touched && phone.invalid">
+                                    Please add valid mobile number
+                                </small>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="Country">Country</label>
+                                <ng-select name="country" id="country" required ngModel #country='ngModel' [items]="countries"
+                                    bindLabel="nameEn" bindValue="id" (change)="onChangeCountries($event)">
+                                </ng-select>
+                                <small class="text-danger mt-2 d-block" *ngIf="f.invalid && f.touched && country.invalid">
+                                    This filed is required
+                                </small>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="city">City</label>
+                                <ng-select name="city" id="city" required ngModel #city='ngModel' [items]="cities" bindLabel="cityEn"
+                                    bindValue="id">
+                                </ng-select>
+                                <small class="text-danger mt-2 d-block" *ngIf="f.invalid && f.touched && city.invalid">
+                                    This filed is required
+                                </small>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="state">Governorate</label>
+                                <input type="text" class="form-control" id="state" name="state" required ngModel #state='ngModel'>
+                                <small class="text-danger mt-2 d-block"
+                                *ngIf="f.invalid && f.touched && state.invalid">
+                                Governorate Should be more than 3 characters
+                            </small>
                             </div>
                             <div class="col-md-6">
-                                <label for="review">Last Name</label>
-                                <input type="password" class="form-control" id="lname" placeholder="Last Name" required="">
+                                <button type="submit" class="btn btn-solid" [disabled]="f.invalid">create Account</button>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <label for="email">email</label>
-                                <input type="text" class="form-control" id="email" placeholder="Email" required="">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="review">Password</label>
-                                <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
-                            </div>
-                            <button class="btn btn-solid">create Account</button>
+
                         </div>
                     </form>
                 </div>

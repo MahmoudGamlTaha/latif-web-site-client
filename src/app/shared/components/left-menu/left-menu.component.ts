@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavService, Menu } from '../../services/nav.service';
-import { Router } from '@angular/router';
+import { Menu, NavService } from '../../services/nav.service';
+
 import { CategoryService } from '../../services/category.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-left-menu',
@@ -27,7 +28,7 @@ export class LeftMenuComponent implements OnInit {
     this.categoryService.getCategoryByTypeId(type).subscribe((categories :any)=>{
       let categoryTypes = categories.response.data;
       categoryTypes.forEach(element => {
-       // console.log(element.name);
+       // 
         let menu:Menu = this.createMenuItem(element, "type","sub");
          
         this.categoryService.getCategoryByTypeId(menu.id).subscribe((subs:any)=>{
@@ -45,7 +46,7 @@ export class LeftMenuComponent implements OnInit {
           menu.children = [];*/
           
         this.menuItems.push(menu);
-        console.log(this.menuItems);
+        
         this.navServices.mainMenuToggle = false;
       });
     })
@@ -64,7 +65,7 @@ export class LeftMenuComponent implements OnInit {
     menu.badge = false;
   
     if(menuType == 'link'){
-      console.log(menu.path);
+      
     }
     menu.type = menuType;
    

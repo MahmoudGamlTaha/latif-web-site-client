@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../../shared/data/slider';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Images, UserAds } from '../../../../shared/classes/UserAds';
-import { UserAdsService } from '../../../../shared/services/product.service';
-import { SizeModalComponent } from "../../../../shared/components/modal/size-modal/size-modal.component";
+import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../../shared/data/slider';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { SelectMultipleControlValueAccessor } from '@angular/forms';
+import { SizeModalComponent } from "../../../../shared/components/modal/size-modal/size-modal.component";
+import { UserAdsService } from '../../../../shared/services/product.service';
 import { delay } from 'rxjs/operators';
 import { disposeEmitNodes } from 'typescript';
-import { CommonModule } from '@angular/common'; 
-import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-no-sidebar',
@@ -33,7 +34,7 @@ export class ProductNoSidebarComponent implements OnInit {
        this.loading = true;
     }
  getProductById(id:number){
-  console.log(id);
+  
   this.productService.getAdsById(id).subscribe((res:any) =>{
     this.product = new UserAds();
     let retProduct = res.response.data;
@@ -62,7 +63,7 @@ export class ProductNoSidebarComponent implements OnInit {
     this.product.description = retProduct.description;
     this.product.CreatedDate = retProduct.created_at;
     this.loading = false;
-    console.log(this.product);
+    
   });
 }
   ngOnInit(): void {

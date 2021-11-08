@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
-import { UserAdsService } from "../../../shared/services/product.service";
+import { Component, OnInit } from '@angular/core';
+
 import { UserAds } from '../../../shared/classes/UserAds';
+import { UserAdsService } from "../../../shared/services/product.service";
+import { ViewportScroller } from '@angular/common';
 import { adsFilter } from 'src/app/shared/classes/adsFilter';
 
 @Component({
@@ -52,7 +53,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
            this.productService.getFilterAds(this.adsFilter).subscribe((items:any)=>{
              this.products = items.response.data;
              this.loader = false;  
-             console.log(this.products);
+             
            });
                       // Price Filter
           //this.products = this.products.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice) 
@@ -133,7 +134,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   // product Pagination
   setPage(page: number) {
-    console.log(page);
+    
     this.router.navigate([], { 
       relativeTo: this.route,
       queryParams: { page: page },

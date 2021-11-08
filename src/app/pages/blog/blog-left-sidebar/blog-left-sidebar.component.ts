@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Blog } from 'src/app/shared/classes/blogs';
 import {BlogService} from '../../../shared/services/blog.service'
+
 @Component({
   selector: 'app-blog-left-sidebar',
   templateUrl: './blog-left-sidebar.component.html',
@@ -39,14 +41,14 @@ export class BlogLeftSidebarComponent implements OnInit {
         if(info.city != null){
          blog.createdBy.city = element.city.cityAr;
         }
-        console.log(element);
+        
         blog.title = element.title;
         blog.image = element.image==null?"/assets/images/blog/default.jpg":element.image;
         blog.images = element.images;
         this.blogs.push(blog);
-        console.log(blog);
+        
     }
-  console.log(this.blogs);
+  
   });
   }
 

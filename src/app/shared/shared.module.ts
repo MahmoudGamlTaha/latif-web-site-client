@@ -1,58 +1,94 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { BarRatingModule } from "ngx-bar-rating";
 import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { TranslateModule } from '@ngx-translate/core';
 
-// Header and Footer Components
-import { HeaderOneComponent } from './header/header-one/header-one.component';
-import { FooterOneComponent } from './footer/footer-one/footer-one.component';
-import { HeaderTwoComponent } from './header/header-two/header-two.component';
-import { FooterTwoComponent } from './footer/footer-two/footer-two.component';
-import { HeaderThreeComponent } from './header/header-three/header-three.component';
-import { FooterThreeComponent } from './footer/footer-three/footer-three.component';
-import { HeaderFourComponent } from './header/header-four/header-four.component';
-import { FooterFourComponent } from './footer/footer-four/footer-four.component';
-
-// Components
-import { LeftMenuComponent } from './components/left-menu/left-menu.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { CategoriesComponent } from './components/categories/categories.component';
+import { APIInterceptor } from './interceptors/http-interceptor';
+import { AgeVerificationComponent } from './components/modal/age-verification/age-verification.component';
+import { AppBaseComponent } from './components/app-base/app-base.component';
+import { BarRatingModule } from "ngx-bar-rating";
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { ProductBoxOneComponent } from './components/product/product-box-one/product-box-one.component';
-import { ProductBoxTwoComponent } from './components/product/product-box-two/product-box-two.component';
-import { ProductBoxThreeComponent } from './components/product/product-box-three/product-box-three.component';
-import { ProductBoxFourComponent } from './components/product/product-box-four/product-box-four.component';
-import { ProductBoxFiveComponent } from './components/product/product-box-five/product-box-five.component';
-import { ProductBoxVerticalComponent } from './components/product/product-box-vertical/product-box-vertical.component';
-import { ProductBoxVerticalSliderComponent } from './components/product/product-box-vertical-slider/product-box-vertical-slider.component';
-
-// Modals Components
-import { NewsletterComponent } from './components/modal/newsletter/newsletter.component';
-import { QuickViewComponent } from './components/modal/quick-view/quick-view.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartModalComponent } from './components/modal/cart-modal/cart-modal.component';
 import { CartVariationComponent } from './components/modal/cart-variation/cart-variation.component';
-import { VideoModalComponent } from './components/modal/video-modal/video-modal.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { CommonModule } from '@angular/common';
+import { DiscountPipe } from './pipes/discount.pipe';
+import { FooterFourComponent } from './footer/footer-four/footer-four.component';
+import { FooterOneComponent } from './footer/footer-one/footer-one.component';
+import { FooterThreeComponent } from './footer/footer-three/footer-three.component';
+import { FooterTwoComponent } from './footer/footer-two/footer-two.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderFourComponent } from './header/header-four/header-four.component';
+import { HeaderOneComponent } from './header/header-one/header-one.component';
+import { HeaderThreeComponent } from './header/header-three/header-three.component';
+import { HeaderTwoComponent } from './header/header-two/header-two.component';
+import { LayoutBoxComponent } from './components/layout-box/layout-box.component';
+import { LeftMenuComponent } from './components/left-menu/left-menu.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { NewsletterComponent } from './components/modal/newsletter/newsletter.component';
+import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ProductBoxFiveComponent } from './components/product/product-box-five/product-box-five.component';
+import { ProductBoxFourComponent } from './components/product/product-box-four/product-box-four.component';
+import { ProductBoxOneComponent } from './components/product/product-box-one/product-box-one.component';
+import { ProductBoxThreeComponent } from './components/product/product-box-three/product-box-three.component';
+import { ProductBoxTwoComponent } from './components/product/product-box-two/product-box-two.component';
+import { ProductBoxVerticalComponent } from './components/product/product-box-vertical/product-box-vertical.component';
+import { ProductBoxVerticalSliderComponent } from './components/product/product-box-vertical-slider/product-box-vertical-slider.component';
+import { QuickViewComponent } from './components/modal/quick-view/quick-view.component';
+import { RouterModule } from '@angular/router';
+import { SettingsComponent } from './components/settings/settings.component';
 import { SizeModalComponent } from './components/modal/size-modal/size-modal.component';
-import { AgeVerificationComponent } from './components/modal/age-verification/age-verification.component';
+import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
+import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { VideoModalComponent } from './components/modal/video-modal/video-modal.component';
+
+// Header and Footer Components
+
+
+
+
+
+
+
+
+
+// Components
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Modals Components
+
+
+
+
+
+
+
 
 // Skeleton Loader Components
-import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
+
 
 // Layout Box
-import { LayoutBoxComponent } from './components/layout-box/layout-box.component';
+
 
 // Tap To Top
-import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component';
+
 
 // Pipes
-import { DiscountPipe } from './pipes/discount.pipe';
+
+
 
 @NgModule({
   declarations: [
@@ -86,7 +122,8 @@ import { DiscountPipe } from './pipes/discount.pipe';
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
-    DiscountPipe
+    DiscountPipe,
+    AppBaseComponent
   ],
   imports: [
     CommonModule,
@@ -139,7 +176,15 @@ import { DiscountPipe } from './pipes/discount.pipe';
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
-    DiscountPipe
+    DiscountPipe,
+    AppBaseComponent
+  ],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: APIInterceptor,
+      multi   : true,
+    }
   ]
 })
 export class SharedModule { }
