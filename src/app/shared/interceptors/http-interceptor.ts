@@ -17,7 +17,6 @@ export class APIInterceptor implements HttpInterceptor {
         }
         request = request.clone({
             setHeaders: header,
-          
         });
         return next.handle(request);
     }
