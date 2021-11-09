@@ -61,7 +61,7 @@ export class RegisterComponent extends AppBaseComponent implements OnInit,OnDest
         state:value.state
       }
       const regSub = this._authService.registration(registerUserRequest).subscribe((res:any) =>{
-        if(res)   this.router.navigate(['/page/login'])
+        if(res)   this.router.navigate(['/pages/login'])
       })
       this.unsubscribe.push(regSub)
     }
