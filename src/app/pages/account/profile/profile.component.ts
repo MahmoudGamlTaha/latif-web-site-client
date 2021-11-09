@@ -1,13 +1,13 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router'
+import { Component, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MessageRequest, ProfileService } from '../../../shared/services/profile.service';
-import { PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar'
 
-import { AppBaseComponent } from '../../../shared/components/app-base/app-base.component';
-import { CookiesData } from '../../../shared/services/cookies/CookiesData.service';
-import { NgForm } from '@angular/forms';
-import { UserAdsService } from '../../../shared/services/product.service';
-import { ViewportScroller } from '@angular/common';
+import { AppBaseComponent } from '../../../shared/components/app-base/app-base.component'
+import { CookiesData } from '../../../shared/services/cookies/CookiesData.service'
+import { NgForm } from '@angular/forms'
+import { UserAdsService } from '../../../shared/services/product.service'
+import { ViewportScroller } from '@angular/common'
 
 @Component({
   selector: 'app-profile',
@@ -16,25 +16,32 @@ import { ViewportScroller } from '@angular/common';
 })
 export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDestroy {
 
-  userProfile;
-  public grid: string = 'col-md-6';
-  public layoutView: string = 'grid-view';
-  public all_products: any[] = [];
-  public products: any[] = [];
-  pageSize = 2
+  userProfile
+  public grid: string = 'col-lg-3 col-md-6'
+  public layoutView: string = 'grid-view'
+  public all_products: any[] = []
+  public products: any[] = []
+  pageSize = 20
   page = 0
-  start = 0;
+  start = 0
   public finished: boolean = false  // boolean when end of data is reached
 
 
-  chatMessagesData = [];
-  chatData: [];
+  chatMessagesData = []
+  chatData: []
 
-  chatSubmit: boolean;
-  userNameChat:string;
-  selectedUser;
+  chatSubmit: boolean
+  userNameChat:string
+  selectedUser
+  myInterestCategoriesArr= []
+  selectedInterestCategoriesArr:any= []
+  @ViewChild('chatPS') chatPS: PerfectScrollbarComponent
 
-  @ViewChild('chatPS') chatPS: PerfectScrollbarComponent;
+  model = {
+    left: true,
+    middle: false,
+    right: false
+  }
   constructor(
     injector: Injector,
     public ProfileService: ProfileService,
@@ -44,15 +51,12 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
     private router: Router,
     private viewScroller: ViewportScroller
     ) {
-      super(injector);
+      super(injector)
 
   }
 
   ngOnInit(): void {
     if (this.cookie.checkUserProfile) this.userProfile = JSON.parse(this.cookie.getUserProfile())
-    console.log(' this.userProfile: ', this.userProfile);
-
-  
   }
 
   // get my ads
@@ -60,7 +64,7 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
   myAds(){
    const getSub =  this.ProfileService.myAds(String(this.page), String(this.pageSize)).subscribe(result => {
       this.all_products = result.response.data 
-      this.addItems(this.start, this.pageSize);  
+      this.addItems(this.start, this.pageSize)  
     })
     this.unsubscribe.push(getSub)
   }
@@ -68,25 +72,43 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
   myChat(){
     const getSub =  this.ProfileService.myChat(String(this.page)).subscribe(result => {
        this.chatData = result.response.data 
-       console.log('  this.chatData: ',   this.chatData);
+       
      })
      this.unsubscribe.push(getSub)
    }
+
+
    
    nextPageById(message_id,room){
-     this.chatMessagesData = [];
+     this.chatMessagesData = []
     const getSub =  this.ProfileService.nextPageById(message_id,room).subscribe(result => {
        this.chatMessagesData = result.response.data.slice().reverse()
-       this.chatPS.directiveRef.scrollToBottom(0, 300)
+       setTimeout(() => {
+        this.chatPS.directiveRef.scrollToBottom()
+      }, 200)
      })
      this.unsubscribe.push(getSub)
    }
    
-
+   categoryInterestGet(){
+    const getSub =  this.ProfileService.categoryInterestGet('0').subscribe(result => {
+       this.myInterestCategoriesArr = result.response.data 
+     })
+     this.unsubscribe.push(getSub)
+   }
+   
+   myInterestCategories(){
+    const getSub =  this.ProfileService.myInterestCategories().subscribe(result => {
+     this.selectedInterestCategoriesArr = result.response.data.map(({id}) =>(id))
+     console.log('  this.selectedInterestCategoriesArr: ',   this.selectedInterestCategoriesArr);
+      
+     })
+     this.unsubscribe.push(getSub)
+   }
    
   addItems(index, sum) {  
     if(this.products.length < this.all_products.length){
-      this.finished = true;
+      this.finished = true
       for (let i = index; i < sum; ++i) {  
         this.products = this.all_products
       }  
@@ -95,9 +117,9 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
   }
   
   onScroll(){
-    this.start = this.pageSize;  
-    this.pageSize += 2;  
-    this.myAds();  
+    this.start = this.pageSize  
+    this.pageSize += 20  
+    this.myAds()  
   }
 
   onChangeTabe(v){
@@ -105,6 +127,9 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
       this.myAds()
     }else if(v.nextId === 'ngb-tab-2'){
       this.myChat()
+    }else if(v.nextId === 'ngb-tab-3'){
+      this.categoryInterestGet()
+      this.myInterestCategories()
     }
   }
 
@@ -118,23 +143,33 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
       room:  this.selectedUser?.room,
       sender:  this.selectedUser?.senderId,
     }
-    this.ProfileService.sndMsg(body).subscribe(res =>{
+    const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res =>{
       body['senderId'] = this.selectedUser?.senderId
       this.chatMessagesData.push(body)
-      console.log(' this.chatMessagesData: ',  this.chatMessagesData);
+      
       f.reset()
-      this.chatPS.directiveRef.scrollToBottom(0)
-      this.chatPS.directiveRef.scrollToBottom(0)
-      this.chatPS.directiveRef.scrollToBottom(0)
+      setTimeout(() => {
+        this.chatPS.directiveRef.scrollToBottom()
+      }, 100)
     })
+    this.unsubscribe.push(sndMsgSub)
   }
 
   chatUsername(data,f) {
-    console.log('data: ', data);
     this.selectedUser = data
     this.userNameChat = data.reciverName
     this.nextPageById(null, data.room)
     f.reset()
-  
+ 
   }
+
+  onSubmitInterests(f:NgForm){
+    
+    const saveCategoryInterestSub = this.ProfileService.saveCategoryInterest(this.selectedInterestCategoriesArr,this.userProfile.id).subscribe(res => {
+      
+
+    })
+    this.unsubscribe.push(saveCategoryInterestSub)
+  }
+
 }

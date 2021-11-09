@@ -91,7 +91,7 @@ import { WishlistComponent } from './account/wishlist/wishlist.component';
     NgxIntlTelInputModule,
     NgbModule,
     InfiniteScrollModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
   ]
 })
 export class PagesModule { }

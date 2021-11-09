@@ -45,7 +45,7 @@
             ],
             "scripts": [
               "node_modules/isotope-layout/dist/isotope.pkgd.min.js",
-              "node_modules/intl-tel-input/build/js/intlTelInput.min.js",
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
             ]
           },
           "configurations": {

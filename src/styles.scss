@@ -8,6 +8,11 @@
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+
+/*variables*/
+@import './assets/scss/theme/variables';
+$main_color:#ff5551;
+
 .iti {
     width: 100%;
     direction: ltr;
@@ -359,3 +364,23 @@
       min-width: auto;
     }
   }
+
+  .ps-content{
+    padding-right: 10px;
+  }
+
+  /*interests*/
+  .interests{
+    .btn {
+      border-color: $main_color;
+      color:  $main_color;
+      border-radius: 4px;
+      font-weight: normal;
+    }
+    .btn.active{
+      background-color:  $main_color;
+      color: $white;
+    }
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

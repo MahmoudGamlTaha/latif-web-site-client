@@ -49,6 +49,34 @@ export class ProfileService {
   }
 
 
+
+  categoryInterestGet(page: string | null | undefined): Observable<BasicResponse> {
+    let url_ = server.url + "api/public/category-interest";
+    if (page !== null && page !== undefined)
+      url_ = url_.replace("{page}", encodeURIComponent("" + page));
+    else
+      url_ = url_.replace("/{page}", "");
+    url_ = url_.replace(/[?&]$/, "");
+
+    return this.http.get<any>(url_)
+  }
+
+  myInterestCategories(): Observable<BasicResponse> {
+    let url_ = server.url + "api/public/my-interest-categories";
+    url_ = url_.replace(/[?&]$/, "");
+    return this.http.get<any>(url_)
+  }
+
+  saveCategoryInterest(categories: number[], userId: number | null | undefined): Observable<BasicResponse> {
+    let url_ = server.url + "api/public/interest-categories/create?";
+    if (userId !== undefined && userId !== null)
+      url_ += "userId=" + encodeURIComponent("" + userId) + "&";
+    url_ = url_.replace(/[?&]$/, "");
+
+    const content_ = JSON.stringify(categories);
+    return this.http.post<any>(url_, content_)
+  }
+
 }
 
 
