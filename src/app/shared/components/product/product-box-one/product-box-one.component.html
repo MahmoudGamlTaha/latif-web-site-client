@@ -1,7 +1,7 @@
 <div *ngIf="loader">
   <img src="assets/images/loader.gif"/>
 </div>
-  <div class="img-wrapper">
+  <div class="img-wrapper" *ngIf="product">
     <div class="lable-block">
       <span class="lable3" *ngIf="product.price == 0">Adoption</span>
       <span class="lable2" *ngIf="product.price > 0">for sale</span>
@@ -21,7 +21,7 @@
       </a>
     </div>
     <ul class="product-thumb-list" *ngIf="thumbnail">
-      <li class="grid_thumb_img" [class.active]="ImageSrc == image" *ngFor="let image of product.images">
+      <li class="grid_thumb_img" [class.active]="ImageSrc == image" *ngFor="let image of product?.images">
         <a href="javascript:void(0)" (mouseover)="ChangeVariantsImage(image)">
           <img [lazyLoad]="image">
         </a>

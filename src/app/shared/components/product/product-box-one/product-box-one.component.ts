@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { QuickViewComponent } from "../../modal/quick-view/quick-view.component";
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+
 import { CartModalComponent } from "../../modal/cart-modal/cart-modal.component";
+import { QuickViewComponent } from "../../modal/quick-view/quick-view.component";
 import { UserAds } from "../../../classes/UserAds";
 import { UserAdsService } from "../../../services/product.service";
 
@@ -26,7 +27,7 @@ export class ProductBoxOneComponent implements OnInit {
   constructor(private productService: UserAdsService) { }
 
   ngOnInit(): void {
-    this.ImageSrc = this.product.image;;
+    this.ImageSrc = this.product?.image;;
     if(this.loader) {
       setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
     }

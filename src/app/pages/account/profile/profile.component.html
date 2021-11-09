@@ -2,82 +2,195 @@
 <!-- personal deatail section start -->
 <section class="contact-page register-page">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>PERSONAL DETAIL</h3>
-                <form class="theme-form">
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <label for="name">First Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter Your name" required="">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email">Last Name</label>
-                            <input type="text" class="form-control" id="last-name" placeholder="Email" required="">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="review">Phone number</label>
-                            <input type="text" class="form-control" id="review" placeholder="Enter your number" required="">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="Email" required="">
-                        </div>
-                        <div class="col-md-12">
-                            <label for="review">Write Your Message</label>
-                            <textarea class="form-control mb-0" placeholder="Write Your Message" id="exampleFormControlTextarea1" rows="6"></textarea>
-                        </div>
+        <div class="row" *ngIf="userProfile">
+            <div class="col-12">
+                <div class="card tab2-card">
+                    <div class="card-body">
+                        <ngb-tabset class="tab-coupon profile-tabs" [destroyOnHide]="false" (tabChange)="onChangeTabe($event)">
+                            <ngb-tab>
+                                <ng-template ngbTabTitle>
+                                    <i class="fa fa-user"></i> Info
+                                </ng-template>
+                                <ng-template ngbTabContent>
+                                    <div class="tab-pane fade show active" id="top-profile" role="tabpanel"
+                                        aria-labelledby="top-profile-tab">
+                                        <h5 class="f-w-600"> Profile</h5>
+                                        <div class="table-responsive profile-table">
+                                            <table class="table table-responsive">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>First Name:</td>
+                                                        <td>{{userProfile.firstName}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Last Name:</td>
+                                                        <td>{{userProfile.lastName}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email:</td>
+                                                        <td>{{userProfile.email}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phone:</td>
+                                                        <td>{{userProfile.phone}}</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Address:</td>
+                                                        <td>{{userProfile.address}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-tab>
+                            <ngb-tab>
+                                <ng-template ngbTabTitle>
+                                    <i class="fa fa-user"></i> My Ads</ng-template>
+                                <ng-template ngbTabContent>
+                                    <div class="collection-product-wrapper" id="products">
+                                        <div class="product-wrapper-grid" [ngClass]="layoutView">
+                                            <div class="row">
+                                                <div class="col-grid-box" [ngClass]="grid"
+                                                    *ngFor="let product of products">
+                                                    <div class="product-box">
+                                                        <app-product-box-one [product]="product"
+                                                            [currency]="productService?.Currency" [thumbnail]="false"
+                                                            [cartModal]="true">
+                                                        </app-product-box-one>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 text-center section-b-space mt-5 no-found"
+                                                    *ngIf="!products.length">
+                                                    <img src="assets/images/empty-search.jpg" class="img-fluid mb-4">
+                                                    <h3>Sorry! Couldn't find the product you were looking For!!! </h3>
+                                                    <p>Please check if you have misspelt something or try searching with
+                                                        other words.</p>
+                                                    <a [routerLink]="['/shop/collection/left/sidebar']"
+                                                        class="btn btn-solid">continue shopping</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Infinite Scroll -->
+                                        <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000"
+                                            (scrolled)="onScroll()" *ngIf="products.length">
+                                        </div>
+                                        <div class="product-infinitescroll">
+                                            <div class="theme-paggination-block">
+                                                <div class="container-fluid p-0">
+                                                    <div class="row">
+                                                        <div class="text-center col-sm-12">
+                                                            <div class="infinite-scrolling mt-3 mb-3 d-inline-block">
+                                                                <img src="assets/images/loader.gif"
+                                                                    *ngIf="!finished && products.length">
+                                                                <div class="loading-more active"
+                                                                    *ngIf="finished && products.length">No More Products
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-tab>
+                            <ngb-tab>
+                                <ng-template ngbTabTitle>
+                                    <i class="fa fa-user"></i> Chat
+                                </ng-template>
+                                <ng-template ngbTabContent>
+                                    <div class="d-lg-flex">
+                                        <div class="chat-leftsidebar mr-lg-4">
+                                          <div class="">
+
+                                            <div class="chat-leftsidebar-nav">
+                                                <div>
+                                                    <h5 class="font-size-14 mb-3">Recent</h5>
+                                                      <ul class="list-unstyled chat-list">
+                                                        <li class="" *ngFor="let data of chatData">
+                                                          <a href="javascript: void(0);" (click)="chatUsername(data,f)">
+                                                            <div class="media">
+                                                              <!-- <div class="align-self-center mr-3">
+                                                                <i class="mdi mdi-circle text-{{data.color}} font-size-10"></i>
+                                                              </div> -->
+                                                              <div class="align-self-center mr-3">
+                                                                <img src="assets/images/icon/Blank-Avatar.png" class="rounded-circle avatar-xs" alt="" width="50">
+                                                              </div>
+                                                              <div class="media-body overflow-hidden">
+                                                                <h5 class="text-truncate font-size-14 mb-1 text-danger">{{ data.reciverName }}</h5>
+                                                                <p class="text-truncate mb-1">{{ data.message }}</p>
+                                                                <div class="font-size-11 text-danger">{{ data.createAt }}</div>
+                                                              </div>
+                                                            </div>
+                                                          </a>
+                                                        </li>
+                                                      </ul>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="w-100 user-chat">
+                                          <div class="card">
+                                            <div class="px-4 py-2 border-bottom">
+                                             
+                                                <div class="d-flex align-items-center" *ngIf="userNameChat">
+                                                  <img src="assets/images/icon/Blank-Avatar.png" class="rounded-circle avatar-xs" alt="" width="50"> 
+                                                  <h5 class="font-size-15 mb-1 ml-2">{{userNameChat}}</h5>
+                                                </div>
+                                               
+                                            </div>
+
+                                            <div>
+                                              <div class="chat-conversation p-3">
+                                                <perfect-scrollbar [scrollIndicators]="true" #chatPS style="height: 470px;">
+                                                  <ul class="list-unstyled">
+                                                    <li *ngFor="let data of chatMessagesData" [ngClass]="{'right': data.senderId === userProfile.id}">
+                                                      <div class="conversation-list">
+                                                        <div class="ctext-wrap">
+                                                          <div class="conversation-name">{{ data.name }}</div>
+                                                          <p>
+                                                            {{ data.message }}
+                                                          </p>
+                                                          <p class="chat-time mb-0"><i class="bx bx-time-five align-middle mr-1"></i> {{ data.time }}</p>
+                                                        </div>
+
+                                                      </div>
+                                                    </li>
+                                                  </ul>
+                                                </perfect-scrollbar>
+                                              </div>
+                                              <div class="p-3 chat-input-section">
+
+                                                <form #f="ngForm" (ngSubmit)="messageSave(f)"  class="row">
+                                                  <div class="col">
+                                                    <div class="position-relative">
+                                                      <input type="text" class="form-control chat-input" placeholder="Enter Message..." required
+                                                        name="message" ngModel #message="ngModel" [ngClass]="{'is-invalid': chatSubmit && f.invalid}">
+                                                      <div *ngIf="chatSubmit && message.invalid" class="invalid-feedback">
+                                                       This value is required.
+                                                      </div>
+
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-auto">
+                                                    <button type="submit" class="btn btn-solid chat-send w-md" [disabled]="f.invalid"><span
+                                                        class="d-none d-sm-inline-block mr-2">Send</span> <i class="mdi mdi-send"></i></button>
+                                                  </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </ng-template>
+                            </ngb-tab>
+                        </ngb-tabset>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
+
     </div>
 </section>
-<!-- Section ends -->
-<!-- address section start -->
-<section class="contact-page register-page section-b-space">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>SHIPPING ADDRESS</h3>
-                <form class="theme-form">
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <label for="name">flat / plot</label>
-                            <input type="text" class="form-control" id="home-ploat" placeholder="company name" required="">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="name">Address *</label>
-                            <input type="text" class="form-control" id="address-two" placeholder="Address" required="">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email">Zip Code *</label>
-                            <input type="text" class="form-control" id="zip-code" placeholder="zip-code" required="">
-                        </div>
-                        <div class="col-md-6 select_input">
-                            <label for="review">Country *</label>
-                            <select class="form-control" size="1">
-                                <option value="India">India</option>
-                                <option value="UAE">UAE</option>
-                                <option value="U.K">U.K</option>
-                                <option value="US">US</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="review">City *</label>
-                            <input type="text" class="form-control" id="city" placeholder="City" required="">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="review">Region/State *</label>
-                            <input type="text" class="form-control" id="region-state" placeholder="Region/state" required="">
-                        </div>
-                        <div class="col-md-12">
-                            <button class="btn btn-sm btn-solid" type="submit">Save setting</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Section ends -->

@@ -32,7 +32,7 @@ export class HeaderOneComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userProfile = JSON.parse(this.cookie.getUserProfile())
+    if(this.cookie.checkUserProfile) this.userProfile = JSON.parse(this.cookie.getUserProfile())
   }
 
   // @HostListener Decorator
@@ -52,7 +52,7 @@ export class HeaderOneComponent implements OnInit {
       //   console.log('res: ', res);
       // })
       this.cookieService.deleteAll();
-      this.router.navigate(['/'])
+      this.router.navigate(['/home/app'])
       window.location.reload()
     }
   

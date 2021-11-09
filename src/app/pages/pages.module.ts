@@ -20,6 +20,7 @@ import { GalleryModule } from '@ks89/angular-modal-gallery';
 import { GridFourComponent } from './portfolio/grid-four/grid-four.component';
 import { GridThreeComponent } from './portfolio/grid-three/grid-three.component';
 import { GridTwoComponent } from './portfolio/grid-two/grid-two.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoginComponent } from './account/login/login.component';
 import { LookbookComponent } from './lookbook/lookbook.component';
 import { MasonryFullWidthComponent } from './portfolio/masonry-full-width/masonry-full-width.component';
@@ -28,9 +29,11 @@ import { MasonryGridThreeComponent } from './portfolio/masonry-grid-three/masonr
 import { MasonryGridTwoComponent } from './portfolio/masonry-grid-two/masonry-grid-two.component';
 import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ProfileComponent } from './account/profile/profile.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ReviewComponent } from './review/review.component';
@@ -75,7 +78,8 @@ import { WishlistComponent } from './account/wishlist/wishlist.component';
     MasonryGridTwoComponent,
     MasonryGridThreeComponent,
     MasonryGridFourComponent,
-    MasonryFullWidthComponent
+    MasonryFullWidthComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -84,7 +88,10 @@ import { WishlistComponent } from './account/wishlist/wishlist.component';
     PagesRoutingModule,
     NgSelectModule,
     FormsModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    NgbModule,
+    InfiniteScrollModule,
+    PerfectScrollbarModule
   ]
 })
 export class PagesModule { }

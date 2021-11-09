@@ -16,6 +16,7 @@ import { FooterFourComponent } from './footer/footer-four/footer-four.component'
 import { FooterOneComponent } from './footer/footer-one/footer-one.component';
 import { FooterThreeComponent } from './footer/footer-three/footer-three.component';
 import { FooterTwoComponent } from './footer/footer-two/footer-two.component';
+import { GridComponent } from '../shop/collection/widgets/grid/grid.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderFourComponent } from './header/header-four/header-four.component';
 import { HeaderOneComponent } from './header/header-one/header-one.component';
@@ -28,6 +29,7 @@ import { NewsletterComponent } from './components/modal/newsletter/newsletter.co
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { PaginationComponent } from '../shop/collection/widgets/pagination/pagination.component';
 import { ProductBoxFiveComponent } from './components/product/product-box-five/product-box-five.component';
 import { ProductBoxFourComponent } from './components/product/product-box-four/product-box-four.component';
 import { ProductBoxOneComponent } from './components/product/product-box-one/product-box-one.component';
@@ -123,7 +125,9 @@ import { VideoModalComponent } from './components/modal/video-modal/video-modal.
     LayoutBoxComponent,
     TapToTopComponent,
     DiscountPipe,
-    AppBaseComponent
+    AppBaseComponent,
+    GridComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
@@ -177,7 +181,9 @@ import { VideoModalComponent } from './components/modal/video-modal/video-modal.
     LayoutBoxComponent,
     TapToTopComponent,
     DiscountPipe,
-    AppBaseComponent
+    AppBaseComponent,
+    GridComponent,
+    PaginationComponent
   ],
   providers: [
     {
