@@ -2,6 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AppRouteGuard } from '../shared/services/auth-route-guard';
+import { AppRouteGuard2 } from '../shared/services/auth2-guard';
 import { BlogDetailsComponent } from './blog/blog-details/blog-details.component';
 import { BlogLeftSidebarComponent } from './blog/blog-left-sidebar/blog-left-sidebar.component';
 import { BlogNoSidebarComponent } from './blog/blog-no-sidebar/blog-no-sidebar.component';
@@ -64,8 +65,8 @@ const routes: Routes = [
   },
   { 
     path: 'profile', 
-    component: ProfileComponent
-
+    component: ProfileComponent,
+    canActivate: [AppRouteGuard2]
   },
   { 
     path: 'contact', 

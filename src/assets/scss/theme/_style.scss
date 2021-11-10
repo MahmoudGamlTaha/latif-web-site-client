@@ -991,15 +991,13 @@ header {
     position: relative;
     padding-top: 25px;
     padding-bottom: 25px;
-    font-family: $font_0, $font_1;
-
     img,
     i {
         cursor: pointer;
     }
 
     .show-div {
-        top: 103px;
+        top: 83px;
         position: absolute;
         z-index: 9;
         background-color: $white;
@@ -10659,6 +10657,7 @@ footer {
 
 body.rtl {
     direction: rtl;
+    text-align: right;
 }
 
 .rtl {

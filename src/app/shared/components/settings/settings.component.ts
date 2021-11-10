@@ -11,16 +11,18 @@ import { UserAds } from "../../classes/UserAds";
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-
+  language
   public products: UserAds[] = [];
   public search: boolean = false;
   
   public languages = [{ 
     name: 'English',
-    code: 'en'
+    code: 'en',
+    flag: './assets/images/icon/226-united-states.svg',
   }, {
-    name: 'French',
-    code: 'fr'
+    name: 'العربية',
+    code: 'ar',
+    flag: './assets/images/icon/008-saudi-arabia.svg',
   }];
 
   public currencies = [{
@@ -44,15 +46,29 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.languages.forEach((language:any) => {
+      if (language.code === this.translate.currentLang ) {
+        this.language = language;
+      }
+    });
   }
 
   searchToggle(){
     this.search = !this.search;
   }
 
-  changeLanguage(code){
+  changeLanguage(lang){
     if (isPlatformBrowser(this.platformId)) {
-      this.translate.use(code)
+      this.translate.use(lang.code)
+      localStorage.setItem('lang',lang.code);
+      this.language = lang
+      if(lang.code === 'ar'){
+        document.body.classList.remove('ltr')
+        document.body.classList.add('rtl')
+      }else if(lang.code === 'en'){
+        document.body.classList.remove('rtl')
+        document.body.classList.add('ltr')
+      }
     }
   }
 

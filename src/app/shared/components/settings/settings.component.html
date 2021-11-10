@@ -25,7 +25,7 @@
         </div>
       </div>
     </li>
-    <li class="onhover-div mobile-setting">
+    <!-- <li class="onhover-div mobile-setting">
       <div><img src="assets/images/icon/setting.png" class="img-fluid" alt="settong">
         <i class="ti-settings"></i></div>
       <div class="show-div setting">
@@ -42,11 +42,28 @@
           </li>
         </ul>
       </div>
+    </li> -->
+
+    <li class="onhover-div mobile-lang">
+      <div>
+        <img src="{{ language?.flag }}" class="img-fluid" width="25" alt="falf">  {{ language.name }}
+      </div>
+      <div class="show-div setting">
+        <ul>
+          <li *ngFor="let language of languages">
+            <a href="javascript:void(0)" (click)="changeLanguage(language)">
+              <img src="{{ language.flag }}" width="25"/> {{ language.name }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    
     </li>
     <li class="onhover-div mobile-cart">
       <div><a href="/multikart/shop/cart">
-        <img src="assets/images/icon/cart.png" alt="" class="img-fluid">
-        <i class="ti-shopping-cart"></i></a>
+          <img src="assets/images/icon/cart.png" alt="" class="img-fluid">
+          <i class="ti-shopping-cart"></i></a>
       </div>
       <span class="cart_qty_cls">{{ products.length }}</span>
       <ul class="show-div shopping-cart" *ngIf='!products.length'>

@@ -1,14 +1,14 @@
-<app-breadcrumb [title]="'Login'" [breadcrumb]="'Login'"></app-breadcrumb>
+<app-breadcrumb [title]="'auth.login' | translate" [breadcrumb]="'auth.login' | translate"></app-breadcrumb>
 <!-- section start -->
 <section class="login-page section-b-space">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <h3>Login</h3>
+            <div class="col-lg-8">
+                <h3> {{'auth.login' | translate}}</h3>
                 <div class="theme-card">
                     <form class="theme-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
                         <div class="form-group">
-                            <label for="email">Mobile</label>
+                            <label>{{'common.phone' | translate}}</label>
                             <ngx-intl-tel-input
                                 [preferredCountries]="[CountryISO.UnitedStates, CountryISO.UnitedKingdom]"
                                 [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true"
@@ -17,23 +17,18 @@
                                 [phoneValidation]="true" name="mobile" ngModel></ngx-intl-tel-input>
                         </div>
                         <div class="form-group">
-                            <label for="review">Password</label>
+                            <label>{{'auth.password' | translate}}</label>
                             <input type="password" name="password" class="form-control"
                                 placeholder="Enter your password" required ngModel>
                         </div>
-                        <button type="submit" class="btn btn-solid" [disabled]="f.invalid">Login</button>
+                        <button type="submit" class="btn btn-solid" [disabled]="f.invalid">{{'auth.login' | translate}}</button>
+
+                        <a routerLink="/pages/register" class="btn btn-link">{{'auth.register' | translate}}</a>
+
                     </form>
                 </div>
             </div>
-            <div class="col-lg-6 right-login">
-                <h3>New Customer</h3>
-                <div class="theme-card authentication-right">
-                    <h6 class="title-font">Create A Account</h6>
-                    <p>Sign up for a free account at our store. Registration is quick and easy. It allows you to be able
-                        to order from our shop. To start shopping click register.</p>
-                    <a routerLink="/pages/register" class="btn btn-solid">Create an Account</a>
-                </div>
-            </div>
+        
         </div>
     </div>
 </section>

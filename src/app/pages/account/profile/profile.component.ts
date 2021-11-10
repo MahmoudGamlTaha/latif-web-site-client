@@ -36,6 +36,7 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
   myInterestCategoriesArr= []
   selectedInterestCategoriesArr:any= []
   @ViewChild('chatPS') chatPS: PerfectScrollbarComponent
+  @ViewChild('f') f: NgForm
 
   model = {
     left: true,
@@ -134,32 +135,34 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
   }
 
   messageSave(f:NgForm){
-    
-    const body :any ={
-      ad_item: this.selectedUser?.itemId,
-      device_id: 'web',
-      device_model: 'web',
-      message: f.value.message,
-      room:  this.selectedUser?.room,
-      sender:  this.selectedUser?.senderId,
+    if(this.selectedUser){
+      const body :any ={
+        ad_item: this.selectedUser?.itemId,
+        device_id: 'web',
+        device_model: 'web',
+        message: f.value.message,
+        room:  this.selectedUser?.room,
+        sender:  this.selectedUser?.senderId,
+      }
+      const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res =>{
+        body['senderId'] = this.selectedUser?.senderId
+        this.chatMessagesData.push(body)
+        
+        f.reset()
+        setTimeout(() => {
+          this.chatPS.directiveRef.scrollToBottom()
+        }, 100)
+      })
+      this.unsubscribe.push(sndMsgSub)
     }
-    const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res =>{
-      body['senderId'] = this.selectedUser?.senderId
-      this.chatMessagesData.push(body)
-      
-      f.reset()
-      setTimeout(() => {
-        this.chatPS.directiveRef.scrollToBottom()
-      }, 100)
-    })
-    this.unsubscribe.push(sndMsgSub)
+   
   }
 
-  chatUsername(data,f) {
+  chatUsername(data) {
     this.selectedUser = data
     this.userNameChat = data.reciverName
     this.nextPageById(null, data.room)
-    f.reset()
+    this.f.reset()
  
   }
 

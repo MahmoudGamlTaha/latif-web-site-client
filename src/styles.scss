@@ -8,6 +8,8 @@
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", "Cairo", sans-serif; }
 
 /*variables*/
 @import './assets/scss/theme/variables';
@@ -341,7 +343,6 @@ $main_color:#ff5551;
     border-radius: 30px;
     background-color: #fff !important;
     border-color:  #9b9b9b !important;
-    padding-right: 120px;
   }
   
   .chat-input-links{
@@ -382,5 +383,10 @@ $main_color:#ff5551;
       color: $white;
     }
   }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  
+  .rtl{
+    .breadcrumb-item + .breadcrumb-item::before{
+      float: right;
+    }
+  }
+

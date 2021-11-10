@@ -10,7 +10,7 @@ import { CookiesData } from './cookies/CookiesData.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class AppRouteGuard implements CanActivate, CanActivateChild {
+export class AppRouteGuard2 implements CanActivate, CanActivateChild {
 
     constructor(
         private _router: Router,
@@ -19,7 +19,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
    
-        if (!this.cookie.getToken()) {
+        if (this.cookie.getToken()) {
             return true;
         }else{
             this._router.navigate([''])

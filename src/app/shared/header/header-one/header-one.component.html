@@ -6,7 +6,7 @@
         <div class="col-lg-6">
           <div class="header-contact">
             <ul>
-              <li>Welcome to Our {{siteName}}</li>
+              <li>{{'welcome' | translate}} {{siteName}}</li>
               <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 123 - 456 - 7890</li>
             </ul>
           </div>
@@ -33,19 +33,19 @@
                 <ng-container *ngIf="!userProfile">
                 
                   <li>
-                    <a [routerLink]="[ '/pages/login' ]">Login</a>
+                    <a [routerLink]="[ '/pages/login' ]">{{'auth.login' | translate}}</a>
                   </li>
                   <li>
-                    <a [routerLink]="[ '/pages/register' ]">Register</a>
+                    <a [routerLink]="[ '/pages/register' ]">{{'auth.register' | translate}}</a>
                   </li>
                 </ng-container>
                 <ng-container *ngIf="userProfile">
                   <li>
-                    <a [routerLink]="[ '/pages/profile' ]">Profile</a>
+                    <a [routerLink]="[ '/pages/profile' ]">{{'profile.title' | translate}}</a>
                 </li>
                   <li >
                     <a href="javascript:void(0)" (click)="onLogout()">
-                      Logout
+                      {{'auth.logout' | translate}}
                     </a>
                   </li>
                 </ng-container>

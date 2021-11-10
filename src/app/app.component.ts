@@ -19,11 +19,24 @@ export class AppComponent {
   );
   
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
-    private loader: LoadingBarService, translate: TranslateService) {
+    private loader: LoadingBarService, private translate: TranslateService) {
     if (isPlatformBrowser(this.platformId)) {
       translate.setDefaultLang('en');
       translate.addLangs(['en', 'fr']);
     }
+
+    if(localStorage.getItem('lang')){
+      let lang = localStorage.getItem('lang')
+      this.translate.use(lang)
+      if(lang === 'ar'){
+        document.body.classList.remove('ltr')
+        document.body.classList.add('rtl')
+      }else if(lang === 'en'){
+        document.body.classList.remove('rtl')
+        document.body.classList.add('ltr')
+      }
+    }
   }
+  
 
 }

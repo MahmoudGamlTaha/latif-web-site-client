@@ -4,6 +4,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { APIInterceptor } from './shared/interceptors/http-interceptor';
 import { AppComponent } from './app.component';
 import { AppRouteGuard } from './shared/services/auth-route-guard';
+import { AppRouteGuard2 } from './shared/services/auth2-guard';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -60,7 +61,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi   : true,
     },
     CookieService,
-    AppRouteGuard
+    AppRouteGuard,
+    AppRouteGuard2
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
-<app-breadcrumb [title]="'Profile'" [breadcrumb]="'Profile'"></app-breadcrumb>
+<app-breadcrumb [title]="('profile.title' | translate)" [breadcrumb]="('profile.title' | translate)"></app-breadcrumb>
 <!-- personal deatail section start -->
-<section class="contact-page register-page">
+<section class="contact-page register-page section-b-space">
   <div class="container">
     <div class="row" *ngIf="userProfile">
       <div class="col-12">
@@ -9,34 +9,29 @@
             <ngb-tabset class="tab-coupon profile-tabs" [destroyOnHide]="false" (tabChange)="onChangeTabe($event)">
               <ngb-tab>
                 <ng-template ngbTabTitle>
-                  <i class="fa fa-user"></i> Info
+                   {{'profile.Info' | translate}}
                 </ng-template>
                 <ng-template ngbTabContent>
                   <div class="tab-pane fade show active" id="top-profile" role="tabpanel"
                     aria-labelledby="top-profile-tab">
-                    <h5 class="f-w-600"> Profile</h5>
                     <div class="table-responsive profile-table">
                       <table class="table table-responsive">
                         <tbody>
                           <tr>
-                            <td>First Name:</td>
-                            <td>{{userProfile.firstName}}</td>
+                            <td> {{'common.name' | translate}}</td>
+                            <td>{{userProfile.firstName + ' ' + userProfile.lastName}}</td>
                           </tr>
                           <tr>
-                            <td>Last Name:</td>
-                            <td>{{userProfile.lastName}}</td>
-                          </tr>
-                          <tr>
-                            <td>Email:</td>
+                            <td> {{'common.email' | translate}}</td>
                             <td>{{userProfile.email}}</td>
                           </tr>
                           <tr>
-                            <td>Phone:</td>
+                            <td> {{'common.phone' | translate}}</td>
                             <td>{{userProfile.phone}}</td>
                           </tr>
 
                           <tr>
-                            <td>Address:</td>
+                            <td> {{'common.address' | translate}}</td>
                             <td>{{userProfile.address}}</td>
                           </tr>
                         </tbody>
@@ -47,7 +42,7 @@
               </ngb-tab>
               <ngb-tab>
                 <ng-template ngbTabTitle>
-                  <i class="fa fa-user"></i> My Ads</ng-template>
+                  {{'profile.MyAds' | translate}}</ng-template>
                 <ng-template ngbTabContent>
                   <div class="collection-product-wrapper" id="products">
                     <div class="product-wrapper-grid" [ngClass]="layoutView">
@@ -93,7 +88,7 @@
               </ngb-tab>
               <ngb-tab>
                 <ng-template ngbTabTitle>
-                  <i class="fa fa-user"></i> Chat
+                 {{'profile.chat' | translate}}
                 </ng-template>
                 <ng-template ngbTabContent>
                   <div class="d-lg-flex">
@@ -102,11 +97,10 @@
 
                         <div class="chat-leftsidebar-nav">
                           <div>
-                            <h5 class="font-size-14 mb-3">Recent</h5>
                             <perfect-scrollbar [scrollIndicators]="true" style="height: 470px;">
                               <ul class="list-unstyled chat-list">
                                 <li class="" *ngFor="let data of chatData">
-                                  <a href="javascript: void(0);" (click)="chatUsername(data,f)">
+                                  <a href="javascript: void(0);" (click)="chatUsername(data)">
                                     <div class="media">
                                       <!-- <div class="align-self-center mr-3">
                                                                 <i class="mdi mdi-circle text-{{data.color}} font-size-10"></i>
@@ -133,8 +127,7 @@
                     </div>
                     <div class="w-100 user-chat">
                       <div class="card">
-                        <div class="px-4 py-2 border-bottom">
-
+                        <div class="px-4 py-2" [ngClass]="{'border-bottom': userNameChat}">
                           <div class="d-flex align-items-center" *ngIf="userNameChat">
                             <img src="assets/images/icon/Blank-Avatar.png" class="rounded-circle avatar-xs" alt=""
                               width="50">
@@ -164,12 +157,12 @@
                               </ul>
                             </perfect-scrollbar>
                           </div>
-                          <div class="p-3 chat-input-section">
+                          <div class="p-3 chat-input-section" *ngIf="selectedUser">
 
                             <form #f="ngForm" (ngSubmit)="messageSave(f)" class="row">
                               <div class="col">
                                 <div class="position-relative">
-                                  <input type="text" class="form-control chat-input" placeholder="Enter Message..."
+                                  <input type="text" class="form-control chat-input" [placeholder]="'profile.chatPlaceHolder' | translate"
                                     required name="message" ngModel #message="ngModel"
                                     [ngClass]="{'is-invalid': chatSubmit && f.invalid}">
                                   <div *ngIf="chatSubmit && message.invalid" class="invalid-feedback">
@@ -180,7 +173,7 @@
                               </div>
                               <div class="col-auto">
                                 <button type="submit" class="btn btn-solid chat-send w-md" [disabled]="f.invalid"><span
-                                    class="d-none d-sm-inline-block mr-2">Send</span> <i
+                                    class="d-none d-sm-inline-block mr-2">{{'btn.send' | translate}}</span> <i
                                     class="mdi mdi-send"></i></button>
                               </div>
                             </form>
@@ -193,7 +186,7 @@
               </ngb-tab>
               <ngb-tab>
                 <ng-template ngbTabTitle>
-                  <i class="fa fa-user"></i> Your interests
+                  {{'profile.interests' | translate}}
                 </ng-template>
                 <ng-template ngbTabContent>
                   <form #FInterests="ngForm" (ngSubmit)="onSubmitInterests(FInterests)">
@@ -204,7 +197,7 @@
                       </ng-select>
                     </div>
                     <button type="submit" class="btn btn-solid chat-send w-md" [disabled]="FInterests.invalid">
-                      Done
+                      {{'btn.done' | translate}}
                     </button>
                   </form>
                 </ng-template>

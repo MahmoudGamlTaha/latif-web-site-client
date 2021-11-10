@@ -1,7 +1,6 @@
 {
   "topbar-title": "Welcome to Our store Multikart",
   "call-us": "Call Us",
-  "home": "home",
   "shop": "Shop",
   "products": "Products",
   "features": "Features",
@@ -82,5 +81,35 @@
   "coming-soon": "coming soon",
   "dashboard": "Dashboard",
   "FAQ": "FAQ",
-  "blog-details": "blog details"
+  "blog-details": "blog details",
+
+  "home": "الرئيسية",
+  "welcome": "Welcome to Our",
+  "profile": {
+    "title": "Profile",
+    "Info": "Info",
+    "MyAds": "My Ads",
+    "chat": "Chat",
+    "language": "Language",
+    "interests": "Your interests",
+    "chatPlaceHolder":"Type your message..."
+  },
+  "common": {
+    "name": "Name",
+    "email":"Email",
+    "phone":"Phone",
+    "address":"Address"
+  },
+  "btn":{
+    "save":"Save",
+    "send":"Send",
+    "done":"Done"
+  },
+  "auth":{
+    "login":"Login",
+    "register":"Register",
+    "logout":"Logout",
+    "password":"Password"
+  }
+
 }
