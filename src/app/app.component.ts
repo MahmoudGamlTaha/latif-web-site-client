@@ -35,6 +35,8 @@ export class AppComponent {
         document.body.classList.remove('rtl')
         document.body.classList.add('ltr')
       }
+    }else{
+      localStorage.setItem('lang','en')
     }
   }
   

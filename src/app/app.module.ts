@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { ElementsComponent } from './elements/elements.component';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error-interceptor';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { NgModule } from '@angular/core';
@@ -58,6 +59,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     {
       provide : HTTP_INTERCEPTORS,
       useClass: APIInterceptor,
+      multi   : true,
+    },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi   : true,
     },
     CookieService,

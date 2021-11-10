@@ -52,7 +52,9 @@ export class HeaderOneComponent implements OnInit {
       //   console.log('res: ', res);
       // })
       this.cookieService.deleteAll();
-      this.router.navigate(['/'])
+      this.router.navigate(['/']).then(()=>{
+        window.location.reload()
+      });
     }
   
   }
