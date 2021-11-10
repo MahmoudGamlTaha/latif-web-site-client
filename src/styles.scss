@@ -51,14 +51,15 @@ $main_color:#ff5551;
 
     .nav-tabs {
         .nav-link {
-            color: #ff8084;
-
+            color: #212529;
+            font-weight: 600;
+            font-size: 15px;
             &.active,
             &:focus,
             &:hover {
-                color: #ff8084;
+                color: $main_color;
                 border-color: transparent;
-                border-bottom: 2px solid #ff8084;
+                border-bottom: 2px solid $main_color;
             }
         }
 
@@ -66,7 +67,7 @@ $main_color:#ff5551;
             &.show {
                 .nav-link {
                     border-color: transparent;
-                    border-bottom: 2px solid #ff8084;
+                    border-bottom: 2px solid $main_color;
                 }
             }
         }
