@@ -7,7 +7,7 @@
         <div class="card tab2-card">
           <div class="card-body">
             <ngb-tabset class="tab-coupon profile-tabs" [destroyOnHide]="false" (tabChange)="onChangeTabe($event)">
-              <ngb-tab>
+              <ngb-tab id="Info" >
                 <ng-template ngbTabTitle>
                    {{'profile.Info' | translate}}
                 </ng-template>
@@ -40,7 +40,7 @@
                   </div>
                 </ng-template>
               </ngb-tab>
-              <ngb-tab>
+              <ngb-tab id="MyAds">
                 <ng-template ngbTabTitle>
                   {{'profile.MyAds' | translate}}</ng-template>
                 <ng-template ngbTabContent>
@@ -86,7 +86,7 @@
                   </div>
                 </ng-template>
               </ngb-tab>
-              <ngb-tab>
+              <ngb-tab id="chat">
                 <ng-template ngbTabTitle>
                  {{'profile.chat' | translate}}
                 </ng-template>
@@ -184,7 +184,7 @@
                   </div>
                 </ng-template>
               </ngb-tab>
-              <ngb-tab>
+              <ngb-tab id="interests">
                 <ng-template ngbTabTitle>
                   {{'profile.interests' | translate}}
                 </ng-template>

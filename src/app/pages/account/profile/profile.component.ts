@@ -17,7 +17,7 @@ import { ViewportScroller } from '@angular/common'
 export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDestroy {
 
   userProfile
-  public grid: string = 'col-lg-3 col-md-6'
+  public grid: string = 'col-lg-3 col-md-4 col-sm-6 col-12'
   public layoutView: string = 'grid-view'
   public all_products: any[] = []
   public products: any[] = []
@@ -124,11 +124,11 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
   }
 
   onChangeTabe(v){
-    if(v.nextId === 'ngb-tab-1'){
+    if(v.nextId === 'MyAds'){
       this.myAds()
-    }else if(v.nextId === 'ngb-tab-2'){
+    }else if(v.nextId === 'chat'){
       this.myChat()
-    }else if(v.nextId === 'ngb-tab-3'){
+    }else if(v.nextId === 'interests'){
       this.categoryInterestGet()
       this.myInterestCategories()
     }
