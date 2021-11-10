@@ -189,14 +189,19 @@
                   {{'profile.interests' | translate}}
                 </ng-template>
                 <ng-template ngbTabContent>
-                  <form #FInterests="ngForm" (ngSubmit)="onSubmitInterests(FInterests)">
-                    <div class="form-group">
-                      <ng-select [multiple]="true" [(ngModel)]="selectedInterestCategoriesArr" name="myInterestCategories">
-                        <ng-option *ngFor="let item of myInterestCategoriesArr" [value]="item.category.id">
-                          {{item.category.name}}</ng-option>
-                      </ng-select>
+                  <form [formGroup]="updateSvcForm"  (ngSubmit)="onSubmitInterests()">
+                    <div class="btn-group-toggle interests">
+                      <ng-container  *ngFor="let item of myInterestCategoriesArr">
+                        <label  ngbButtonLabel [ngClass]="{'active': item.category?.checked}">
+                          <input type="checkbox" [value]="item.category.id" 
+                          [checked]="item.category?.checked"
+                          (change)="onCheckChange($event)" ngbButton> {{item.category.name}}
+                        </label>
+                      </ng-container>
+                      <pre>{{ updateSvcForm.value | json }} </pre>
+
                     </div>
-                    <button type="submit" class="btn btn-solid chat-send w-md" [disabled]="FInterests.invalid">
+                    <button type="submit" class="btn btn-solid chat-send w-md mt-3" >
                       {{'btn.done' | translate}}
                     </button>
                   </form>

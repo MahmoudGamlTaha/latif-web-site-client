@@ -1,11 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router'
 import { Component, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { FormArray, FormArrayName, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { MessageRequest, ProfileService } from '../../../shared/services/profile.service';
 import { PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar'
 
 import { AppBaseComponent } from '../../../shared/components/app-base/app-base.component'
 import { CookiesData } from '../../../shared/services/cookies/CookiesData.service'
-import { NgForm } from '@angular/forms'
 import { UserAdsService } from '../../../shared/services/product.service'
 import { ViewportScroller } from '@angular/common'
 
@@ -50,10 +50,15 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
     public productService:UserAdsService,
     private route: ActivatedRoute, 
     private router: Router,
-    private viewScroller: ViewportScroller
+    private viewScroller: ViewportScroller,
+    private fb: FormBuilder
     ) {
       super(injector)
 
+      this.updateSvcForm = this.fb.group({
+        interests: this.fb.array([]),
+      });
+  
   }
 
   ngOnInit(): void {
@@ -94,6 +99,9 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
    categoryInterestGet(){
     const getSub =  this.ProfileService.categoryInterestGet('0').subscribe(result => {
        this.myInterestCategoriesArr = result.response.data 
+       this.myInterestCategoriesArr.forEach(v => {v.category.checked = false;});
+       console.log(' this.myInterestCategoriesArr: ',  this.myInterestCategoriesArr);
+       this.myInterestCategories()
      })
      this.unsubscribe.push(getSub)
    }
@@ -101,8 +109,10 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
    myInterestCategories(){
     const getSub =  this.ProfileService.myInterestCategories().subscribe(result => {
      this.selectedInterestCategoriesArr = result.response.data.map(({id}) =>(id))
-     console.log('  this.selectedInterestCategoriesArr: ',   this.selectedInterestCategoriesArr);
-      
+     this.myInterestCategoriesArr.map(x => {
+      this.selectedInterestCategoriesArr.indexOf(x.category.id) >= 0 ? x.category.checked = true : x.category.checked = false
+     })
+     this.selectedInterestCategoriesArr.map((x) => this.ssArray.push(this.fb.control(x)))
      })
      this.unsubscribe.push(getSub)
    }
@@ -130,7 +140,6 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
       this.myChat()
     }else if(v.nextId === 'interests'){
       this.categoryInterestGet()
-      this.myInterestCategories()
     }
   }
 
@@ -165,10 +174,25 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
     this.f.reset()
  
   }
+  updateSvcForm: FormGroup;
 
-  onSubmitInterests(f:NgForm){
-    
-    const saveCategoryInterestSub = this.ProfileService.saveCategoryInterest(this.selectedInterestCategoriesArr,this.userProfile.id).subscribe(res => {
+  get ssArray() {
+    return this.updateSvcForm.get('interests') as FormArray;
+  }
+
+  onCheckChange(event) {
+    if (event.target.checked) {
+      this.ssArray.push(this.fb.control(+event.target.value));
+    }
+    else {
+      this.ssArray.removeAt(this.ssArray.value.findIndex(x => x === event.target.value))
+    }
+  }
+  onSubmitInterests(){
+    console.log('this.updateSvcForm.value: ', this.updateSvcForm.value);
+    const saveCategoryInterestSub = this.ProfileService.saveCategoryInterest(this.updateSvcForm.value.interests,this.userProfile.id).subscribe(res => {
+      
+      console.log('res: ', res);
       
 
     })
