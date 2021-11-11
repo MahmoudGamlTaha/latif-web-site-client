@@ -83,7 +83,7 @@
   "FAQ": "FAQ",
   "blog-details": "blog details",
 
-  "home": "الرئيسية",
+  "home": "Home",
   "welcome": "Welcome to Our",
   "myAccount":"My Account",
   "profile": {
@@ -99,18 +99,32 @@
     "name": "Name",
     "email":"Email",
     "phone":"Phone",
-    "address":"Address"
+    "address":"Address",
+    "required":"This filed is required"
   },
   "btn":{
     "save":"Save",
     "send":"Send",
-    "done":"Done"
+    "done":"Done",
+    "createAccount": "Create Account"
   },
   "auth":{
     "login":"Login",
     "register":"Register",
     "logout":"Logout",
-    "password":"Password"
+    "password":"Password",
+    "Country": "Country",
+    "City": "City",
+    "Governorate": "Governorate",
+    "RetypePassword": "Retype password",
+    "passwordMismatch":"Password mismatch",
+    "length2Message":"should be more than 2 characters",
+    "length6Message":"should be more than 6 characters",
+    "length3Message":"should be more than 3 characters",
+    "length5Message":"should be more than 5 characters",
+    "validMessage":"Please write valid",
+    "policy":"I agree to the application policy and standards"
+
   }
 
 }

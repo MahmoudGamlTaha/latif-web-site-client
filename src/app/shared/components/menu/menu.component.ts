@@ -4,6 +4,7 @@ import { Menu, NavService } from '../../services/nav.service';
 import { CategoryService } from '../../services/category.service';
 import { CategoryType } from '../../classes/categoryType';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu',
@@ -14,7 +15,7 @@ export class MenuComponent implements OnInit {
 
   public menuItems: Menu[];
 
-  constructor(private router: Router, public navServices: NavService, private categoryService:CategoryService) {
+  constructor(private router: Router, public navServices: NavService, private categoryService:CategoryService, private TranslateService:TranslateService) {
   /* this.navServices.items.subscribe(menuItems => this.menuItems = menuItems );
     this.router.events.subscribe((event) => {
       this.navServices.mainMenuToggle = false;
@@ -27,6 +28,7 @@ export class MenuComponent implements OnInit {
   }
   getMenuCategory(type:number){
     this.categoryService.getCategoryByTypeId(type).subscribe((categories :any)=>{
+      console.log('categories: ', categories);
       let categoryTypes = categories.response.data;
       categoryTypes.forEach(element => {
        // 
@@ -60,7 +62,7 @@ export class MenuComponent implements OnInit {
       menu.children = [];
     }
     
-    menu.title = element.name;
+    menu.title = this.TranslateService.currentLang ==='en' ? element.name : element.nameAr;
     menu.active = element.acive;
     menu.badge = false;
   

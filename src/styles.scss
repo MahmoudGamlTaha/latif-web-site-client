@@ -30,9 +30,22 @@ $main_color:#ff5551;
 }
 
 .ng-select.ng-select-single .ng-select-container {
-    height: 54px !important
+    height: 54px !important;
+    line-height: 54px!important;
+    border-radius: 0!important;
 }
-
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input{
+  padding-right: 10px!important;
+}
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input{
+  top: 0!important;
+}
+.rtl{
+  .ng-select .ng-select-container .ng-value-container{
+    padding-left: 0;
+    padding-right: 10px;
+  }
+}
 
 .tab2-card {
     ul {
@@ -392,3 +405,50 @@ $main_color:#ff5551;
     }
   }
 
+
+  //checkbox
+
+  .checkbox_animated {
+    cursor: pointer;
+    position: relative;
+    margin: 0 1rem 0 0;
+}
+
+body.rtl .radio_animated, body.rtl .checkbox_animated {
+  margin: 0 0 0 1rem;
+}
+.checkbox_animated:checked:before {
+  -webkit-transform: rotate(-45deg) scale(1, 1);
+  transform: rotate(-45deg) scale(1, 1);
+}
+
+.checkbox_animated:before {
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+  transition: -webkit-transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+  transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+  transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75), -webkit-transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+  -webkit-transform: rotate(-45deg) scale(0, 0);
+  transform: rotate(-45deg) scale(0, 0);
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 0.225rem;
+  z-index: 1;
+  width: 0.75rem;
+  height: 0.375rem;
+  border: 2px solid $main_color;
+  border-top-style: none;
+  border-right-style: none;
+}
+
+.checkbox_animated:after {
+  content: "";
+  position: absolute;
+  top: -0.125rem;
+  left: -6px;
+  width: 1.3rem;
+  height: 1.3rem;
+  background: #ffffff;
+  border: 2px solid #e8ebf2;
+  cursor: pointer;
+}

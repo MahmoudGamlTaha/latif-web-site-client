@@ -151,7 +151,7 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
         device_model: 'web',
         message: f.value.message,
         room:  this.selectedUser?.room,
-        sender:  this.selectedUser?.senderId,
+        sender:  String(this.selectedUser?.senderId),
       }
       const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res =>{
         body['senderId'] = this.selectedUser?.senderId
@@ -171,8 +171,9 @@ export class ProfileComponent  extends AppBaseComponent implements OnInit, OnDes
     this.selectedUser = data
     this.userNameChat = data.reciverName
     this.nextPageById(null, data.room)
-    this.f.reset()
- 
+    setTimeout(() => {
+      this.f?.reset()
+    }, 100)
   }
   updateSvcForm: FormGroup;
 

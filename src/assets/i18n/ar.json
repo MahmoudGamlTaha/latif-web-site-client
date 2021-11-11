@@ -85,32 +85,47 @@
 
   "home": "الرئيسية",
   "welcome": "مرحبا بكم فى",
-  "myAccount":"حسابى",
+  "myAccount": "حسابى   ",
   "profile": {
-    "title":"الحساب",
+    "title": "الحساب",
     "Info": "معلومات",
-    "MyAds":"اعلاناتى",
-    "chat":"المحادثة",
-    "language":"اللغة",
-    "interests":"اهتمامتك",
-    "chatPlaceHolder":"اكتب الرسالة الخاصة بك..."
+    "MyAds": "اعلاناتى",
+    "chat": "المحادثة",
+    "language": "اللغة",
+    "interests": "اهتمامتك",
+    "chatPlaceHolder": "اكتب الرسالة الخاصة بك..."
   },
   "common": {
     "name": "الاسم",
-    "email":"البريد الالكترونى",
-    "phone":"رقم الموبيل",
-    "address":"العنوان"
+    "email": "البريد الالكترونى",
+    "phone": "رقم الموبيل",
+    "address": "العنوان",
+    "required": "هذا الحقل مطلوب"
+
   },
-  "btn":{
-    "save":"حفظ",
-    "send":"ارسال",
-    "done":"تم"
+  "btn": {
+    "save": "حفظ",
+    "send": "ارسال",
+    "done": "تم",
+    "createAccount": "إنشاء حساب"
   },
-  "auth":{
-    "login":"تسجيل دخول",
-    "register":"تسجيل حساب",
-    "logout":"تسجيل خروج",
-    "password":"كلمة المرور"
+  "auth": {
+    "login": "تسجيل دخول",
+    "register": "تسجيل حساب",
+    "logout": "تسجيل خروج",
+    "password": "كلمة المرور",
+    "Country": "البلد",
+    "City": "المدينة",
+    "Governorate": "المحافظة",
+    "RetypePassword": "اعد ادخال كلمة المرور",
+    "passwordMismatch": "كلمة المرور غير متطابقة",
+    "length2Message": "يجب ان يكون اكثر من حرفين",
+    "length6Message": "يجب ان يكون  اكثر من  6 حروف",
+    "length3Message": "يجب ان يكون  اكثر من  3 حروف",
+    "length5Message": "يجب ان يكون  اكثر من  5 حروف",
+    "validMessage": "يجب ان يكون صحيح",
+    "policy":"اوافق على سياسة ومعايير التطبيق"
+
   }
 
 }

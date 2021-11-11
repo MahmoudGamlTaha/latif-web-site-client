@@ -70,6 +70,7 @@ export class SettingsComponent implements OnInit {
         document.body.classList.add('ltr')
       }
     }
+    window.location.reload()
   }
 
   get getTotal(): Observable<number> {
