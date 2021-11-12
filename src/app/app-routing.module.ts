@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { ShopComponent } from './shop/shop.component';
-import { PagesComponent } from './pages/pages.component';
 import { ElementsComponent } from './elements/elements.component';
+import { NgModule } from '@angular/core';
+import { PagesComponent } from './pages/pages.component';
+import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
   {

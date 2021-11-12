@@ -15,6 +15,7 @@ import { ImageOutsideComponent } from './product/image-outside/image-outside.com
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { Ng5SliderModule } from 'ng5-slider';
 import { NgModule } from '@angular/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PriceComponent } from './collection/widgets/price/price.component';
@@ -103,7 +104,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     InfiniteScrollModule,
     SharedModule,
     ShopRoutingModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    NgSelectModule
   ]
 })
 export class ShopModule { }

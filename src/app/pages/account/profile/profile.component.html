@@ -138,18 +138,13 @@
 
                         <div>
                           <div class="chat-conversation p-3">
-                            <perfect-scrollbar [scrollIndicators]="true" #chatPS style="height: 470px;">
+                            <perfect-scrollbar [scrollIndicators]="true" #chatPS style="height: 470px;" (psScrollY)="onScrollEvent($event)">
                               <ul class="list-unstyled">
-                                <li *ngFor="let data of chatMessagesData"
-                                  [ngClass]="{'right': data.senderId === userProfile.id}">
+                                <li *ngFor="let data of chatMessagesData.slice().reverse()"
+                                  [ngClass]="{'right': data.senderId !== userProfile.id}">
                                   <div class="conversation-list">
                                     <div class="ctext-wrap">
-                                      <div class="conversation-name">{{ data.name }}</div>
-                                      <p>
-                                        {{ data.message }}
-                                      </p>
-                                      <p class="chat-time mb-0"><i class="bx bx-time-five align-middle mr-1"></i>
-                                        {{ data.time }}</p>
+                                       {{ data.message }}
                                     </div>
 
                                   </div>

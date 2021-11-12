@@ -81,8 +81,50 @@
                         </div>
                     </div>
                     <div class="product-buttons">
-                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="addToCart(product)">chat</a>
-                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="buyNow(product)">report</a>
+                        <a href="javascript:void(0);" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="onOpenChat()"> {{'profile.chat' | translate}}</a>
+                        <a href="javascript:void(0);" class="btn btn-solid" [class.disabled]="counter > product.stock" (click)="onReport(content)"> {{'ads.report' | translate}}</a>
+
+                        <ng-template #content let-modal>
+                            <ng-container *ngIf="!loadingReport">
+                                <div class="modal-header">
+                                    <h5 class="modal-title f-w-600" id="exampleModalLabel"> {{'ads.report' | translate}} </h5>
+                                    <button type="button" class="close" aria-label="Close"
+                                        (click)="modal.dismiss('Cross click')">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form #f2="ngForm" class="needs-validation" >
+                                        <div class="form">
+                                            <div class="form-group" [ngClass]="{'mb-0': report.value !== 'other'}">
+                                                <ng-select name="report" required [ngModel]="reports[0]?.id" #report='ngModel' [items]="reports"
+                                                    [bindLabel]="TranslateService.currentLang ==='en' ? 'value': 'valueAr'" bindValue="id" >
+                                                    <ng-option *ngFor="let item of reports" [value]="item.id">{{TranslateService.currentLang ==='en' ? item.value: item.valueAr}}</ng-option>
+                                                </ng-select>
+                                                <small class="text-danger mt-2 d-block" *ngIf="f2.invalid && f2.touched && report.invalid">
+                                                     {{'common.required' | translate}}
+                                                </small>
+                                            </div>
+                                            <div class="form-group mb-0" *ngIf="report.value === 'other'">
+                                                <label for="my-input">Text</label>
+                                                <textarea class="form-control" name="otherReason" ngModel #otherReason="ngModel" cols="5" rows="5" required></textarea>
+                                                <small class="text-danger mt-2 d-block" *ngIf="f2.invalid && f2.touched && otherReason.invalid">
+                                                    {{'common.required' | translate}}
+                                               </small>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" (click)="onMakeReport(f2,modal)" [disabled]="!f2.valid || onSaveReport"> 
+                                        <span *ngIf="onSaveReport" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        {{'ads.report' | translate}} 
+                                    </button>
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal"
+                                        (click)="modal.dismiss('Cross click')"> {{'btn.close' | translate}}</button>
+                                </div>
+                            </ng-container>
+                        </ng-template>
                     </div>
                     <div class="border-product">
                         <h6 class="product-title">product details</h6>
@@ -195,22 +237,34 @@
 </section>
 <app-size-modal #sizeChart [product]="product"></app-size-modal>
 
-<div class="float-chat">
+<div class="float-chat" *ngIf="showChat">
     <div class="card">
-      <div class="px-4 py-2" [ngClass]="{'border-bottom': true}">
+      <div class="px-4 py-2 d-flex justify-content-between align-items-center" [ngClass]="{'border-bottom': true}">
         <div class="d-flex align-items-center" *ngIf="true">
           <img src="assets/images/icon/Blank-Avatar.png" class="rounded-circle avatar-xs" alt=""
             width="50">
-          <h5 class="font-size-15 mb-1 ml-2">{{true}}</h5>
+          <h5 class="font-size-15 mb-1 ml-2">{{product.createdBy?.firstName}}</h5>
         </div>
-
+        <div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showChat = false;reloadChat=true">
+                <span aria-hidden="true">×</span>
+              </button>
+        </div>
       </div>
 
       <div>
         <div class="chat-conversation p-3">
-          <perfect-scrollbar [scrollIndicators]="true" #chatPS style="height: 470px;">
+          <perfect-scrollbar [scrollIndicators]="true" #chatPS style="height: 470px;" (psScrollY)="onScrollEvent($event)">
             <ul class="list-unstyled">
-             
+                <li *ngFor="let data of chatMessagesData.slice().reverse()"
+                [ngClass]="{'right': data.senderId === product.createdBy?.id}">
+                <div class="conversation-list">
+                  <div class="ctext-wrap">
+                    {{ data.message }}
+                  </div>
+
+                </div>
+              </li>
             </ul>
           </perfect-scrollbar>
         </div>
@@ -219,17 +273,9 @@
           <form #f="ngForm"  class="row">
             <div class="col">
               <div class="position-relative">
-                <input type="text" class="form-control chat-input" [placeholder]="'profile.chatPlaceHolder' | translate"
-                  required name="message" ngModel #message="ngModel"
-              >
-              
-
+                <input type="text" class="form-control chat-input" [placeholder]="'profile.chatPlaceHolder' | translate"  [autofocus]="showChat"
+                  required name="message" ngModel #message="ngModel" (keyup.enter)="messageSave(f)">
               </div>
-            </div>
-            <div class="col-auto">
-              <button type="submit" class="btn btn-solid chat-send w-md" [disabled]="f.invalid"><span
-                  class="d-none d-sm-inline-block mr-2">{{'btn.send' | translate}}</span> <i
-                  class="mdi mdi-send"></i></button>
             </div>
           </form>
         </div>

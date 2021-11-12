@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserAds } from '../classes/UserAds';
 import { server } from 'src/environments/environment';
 import { adsFilter } from '../classes/adsFilter';
+import { BasicResponse } from '../models/reponse.model';
 
 const state = {
   products: JSON.parse(localStorage['products'] || '[]'),
@@ -41,24 +42,24 @@ export class UserAdsService {
     this.userAds = this.http.get<any[]>(adsUrl);
     return this.userAds;
   }
-  public getFilterAds(adsFilter:adsFilter): Observable<any[]>{
+  public getFilterAds(adsFilter: adsFilter): Observable<any[]> {
     let adsUrl = server.url + 'api/public/ads/nearest?pageSize=20';
-    if(adsFilter.category > 0){
-      adsUrl += '&category='+ adsFilter.category; 
+    if (adsFilter.category > 0) {
+      adsUrl += '&category=' + adsFilter.category;
     }
-    if(adsFilter.type!= 'ALL'){
-      adsUrl +='&type='+ adsFilter.type;
+    if (adsFilter.type != 'ALL') {
+      adsUrl += '&type=' + adsFilter.type;
     }
-    
-    
+
+
     return this.http.get<any[]>(adsUrl);
   }
-   public getAdsById(id:number): Observable<any>{
-     let adById = server.url + 'api/public/ads/ad-by-Id?id='+id;
-     
-      return  this.http.get<any>(adById);
-    }
-  
+  public getAdsById(id: number): Observable<any> {
+    let adById = server.url + 'api/public/ads/ad-by-Id?id=' + id;
+
+    return this.http.get<any>(adById);
+  }
+
   // Get UserAdss
   public get getUserAdss(): Observable<UserAds[]> {
     this.getProducts();
@@ -67,10 +68,10 @@ export class UserAdsService {
 
   // Get UserAdss By Slug
   public getUserAdsBySlug(slug: number): Observable<UserAds> {
-    return this.userAds.pipe(map((items:any) => { 
-      return items.response.data.find((item: any) => { 
-        return item.id === slug; 
-      }); 
+    return this.userAds.pipe(map((items: any) => {
+      return items.response.data.find((item: any) => {
+        return item.id === slug;
+      });
     }));
   }
 
@@ -168,11 +169,11 @@ export class UserAdsService {
     const qty = product.quantity ? product.quantity : 1;
     const items = cartItem ? cartItem : product;
     const stock = this.calculateStockCounts(items, qty);
-    
-    if(!stock) return false
+
+    if (!stock) return false
 
     if (cartItem) {
-        cartItem.quantity += qty    
+      cartItem.quantity += qty
     } else {
       state.cart.push({
         ...product,
@@ -200,12 +201,12 @@ export class UserAdsService {
     })
   }
 
-    // Calculate Stock Counts
+  // Calculate Stock Counts
   public calculateStockCounts(product, quantity) {
     const qty = product.quantity + quantity
     const stock = product.stock
     if (stock < qty || stock == 0) {
-      this.toastrService.error('You can not add more items than available. In stock '+ stock +' items.');
+      this.toastrService.error('You can not add more items than available. In stock ' + stock + ' items.');
       return false
     }
     return true
@@ -224,7 +225,7 @@ export class UserAdsService {
     return this.cartItems.pipe(map((product: UserAds[]) => {
       return product.reduce((prev, curr: UserAds) => {
         let price = curr.price;
-        if(curr.discount) {
+        if (curr.discount) {
           price = curr.price - (curr.price * curr.discount / 100)
         }
         return (prev + price * curr.quantity) * this.Currency.price;
@@ -253,13 +254,13 @@ export class UserAdsService {
         return Tags
       })
     ));*/
-    return  new Observable<UserAds[]>();
+    return new Observable<UserAds[]>();
   }
 
   // Sorting Filter
   public sortUserAdss(products: UserAds[], payload: string): any {
 
-    if(payload === 'ascending') {
+    if (payload === 'ascending') {
       return products.sort((a, b) => {
         if (a.id < b.id) {
           return -1;
@@ -304,7 +305,7 @@ export class UserAdsService {
         }
         return 0;
       })
-    } 
+    }
   }
 
   /*
@@ -320,22 +321,22 @@ export class UserAdsService {
     let paginateRange = 3;
 
     // ensure current page isn't out of range
-    if (currentPage < 1) { 
-      currentPage = 1; 
-    } else if (currentPage > totalPages) { 
-      currentPage = totalPages; 
+    if (currentPage < 1) {
+      currentPage = 1;
+    } else if (currentPage > totalPages) {
+      currentPage = totalPages;
     }
-    
+
     let startPage: number, endPage: number;
     if (totalPages <= 5) {
       startPage = 1;
       endPage = totalPages;
-    } else if(currentPage < paginateRange - 1){
+    } else if (currentPage < paginateRange - 1) {
       startPage = 1;
       endPage = startPage + paginateRange - 1;
     } else {
       startPage = currentPage - 1;
-      endPage =  currentPage + 1;
+      endPage = currentPage + 1;
     }
 
     // calculate start and end item indexes
@@ -359,4 +360,44 @@ export class UserAdsService {
     };
   }
 
+
+  /******/
+  checkChatAds(ads: number): Observable<BasicResponse> {
+    let url_ = server.url + "api/public/chat/check-chat-ads?";
+    if (ads === undefined || ads === null)
+      throw new Error("The parameter 'ads' must be defined and cannot be null.");
+    else
+      url_ += "ads=" + encodeURIComponent("" + ads) + "&";
+    url_ = url_.replace(/[?&]$/, "");
+
+    return this.http.get<any>(url_)
+  }
+
+  reasons(): Observable<BasicResponse> {
+    let url_ = server.url + "api/public/reasons";
+    url_ = url_.replace(/[?&]$/, "");
+    return this.http.get<any>(url_)
+  }
+
+  makeReport(request: ReportRequest): Observable<BasicResponse> {
+    let url_ = server.url + "api/public/reportedAds/makeReport";
+    url_ = url_.replace(/[?&]$/, "");
+
+    const content_ = JSON.stringify(request);
+
+    return this.http.post<any>(url_, content_)
+  }
+}
+
+export interface ReportRequest {
+  adId: number | undefined;
+  otherReason: string | undefined;
+  reason: number | undefined;
+  type: ReportRequestType | undefined;
+}
+
+export enum ReportRequestType {
+  UNSEEN = "UNSEEN",
+  REPORT = "REPORT",
+  INTEREST = "INTEREST",
 }

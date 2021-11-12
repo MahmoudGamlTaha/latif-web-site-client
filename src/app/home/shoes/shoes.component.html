@@ -26,12 +26,12 @@
                                     <a [routerLink]="['/shop/collection/left/sidebar']"
                                        [queryParams]="{ category: category.category.id}">
                                         <div class="category-image">
-                                            <img [src]="category.category.iconSelect" alt="category.category.name" class="w-auto icon-size">
+                                            <img [src]="category.category.iconSelect" alt="category.category.name" class="w-auto icon-size" onerror="this.src='assets/images/icon/pawprint.png';" >
                                         </div>
                                     </a>
                                     <div class="category-details">
                                         <a [routerLink]="['/shop/collection/left/sidebar']"
-                                           [queryParams]="{ category: category.category.id}">
+                                           [queryParams]="{ category: category.category.id}"> 
                                             <h5>{{ TranslateService.currentLang ==='en' ? category.category.name : category.category.nameAr  }}</h5>
                                         </a>
                                     </div>

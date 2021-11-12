@@ -100,13 +100,15 @@
     "email":"Email",
     "phone":"Phone",
     "address":"Address",
-    "required":"This filed is required"
+    "required":"This filed is required",
+    "other":"Other"
   },
   "btn":{
     "save":"Save",
     "send":"Send",
     "done":"Done",
-    "createAccount": "Create Account"
+    "createAccount": "Create Account",
+    "close":"Close"
   },
   "auth":{
     "login":"Login",
@@ -125,6 +127,12 @@
     "validMessage":"Please write valid",
     "policy":"I agree to the application policy and standards"
 
+  },
+  "ads":{
+    "report":"Report Ad"
+  },
+  "messages":{
+    "successfullyReported":"successfully Reported"
   }
 
 }
