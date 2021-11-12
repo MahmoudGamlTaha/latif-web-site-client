@@ -1,4 +1,4 @@
-<app-breadcrumb [title]="product?.title" [breadcrumb]="'Product'"></app-breadcrumb>
+<app-breadcrumb [title]="product?.title" [breadcrumb]="product?.title"></app-breadcrumb>
 <!-- section start -->
 <section class="section-b-space">
     <div *ngIf="loading else loaded">
@@ -195,4 +195,45 @@
 </section>
 <app-size-modal #sizeChart [product]="product"></app-size-modal>
 
+<div class="float-chat">
+    <div class="card">
+      <div class="px-4 py-2" [ngClass]="{'border-bottom': true}">
+        <div class="d-flex align-items-center" *ngIf="true">
+          <img src="assets/images/icon/Blank-Avatar.png" class="rounded-circle avatar-xs" alt=""
+            width="50">
+          <h5 class="font-size-15 mb-1 ml-2">{{true}}</h5>
+        </div>
+
+      </div>
+
+      <div>
+        <div class="chat-conversation p-3">
+          <perfect-scrollbar [scrollIndicators]="true" #chatPS style="height: 470px;">
+            <ul class="list-unstyled">
+             
+            </ul>
+          </perfect-scrollbar>
+        </div>
+        <div class="p-3 chat-input-section" *ngIf="true">
+
+          <form #f="ngForm"  class="row">
+            <div class="col">
+              <div class="position-relative">
+                <input type="text" class="form-control chat-input" [placeholder]="'profile.chatPlaceHolder' | translate"
+                  required name="message" ngModel #message="ngModel"
+              >
+              
+
+              </div>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-solid chat-send w-md" [disabled]="f.invalid"><span
+                  class="d-none d-sm-inline-block mr-2">{{'btn.send' | translate}}</span> <i
+                  class="mdi mdi-send"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- Section ends -->

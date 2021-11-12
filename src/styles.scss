@@ -133,7 +133,14 @@ $main_color:#ff5551;
 // 
 // Chat.scss
 //
-
+.float-chat{
+  position: fixed;
+  left: 20px;
+  bottom: 0;
+  .chat-conversation {
+    height: 300px;
+  }
+}
 .chat-leftsidebar{
     @media (min-width: 992px) {
       min-width: 380px;
@@ -451,4 +458,36 @@ body.rtl .radio_animated, body.rtl .checkbox_animated {
   background: #ffffff;
   border: 2px solid #e8ebf2;
   cursor: pointer;
+}
+
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation{
+  background: transparent!important;
+}
+
+.swal2-container{
+  top: unset!important;
+}
+
+html body.swal2-height-auto {
+  height: 100%!important;
+}
+.swal2-container .swal2-popup{
+  background: #323232;
+  padding: 14px 16px;
+}
+.swal2-title{
+ font-size: 14px !important;
+ font-weight: normal!important;
+  color: #ffa3ac !important;
+  margin: 0!important;
+  display: block!important;
+}
+
+.swal2-header,
+.swal2-container{
+  padding: 0!important;;
+}
+
+.swal2-popup .swal2-content{
+  margin: 0!important;
 }

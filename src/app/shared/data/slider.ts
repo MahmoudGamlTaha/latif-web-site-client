@@ -110,7 +110,12 @@ export let CollectionSlider: any = {
 export let CategorySlider: any = {
     loop: true,
     dots: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
     navSpeed: 300,
+    navText: [ '<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>' ],
+    nav: true,
     responsive: {
         1024: {
             items: 6

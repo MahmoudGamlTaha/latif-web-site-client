@@ -4,6 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BlogService } from 'src/app/shared/services/blog.service';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { CategoryType } from 'src/app/shared/classes/categoryType';
+import { TranslateService } from '@ngx-translate/core';
 import { UserAds } from '../../shared/classes/UserAds';
 import { UserAdsService } from '../../shared/services/product.service';
 
@@ -23,7 +24,7 @@ export class ShoesComponent implements OnInit, OnDestroy {
   public CategorySliderConfig: any = CategorySlider;
   public ProductSliderConfig: any = ProductSlider;
   
-  constructor(public productService: UserAdsService, public blogService: BlogService, public categoryService: CategoryService) {
+  constructor(public productService: UserAdsService, public blogService: BlogService, public categoryService: CategoryService, public TranslateService:TranslateService) {
     this.getProduct();
     this.getBlog();
     this.getPetCategories();

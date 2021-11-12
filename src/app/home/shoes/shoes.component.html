@@ -14,10 +14,10 @@
 
 <!-- Categories start-->
 <div class="container">
-    <section class="section-b-space border-section border-top-0">
+    <section class="section-b-space">
         <div class="row">
             <div class="col">
-                <div class="slide-6 no-arrow">
+                <div class="slide-6">
                     <owl-carousel-o [options]="CategorySliderConfig">
                         <ng-container *ngFor="let category of petCategories">
                           
@@ -32,7 +32,7 @@
                                     <div class="category-details">
                                         <a [routerLink]="['/shop/collection/left/sidebar']"
                                            [queryParams]="{ category: category.category.id}">
-                                            <h5>{{ category.category.name }}</h5>
+                                            <h5>{{ TranslateService.currentLang ==='en' ? category.category.name : category.category.nameAr  }}</h5>
                                         </a>
                                     </div>
                                 </div>
@@ -95,6 +95,8 @@
                     </ng-template>
                   </ng-container>
                 </owl-carousel-o>
+
+              
             </div>
         </div>
     </div>
@@ -211,7 +213,7 @@
 <!-- Tab product End -->
 
 <!-- blog section start-->
-<section class="blog blog-bg section-b-space">
+<section class="blog blog-bg section-b-space p-t-0">
   <div class="container">
     <div class="row">
       <div class="col">
