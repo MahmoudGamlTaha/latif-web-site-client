@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { UserAdsService } from "../../services/product.service";
 import { UserAds } from "../../classes/UserAds";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookiesData } from '../../services/cookies/CookiesData.service';
+import { Router } from '@angular/router';
+import { CreateAdsComponent } from './create-ads/create-ads.component';
 
 @Component({
   selector: 'app-settings',
@@ -41,7 +45,11 @@ export class SettingsComponent implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
-    public productService: UserAdsService) {
+    public productService: UserAdsService,
+    private modalService: NgbModal,
+    private cookie: CookiesData,
+    private router:Router
+    ) {
     this.productService.cartItems.subscribe(response => this.products = response);
   }
 
@@ -83,6 +91,15 @@ export class SettingsComponent implements OnInit {
 
   changeCurrency(currency: any) {
     this.productService.Currency = currency
+  }
+
+  onAddAds(){
+    if(this.cookie.checkUserProfile()){
+      this.modalService.open(CreateAdsComponent, { centered: true,size:'lg' })
+     
+    }else{
+      this.router.navigate(['/pages/login'])
+    }
   }
 
 }

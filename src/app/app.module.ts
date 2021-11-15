@@ -22,6 +22,7 @@ import { MessagingService } from './shared/services/messaging.service';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PagesComponent } from './pages/pages.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { ShopComponent } from './shop/shop.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -65,6 +66,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    ReactiveFormsModule,
   ],
   providers: [
     {

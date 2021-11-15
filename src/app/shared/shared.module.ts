@@ -10,7 +10,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartModalComponent } from './components/modal/cart-modal/cart-modal.component';
 import { CartVariationComponent } from './components/modal/cart-variation/cart-variation.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { CategorySelectComponent } from './components/settings/create-ads/elemnts/category-select/category-select.component';
+import { CheckboxElementComponent } from './components/settings/create-ads/elemnts/checkbox-element/checkbox-element.component';
 import { CommonModule } from '@angular/common';
+import { CreateAdsComponent } from './components/settings/create-ads/create-ads.component';
 import { DiscountPipe } from './pipes/discount.pipe';
 import { FooterFourComponent } from './footer/footer-four/footer-four.component';
 import { FooterOneComponent } from './footer/footer-one/footer-one.component';
@@ -22,11 +25,13 @@ import { HeaderFourComponent } from './header/header-four/header-four.component'
 import { HeaderOneComponent } from './header/header-one/header-one.component';
 import { HeaderThreeComponent } from './header/header-three/header-three.component';
 import { HeaderTwoComponent } from './header/header-two/header-two.component';
+import { InputElementComponent } from './components/settings/create-ads/elemnts/input-element/input-element.component';
 import { LayoutBoxComponent } from './components/layout-box/layout-box.component';
 import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { NewsletterComponent } from './components/modal/newsletter/newsletter.component';
 import { NgModule } from '@angular/core';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { PaginationComponent } from '../shop/collection/widgets/pagination/pagination.component';
@@ -44,54 +49,17 @@ import { SizeModalComponent } from './components/modal/size-modal/size-modal.com
 import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
 import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { TypeRadioComponent } from './components/settings/create-ads/elemnts/type-radio/type-radio.component';
 import { VideoModalComponent } from './components/modal/video-modal/video-modal.component';
+import { SelectElemntComponent } from './components/settings/create-ads/elemnts/select-elemnt/select-elemnt.component';
 
 // Header and Footer Components
-
-
-
-
-
-
-
-
-
 // Components
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Modals Components
-
-
-
-
-
-
-
-
 // Skeleton Loader Components
-
-
 // Layout Box
-
-
 // Tap To Top
-
-
 // Pipes
-
-
-
 @NgModule({
   declarations: [
     HeaderOneComponent,
@@ -127,7 +95,13 @@ import { VideoModalComponent } from './components/modal/video-modal/video-modal.
     DiscountPipe,
     AppBaseComponent,
     GridComponent,
-    PaginationComponent
+    PaginationComponent,
+    CreateAdsComponent,
+    CategorySelectComponent,
+    TypeRadioComponent,
+    InputElementComponent,
+    CheckboxElementComponent,
+    SelectElemntComponent,
   ],
   imports: [
     CommonModule,
@@ -141,7 +115,10 @@ import { VideoModalComponent } from './components/modal/video-modal/video-modal.
       // preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     }),
     NgxSkeletonLoaderModule,
-    TranslateModule
+    TranslateModule,
+    NgSelectModule,
+    ReactiveFormsModule,
+
   ],
   exports: [
     CommonModule,
@@ -183,7 +160,7 @@ import { VideoModalComponent } from './components/modal/video-modal/video-modal.
     DiscountPipe,
     AppBaseComponent,
     GridComponent,
-    PaginationComponent
+    PaginationComponent,
   ],
   providers: [
     {

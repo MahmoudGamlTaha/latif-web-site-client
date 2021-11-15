@@ -10,9 +10,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           let errorMsg = '';
-          if (error.error instanceof ErrorEvent) {
-            console.log('error: ', error);
-            console.log('this is client side error');
+          if (error.error instanceof ErrorEvent && error.error.message) {
             Swal.fire({
               title:error.error.message,
               showConfirmButton: false,
@@ -21,16 +19,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             errorMsg = `Error: ${error.error.message}`;
           }
           else {
-            console.log('error: ', error);
-            console.log('this is server side error');
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-            Swal.fire({
-              title:error.error.message,
-              showConfirmButton: false,
-              timer:2500
-            })
+            console.log('errorMsg: ', errorMsg);
           }
-          console.log(errorMsg);
+          
           return throwError(errorMsg);
         })
       )

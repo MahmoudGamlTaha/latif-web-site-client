@@ -24,6 +24,8 @@ export class UserAdsService {
   public OpenCart: boolean = false;
   public userAds;
 
+  baseUrl = server.url;
+
   constructor(private http: HttpClient,
     private toastrService: ToastrService) { }
 
@@ -37,13 +39,13 @@ export class UserAdsService {
     //this.UserAdss = this.http.get<UserAds[]>('assets/data/products.json').pipe(map(data => data));
     //this.UserAdss.subscribe(next => { localStorage['products'] = JSON.stringify(next) });
     //return this.UserAdss = this.UserAdss.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
-    let adsUrl = server.url + 'api/public/ads/nearest';
+    let adsUrl = this.baseUrl + 'api/public/ads/nearest';
     //
     this.userAds = this.http.get<any[]>(adsUrl);
     return this.userAds;
   }
   public getFilterAds(adsFilter: adsFilter): Observable<any[]> {
-    let adsUrl = server.url + 'api/public/ads/nearest?pageSize=20';
+    let adsUrl = this.baseUrl + 'api/public/ads/nearest?pageSize=20';
     if (adsFilter.category > 0) {
       adsUrl += '&category=' + adsFilter.category;
     }
@@ -55,7 +57,7 @@ export class UserAdsService {
     return this.http.get<any[]>(adsUrl);
   }
   public getAdsById(id: number): Observable<any> {
-    let adById = server.url + 'api/public/ads/ad-by-Id?id=' + id;
+    let adById = this.baseUrl + 'api/public/ads/ad-by-Id?id=' + id;
 
     return this.http.get<any>(adById);
   }
@@ -363,7 +365,7 @@ export class UserAdsService {
 
   /******/
   checkChatAds(ads: number): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/chat/check-chat-ads?";
+    let url_ = this.baseUrl + "api/public/chat/check-chat-ads?";
     if (ads === undefined || ads === null)
       throw new Error("The parameter 'ads' must be defined and cannot be null.");
     else
@@ -374,19 +376,63 @@ export class UserAdsService {
   }
 
   reasons(): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/reasons";
+    let url_ = this.baseUrl + "api/public/reasons";
     url_ = url_.replace(/[?&]$/, "");
     return this.http.get<any>(url_)
   }
 
   makeReport(request: ReportRequest): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/reportedAds/makeReport";
+    let url_ = this.baseUrl + "api/public/reportedAds/makeReport";
     url_ = url_.replace(/[?&]$/, "");
 
     const content_ = JSON.stringify(request);
 
     return this.http.post<any>(url_, content_)
   }
+
+  /*add ads*/
+  listAdsType(): Observable<BasicResponse> {
+    let url_ = this.baseUrl + "api/public/ads-type/list";
+    url_ = url_.replace(/[?&]$/, "");
+    return this.http.get<any>(url_)
+  }
+
+  getCreateForm(adType: AdType, category: string | null | undefined): Observable<BasicResponse> {
+    let url_ = this.baseUrl + "api/public/ads/get-create-form?";
+    if (adType === undefined || adType === null)
+      throw new Error("The parameter 'adType' must be defined and cannot be null.");
+    else
+      url_ += "adType=" + encodeURIComponent("" + adType) + "&";
+    if (category !== undefined && category !== null)
+      url_ += "category=" + encodeURIComponent("" + category) + "&";
+    url_ = url_.replace(/[?&]$/, "");
+    return this.http.get<any>(url_)
+  }
+
+
+  catByAdTypeNoParentGet(adtypeId: number, page: string | null | undefined): Observable<BasicResponse> {
+    let url_ = this.baseUrl + "api/public/cat-by-adType-no-parent/type={adtypeId}";
+    if (adtypeId === undefined || adtypeId === null)
+      throw new Error("The parameter 'adtypeId' must be defined.");
+    url_ = url_.replace("{adtypeId}", encodeURIComponent("" + adtypeId));
+    if (page !== null && page !== undefined)
+      url_ = url_.replace("{page}", encodeURIComponent("" + page));
+    else
+      url_ = url_.replace("/{page}", "");
+    url_ = url_.replace(/[?&]$/, "");
+    return this.http.get<any>(url_)
+  }
+
+  createAds(userAdsRequest:  DynamicAdsRequest): Observable<BasicResponse> {
+    let url_ = this.baseUrl + "/api/public/ads/create";
+    url_ = url_.replace(/[?&]$/, "");
+
+    const content_ = JSON.stringify(userAdsRequest);
+   
+    return this.http.post<any>(url_, content_)
+}
+
+
 }
 
 export interface ReportRequest {
@@ -400,4 +446,28 @@ export enum ReportRequestType {
   UNSEEN = "UNSEEN",
   REPORT = "REPORT",
   INTEREST = "INTEREST",
+}
+
+export enum AdType {
+  SERVICE = "SERVICE",
+  MEDICAL = "MEDICAL",
+  CONTRACT = "CONTRACT",
+  OCCASIONAL = "OCCASIONAL",
+  TRANSPORTING = "TRANSPORTING",
+  OTHERS = "OTHERS",
+  PETS = "PETS",
+  PET_CARE = "PET_CARE",
+  ACCESSORIES = "ACCESSORIES",
+  Dogs = "Dogs",
+  DELIVERY = "DELIVERY",
+  VETERINARY = "VETERINARY",
+  DRIVER = "DRIVER",
+  COMMERCIAL = "COMMERCIAL",
+  ALL = "ALL",
+}
+
+export interface DynamicAdsRequest{
+  external: boolean | undefined;
+  type: string | undefined;
+  userAds: [];
 }

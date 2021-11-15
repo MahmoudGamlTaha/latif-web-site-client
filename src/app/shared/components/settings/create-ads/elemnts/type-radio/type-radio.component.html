@@ -1,0 +1,12 @@
+<div class="form-group" *ngIf="!loading">
+    <label for="">{{label}}</label>
+    <div class="d-flex justify-content-around">
+        <ng-container *ngFor="let item of options">
+            <label class="d-block" [for]="item.code">
+                <input [value]="item.code" class="radio_animated" [id]="item.code" name="rdo-ani" [formControl]="control" type="radio" [required]="required">
+                {{item.label}}
+            </label>
+        </ng-container>
+    </div>
+
+</div>

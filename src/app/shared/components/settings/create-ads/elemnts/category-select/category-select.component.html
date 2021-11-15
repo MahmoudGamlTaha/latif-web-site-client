@@ -1,0 +1,6 @@
+<div class="form-group" *ngIf="!loading">
+    <label for="">{{label}}</label>
+    <ng-select  [formControl]="control"  [items]="categoryArr"  [bindLabel]=" 'name' " bindValue="id" [attr.required]="required">
+    </ng-select>
+
+</div>

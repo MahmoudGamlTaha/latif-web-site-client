@@ -44,6 +44,7 @@ export class AuthService {
 export interface LoginRequest {
   mobile: string | undefined;
   password: string | undefined;
+  token: string | undefined;
 
 }
 
