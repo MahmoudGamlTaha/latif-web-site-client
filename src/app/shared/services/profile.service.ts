@@ -12,7 +12,7 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   myAds(page: string | null | undefined, pageSize: string | null | undefined): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/ads/myAds?";
+    let url_ = server.url + "/api/public/ads/myAds?";
     if (page !== undefined && page !== null)
       url_ += "page=" + encodeURIComponent("" + page) + "&";
     if (pageSize !== undefined && pageSize !== null)
@@ -23,7 +23,7 @@ export class ProfileService {
   }
 
   myChat(page: string | null | undefined): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/chat/my-chat?";
+    let url_ = server.url + "/api/public/chat/my-chat?";
     if (page !== undefined && page !== null)
       url_ += "page=" + encodeURIComponent("" + page) + "&";
     url_ = url_.replace(/[?&]$/, "");
@@ -32,7 +32,7 @@ export class ProfileService {
 
 
   nextPageById(message_id: string | null | undefined, room: string | null | undefined): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/chat/next-page-by-id?";
+    let url_ = server.url + "/api/public/chat/next-page-by-id?";
     if (message_id !== undefined && message_id !== null)
       url_ += "message_id=" + encodeURIComponent("" + message_id) + "&";
     if (room !== undefined && room !== null)
@@ -42,7 +42,7 @@ export class ProfileService {
   }
 
   sndMsg(request: MessageRequest): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/chat/snd-msg";
+    let url_ = server.url + "/api/public/chat/snd-msg";
     url_ = url_.replace(/[?&]$/, "");
     const content_ = JSON.stringify(request);
     return this.http.post<any>(url_, content_)
@@ -51,7 +51,7 @@ export class ProfileService {
 
 
   categoryInterestGet(page: string | null | undefined): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/category-interest";
+    let url_ = server.url + "/api/public/category-interest";
     if (page !== null && page !== undefined)
       url_ = url_.replace("{page}", encodeURIComponent("" + page));
     else
@@ -62,13 +62,13 @@ export class ProfileService {
   }
 
   myInterestCategories(): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/my-interest-categories";
+    let url_ = server.url + "/api/public/my-interest-categories";
     url_ = url_.replace(/[?&]$/, "");
     return this.http.get<any>(url_)
   }
 
   saveCategoryInterest(categories: number[], userId: number | null | undefined): Observable<BasicResponse> {
-    let url_ = server.url + "api/public/interest-categories/create?";
+    let url_ = server.url + "/api/public/interest-categories/create?";
     if (userId !== undefined && userId !== null)
       url_ += "userId=" + encodeURIComponent("" + userId) + "&";
     url_ = url_.replace(/[?&]$/, "");

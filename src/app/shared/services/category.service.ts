@@ -15,15 +15,15 @@ export class CategoryService{
   
  public getCategoryByTypeId(type:number): Observable<any[]>{
    if(type == 0){
-     let url = server.url + 'api/public/ads-type/list';
+     let url = server.url + '/api/public/ads-type/list';
      return this.http.get<any[]>(url);  
    }
-    let url = server.url + 'api/public/cat-by-adType/type='+type;
+    let url = server.url + '/api/public/cat-by-adType/type='+type;
     
     return this.http.get<any[]>(url);
  }
  public getPetCategory(): Observable<any[]>{
-   let url = server.url + 'api/public/cat-by-adType/type=1'
+   let url = server.url + '/api/public/cat-by-adType/type=1'
    
    return this.http.get<any[]>(url);
  }

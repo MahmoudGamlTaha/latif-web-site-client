@@ -27,7 +27,7 @@ export class BlogService {
 
   // UserAds
   public getBlogs(page:number): Observable<any> {
-    let blogUrl = server.url + 'api/public/blogs?page='+page;
+    let blogUrl = server.url + '/api/public/blogs?page='+page;
     
     this.blogs = this.http.get<any>(blogUrl);
     return this.blogs;
@@ -41,7 +41,7 @@ export class BlogService {
 
   // Get UserAdss By Slug
   public getBlogById(id: number): Observable<any> {
-     let blogDetailUrl = server.url + 'api/public/blogs/id='+id;
+     let blogDetailUrl = server.url + '/api/public/blogs/id='+id;
      let observer = this.http.get<any>(blogDetailUrl);
      return observer; 
   }

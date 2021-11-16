@@ -18,25 +18,25 @@ export class AuthService {
 
   logout(userId): Observable<any> {
 
-    return this._http.post(server.url + `api/public/account/logout?user=${userId}`,'')
+    return this._http.post(server.url + `/api/public/account/logout?user=${userId}`,'')
   }
   
   profile(): Observable<BasicResponse> {
-    return this._http.get<any>(server.url + "api/public/account/profile")
+    return this._http.get<any>(server.url + "/api/public/account/profile")
   }
 
   registration(registerUserRequest: RegisterUserRequest): Observable<BasicResponse> {
     const content_ = JSON.stringify(registerUserRequest);
   
-    return this._http.post<any>(server.url + "api/public/account/registration", content_)
+    return this._http.post<any>(server.url + "/api/public/account/registration", content_)
   }
 
   countries(): Observable<BasicResponse> {
-    return this._http.get<any>(server.url + "api/public/countries")
+    return this._http.get<any>(server.url + "/api/public/countries")
   }
 
   cities(country: number): Observable<BasicResponse> {
-    return this._http.get<any>(server.url + `api/public/city/find-by-country-id?country=${country}`)
+    return this._http.get<any>(server.url + `/api/public/city/find-by-country-id?country=${country}`)
   }
   
 }

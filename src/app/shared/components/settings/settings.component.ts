@@ -7,7 +7,7 @@ import { UserAds } from "../../classes/UserAds";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookiesData } from '../../services/cookies/CookiesData.service';
 import { Router } from '@angular/router';
-import { CreateAdsComponent } from './create-ads/create-ads.component';
+import { CreateAdsComponent } from '../create-ads/create-ads.component';
 
 @Component({
   selector: 'app-settings',

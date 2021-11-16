@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
+import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 
+import { Cloudinary } from '@cloudinary/angular-5.x';
 import { FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-input-element',
@@ -13,10 +16,19 @@ export class InputElementComponent implements OnInit {
   @Input() required:boolean;
   @Input() inputType:string;
   @Input() Name:string;
+  @Input() multiple:boolean;
 
-  constructor() { }
+ 
+  constructor(
+    
+  ) { 
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+   console.log(this.inputType);
+
+  }
+  
+ 
 }

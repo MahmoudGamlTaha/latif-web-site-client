@@ -531,7 +531,7 @@ html body.swal2-height-auto {
 .swal2-title {
   font-size: 14px !important;
   font-weight: normal !important;
-  color: #ffa3ac !important;
+  color: #fff !important;
   margin: 0 !important;
   display: block !important;
 }
@@ -548,7 +548,25 @@ html body.swal2-height-auto {
 /*addAds*/
 
 .addAds{
-  a{
-    color: var(--theme-deafult);
+  position: fixed;
+  bottom: 10%;
+  left: 32px;
+  cursor: pointer;
+  z-index: 2;
+  background: $main_color;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  line-height: 50px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgb(0 0 0 / 45%);
+  transition: all 0.1s ease-in-out;
+  &:hover{
+    box-shadow: none;
+  }
+  .fa{
+    color: $white;
+    font-size: 30px;
   }
 }

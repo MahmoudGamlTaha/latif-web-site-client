@@ -1,5 +1,4 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
 
 import { APIInterceptor } from './interceptors/http-interceptor';
 import { AgeVerificationComponent } from './components/modal/age-verification/age-verification.component';
@@ -10,11 +9,12 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartModalComponent } from './components/modal/cart-modal/cart-modal.component';
 import { CartVariationComponent } from './components/modal/cart-variation/cart-variation.component';
 import { CategoriesComponent } from './components/categories/categories.component';
-import { CategorySelectComponent } from './components/settings/create-ads/elemnts/category-select/category-select.component';
-import { CheckboxElementComponent } from './components/settings/create-ads/elemnts/checkbox-element/checkbox-element.component';
+import { CategorySelectComponent } from './components/create-ads/elemnts/category-select/category-select.component';
+import { CheckboxElementComponent } from './components/create-ads/elemnts/checkbox-element/checkbox-element.component';
 import { CommonModule } from '@angular/common';
-import { CreateAdsComponent } from './components/settings/create-ads/create-ads.component';
+import { CreateAdsComponent } from './components/create-ads/create-ads.component';
 import { DiscountPipe } from './pipes/discount.pipe';
+import {FileUploadModule} from 'ng2-file-upload';
 import { FooterFourComponent } from './footer/footer-four/footer-four.component';
 import { FooterOneComponent } from './footer/footer-one/footer-one.component';
 import { FooterThreeComponent } from './footer/footer-three/footer-three.component';
@@ -25,8 +25,9 @@ import { HeaderFourComponent } from './header/header-four/header-four.component'
 import { HeaderOneComponent } from './header/header-one/header-one.component';
 import { HeaderThreeComponent } from './header/header-three/header-three.component';
 import { HeaderTwoComponent } from './header/header-two/header-two.component';
-import { InputElementComponent } from './components/settings/create-ads/elemnts/input-element/input-element.component';
+import { InputElementComponent } from './components/create-ads/elemnts/input-element/input-element.component';
 import { LayoutBoxComponent } from './components/layout-box/layout-box.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { NewsletterComponent } from './components/modal/newsletter/newsletter.component';
@@ -44,14 +45,16 @@ import { ProductBoxVerticalComponent } from './components/product/product-box-ve
 import { ProductBoxVerticalSliderComponent } from './components/product/product-box-vertical-slider/product-box-vertical-slider.component';
 import { QuickViewComponent } from './components/modal/quick-view/quick-view.component';
 import { RouterModule } from '@angular/router';
+import { SelectElemntComponent } from './components/create-ads/elemnts/select-elemnt/select-elemnt.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SizeModalComponent } from './components/modal/size-modal/size-modal.component';
 import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
 import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { TypeRadioComponent } from './components/settings/create-ads/elemnts/type-radio/type-radio.component';
+import { TypeRadioComponent } from './components/create-ads/elemnts/type-radio/type-radio.component';
 import { VideoModalComponent } from './components/modal/video-modal/video-modal.component';
-import { SelectElemntComponent } from './components/settings/create-ads/elemnts/select-elemnt/select-elemnt.component';
+import { SelectElemntUrlComponent } from './components/create-ads/elemnts/select-elemnt-url/select-elemnt-url.component';
+import { SelectElemnetMultipleComponent } from './components/create-ads/elemnts/select-elemnet-multiple/select-elemnet-multiple.component';
 
 // Header and Footer Components
 // Components
@@ -102,6 +105,8 @@ import { SelectElemntComponent } from './components/settings/create-ads/elemnts/
     InputElementComponent,
     CheckboxElementComponent,
     SelectElemntComponent,
+    SelectElemntUrlComponent,
+    SelectElemnetMultipleComponent,
   ],
   imports: [
     CommonModule,
@@ -118,6 +123,7 @@ import { SelectElemntComponent } from './components/settings/create-ads/elemnts/
     TranslateModule,
     NgSelectModule,
     ReactiveFormsModule,
+
 
   ],
   exports: [

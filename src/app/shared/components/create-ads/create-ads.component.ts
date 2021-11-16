@@ -1,11 +1,12 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
-import { AppBaseComponent } from '../../app-base/app-base.component';
+import { AppBaseComponent } from '../app-base/app-base.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SharedService } from '../../services/shared.service';
+import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
-import { UserAdsService } from '../../../services/product.service';
-import { take } from 'rxjs/operators';
+import { UserAdsService } from '../../services/product.service';
 
 @Component({
   selector: 'app-create-ads',
@@ -16,12 +17,18 @@ export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDe
   loading = false;
   onSave = false;
   adsTypes = []
+
+  
+  myForm: FormGroup;
+  formMap = []
+  
   constructor(
     injector: Injector,
     public modal: NgbActiveModal,
     public TranslateService: TranslateService,
     private UserAdsService: UserAdsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private SharedService:SharedService
   ) {
     super(injector)
   }
@@ -51,6 +58,11 @@ export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDe
       Longitude:[''],
       latitude:[''],
       barkingProblem:[''],
+      city:[''],
+      allow_at_home:[''],
+      driver_method:[''],
+
+      
     });
 
 
@@ -64,21 +76,42 @@ export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDe
     this.unsubscribe.push(getSub)
   }
 
-  myForm: FormGroup;
-  formMap = []
-  typeID
   onChangeType(e) {
-    this.typeID = e?.id
     const getCreateFormSub = this.UserAdsService.getCreateForm(e?.code, undefined).subscribe(res => {
         this.formMap = res.response.data.form
     })
     this.unsubscribe.push(getCreateFormSub)
-
-
   }
 
-  onSubmit(model) {
-    console.log(model);
+  onSubmit() {
+    this.onSave = true
+    var arr = [];
+    let value = {...this.myForm.value}
+
+    delete value['adsType']; 
+    Object.keys(value).forEach(k => (!value[k] && value[k] !== undefined) && delete value[k]);
+    for (let key in value) {   
+      if( this.myForm.value !== "") {
+        arr.push(Object.assign( {id: key,value: Array.isArray(value[key])? value[key].toString() : value[key]}));
+      }
+    }
+    
+    let body :any= {
+      external:true,
+      type: this.myForm.value.adsType,
+      userAds: arr
+    }
+    const createAdsSub =  this.UserAdsService.createAds(body).subscribe(res =>{
+     this.onSave = false;
+     this.modal.close()
+     Swal.fire({
+      title:res.message,
+      showConfirmButton: false,
+      timer:2500
+    })
+    window.location.reload();
+    })
+    this.unsubscribe.push(createAdsSub)
   }
 
 }

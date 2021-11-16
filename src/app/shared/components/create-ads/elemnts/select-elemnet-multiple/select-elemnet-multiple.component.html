@@ -1,0 +1,6 @@
+<div class="form-group" >
+    <label for="">{{label}}</label>
+    <ng-select  [formControl]="control"  [items]="listArr" [bindLabel]="TranslateService.currentLang ==='en' ? 'label':'label'"  bindValue="code" [attr.required]="required" [multiple]="true" [closeOnSelect]="false">
+    </ng-select>
+
+</div>

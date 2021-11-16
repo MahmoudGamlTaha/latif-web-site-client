@@ -1,6 +1,5 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-app-base',
@@ -9,6 +8,8 @@ import { Subscription } from 'rxjs';
 export class AppBaseComponent implements OnDestroy{
 
   unsubscribe: Subscription[] = [];
+
+  refresh = new Subject();
 
   constructor(injector: Injector) { }
 

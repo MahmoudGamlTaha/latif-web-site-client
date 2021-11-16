@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
-import { UserAdsService } from '../../../../../services/product.service';
+import { UserAdsService } from 'src/app/shared/services/product.service';
 import { take } from 'rxjs/operators';
 
 @Component({

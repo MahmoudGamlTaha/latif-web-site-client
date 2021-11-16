@@ -47,17 +47,17 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
     private cdr: ChangeDetectorRef,
     private cookie: CookiesData,
     private modalService: NgbModal,
-    public TranslateService:TranslateService,
+    public TranslateService: TranslateService,
   ) {
     super(injector)
     this.loading = true;
   }
 
- 
+
   getProductById(id: number) {
 
-   const  getAdsByIdSub =this.productService.getAdsById(id).subscribe((res: any) => {
-      
+    const getAdsByIdSub = this.productService.getAdsById(id).subscribe((res: any) => {
+
       this.product = new UserAds();
       let retProduct = res.response.data;
       this.product.id = retProduct.id;
@@ -98,8 +98,6 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
       this.product_id = res.slug;
       if (this.product_id) this.getProductById(this.product_id);
     })
-
-
   }
 
   // Get Product Color
@@ -164,11 +162,11 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
 
   /*chat*/
   onOpenChat() {
-    if(this.cookie.checkUserProfile()){
+    if (this.cookie.checkUserProfile()) {
       const checkChatAdsSub = this.productService.checkChatAds(this.product_id).subscribe(res => {
         if (res.response.data) {
           this.chatRoom = res.response.data
-          const nextPageByIdSub =  this.ProfileService.nextPageById(undefined, res.response.data).subscribe(res2 => {
+          const nextPageByIdSub = this.ProfileService.nextPageById(undefined, res.response.data).subscribe(res2 => {
             this.chatMessagesData = res2.response.data
             this.showChat = true;
             setTimeout(() => {
@@ -180,87 +178,87 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
         }
       })
       this.unsubscribe.push(checkChatAdsSub)
-    }else{
+    } else {
       this.router.navigate(['/pages/login'])
     }
-  
-   }
- 
-   onScrollEvent(e) {
-     if(this.reloadChat){
-       if (this.chatPS.directiveRef.position().y === 'start') {
-         const nextPageByIdSub =   this.ProfileService.nextPageById(this.chatMessagesData[this.chatMessagesData.length - 1]['id'], this.chatMessagesData[this.chatMessagesData.length - 1]['room']).subscribe(res2 => {
-           if(!res2.response.data.length) this.reloadChat = false
-           this.chatMessagesData = [ ...this.chatMessagesData,...res2.response.data]
-           
-           setTimeout(() => {
-             this.cdr.detectChanges()
-           }, 100);
-         })
-         this.unsubscribe.push(nextPageByIdSub)
- 
-       }
-     }
-   }
-   messageSave(f:NgForm){
-       const body :any ={
-         ad_item: this.product_id,
-         device_id: 'web',
-         device_model: 'web',
-         message: f.value.message,
-         room:   this.chatRoom ,
-         sender: JSON.parse(this.cookie.getUserProfile())?.id || undefined,
-       }
-       const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res =>{
-         body['senderId'] = JSON.parse(this.cookie.getUserProfile())?.id
-         this.chatMessagesData.unshift(body)
-         
-         f.reset()
-         setTimeout(() => {
-           this.chatPS.directiveRef.scrollToBottom()
-           this.cdr.detectChanges()
- 
-         }, 100)
-       
-       })
-       this.unsubscribe.push(sndMsgSub)
-    
-   }
-   /*report*/
+
+  }
+
+  onScrollEvent(e) {
+    if (this.reloadChat) {
+      if (this.chatPS.directiveRef.position().y === 'start') {
+        const nextPageByIdSub = this.ProfileService.nextPageById(this.chatMessagesData[this.chatMessagesData.length - 1]['id'], this.chatMessagesData[this.chatMessagesData.length - 1]['room']).subscribe(res2 => {
+          if (!res2.response.data.length) this.reloadChat = false
+          this.chatMessagesData = [...this.chatMessagesData, ...res2.response.data]
+
+          setTimeout(() => {
+            this.cdr.detectChanges()
+          }, 100);
+        })
+        this.unsubscribe.push(nextPageByIdSub)
+
+      }
+    }
+  }
+  messageSave(f: NgForm) {
+    const body: any = {
+      ad_item: this.product_id,
+      device_id: 'web',
+      device_model: 'web',
+      message: f.value.message,
+      room: this.chatRoom,
+      sender: JSON.parse(this.cookie.getUserProfile())?.id || undefined,
+    }
+    const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res => {
+      body['senderId'] = JSON.parse(this.cookie.getUserProfile())?.id
+      this.chatMessagesData.unshift(body)
+
+      f.reset()
+      setTimeout(() => {
+        this.chatPS.directiveRef.scrollToBottom()
+        this.cdr.detectChanges()
+
+      }, 100)
+
+    })
+    this.unsubscribe.push(sndMsgSub)
+
+  }
+  /*report*/
   reports = []
   onSaveReport = false
   public loadingReport: boolean;
-  onReport(content){
-    if(this.cookie.checkUserProfile()){
+  onReport(content) {
+    if (this.cookie.checkUserProfile()) {
       this.loadingReport = true
       this.modalService.open(content, { centered: true })
-      const getSub = this.productService.reasons().subscribe(res =>{
+      const getSub = this.productService.reasons().subscribe(res => {
         console.log('res: ', res);
         this.reports = [...res.response.data,
-          {
-            "id": 'other',
-            "value": "Other",
-            "valueAr": "اخرى",
+        {
+          "id": 'other',
+          "value": "Other",
+          "valueAr": "اخرى",
         }]
         this.loadingReport = false
       })
       this.unsubscribe.push(getSub)
-    }else{
+    } else {
       this.router.navigate(['/pages/login'])
     }
   }
 
-  onMakeReport(f:NgForm,modal){
+  onMakeReport(f: NgForm, modal) {
     this.onSaveReport = true
-    const body :any= {
+    const body: any = {
       adId: this.product_id,
       otherReason: f.value.otherReason || undefined,
-      reason: String(f.value.report) !== "other" ? String(f.value.report)  : undefined,
-      type:  "REPORT",
+      reason: String(f.value.report) !== "other" ? String(f.value.report) : undefined,
+      type: "REPORT",
     }
-   const makeReportSub = this.productService.makeReport(body).subscribe(res =>{
-     this.onSaveReport = false
-     modal.dismiss('Cross click')
+    const makeReportSub = this.productService.makeReport(body).subscribe(res => {
+      this.onSaveReport = false
+      modal.dismiss('Cross click')
     })
     this.unsubscribe.push(makeReportSub)
   }

@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label for="">{{label}}</label>
+    <ng-select  [formControl]="control"  [items]="listArr"  
+    [bindLabel]="TranslateService.currentLang ==='en' ? 'name':'nameAr'" 
+    bindValue="code" [attr.required]="required" [multiple]="multiple">
+    </ng-select>
+
+</div>

@@ -1,0 +1,12 @@
+<div class="form-group" >
+    <label for="">{{label}}</label>
+    <input 
+    [type]="
+    (inputType ==='string' ? 'text' : null) 
+    || (inputType ==='money' ? 'number' : null) 
+    || (inputType ==='Integer' ? 'number' : null) 
+    || (inputType ==='file'  
+    || inputType ==='files'? 'file' : null)
+    "
+     class="form-control" [formControl]="control" [name]="Name" [required]="required" [multiple]="multiple">
+</div>
