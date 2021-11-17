@@ -61,7 +61,7 @@
                         <app-checkbox-element class="col-12" [Name]="item.name"
                             *ngIf="item.type === 'boolean' && item.label_ar "
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
-                            [control]="myForm.get(item.name)" [required]="item.required" [form]="myForm">
+                            [control]="myForm.get(item.name)"  [form]="myForm">
                         </app-checkbox-element>
 
 

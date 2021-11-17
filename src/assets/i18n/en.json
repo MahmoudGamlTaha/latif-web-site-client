@@ -101,7 +101,10 @@
     "phone":"Phone",
     "address":"Address",
     "required":"This filed is required",
-    "other":"Other"
+    "other":"Other",
+    "yes":"Yes",
+    "no":"No",
+    "notFound":"Not found"
   },
   "btn":{
     "save":"Save",
@@ -132,7 +135,8 @@
     "report":"Report Ad"
   },
   "messages":{
-    "successfullyReported":"successfully Reported"
+    "successfullyReported":"successfully Reported",
+    "ownChat" :"This ad is your own so you can not hold a conversation"
   }
 
 }

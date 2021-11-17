@@ -518,7 +518,9 @@ body.rtl .checkbox_animated {
 .swal2-container {
   top: unset !important;
 }
-
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){
+  overflow:auto!important
+}
 html body.swal2-height-auto {
   height: 100% !important;
 }

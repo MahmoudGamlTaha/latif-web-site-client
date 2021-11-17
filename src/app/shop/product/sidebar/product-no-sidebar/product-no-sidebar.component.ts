@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { ProfileService } from '../../../../shared/services/profile.service';
 import { SizeModalComponent } from "../../../../shared/components/modal/size-modal/size-modal.component";
+import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
 import { UserAds } from '../../../../shared/classes/UserAds';
 import { UserAdsService } from '../../../../shared/services/product.service';
@@ -53,37 +54,41 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
     this.loading = true;
   }
 
+  getDataFromArr(arr,key,value){
+    return arr.find(x => x[key] === value)
+    
+  }
 
   getProductById(id: number) {
 
     const getAdsByIdSub = this.productService.getAdsById(id).subscribe((res: any) => {
-
-      this.product = new UserAds();
-      let retProduct = res.response.data;
-      this.product.id = retProduct.id;
-      this.product.city = retProduct.city;
-      this.product.type = retProduct.type;
-      this.product.name = retProduct.name;
-      this.product.categoryName = retProduct.categoryName;
-      if (retProduct.createdBy != null) {
-        this.product.createdBy = retProduct.createdBy;
-        this.product.createdBy.adsCount = retProduct.createdBy.adsCount ?? 0;
-        this.product.createdBy.city = retProduct.createdBy.city;
-        this.product.createdBy.firstName = retProduct.createdBy.firstName;
-        this.product.createdBy.lastName = retProduct.createdBy.lastName == null ? "" : retProduct.createdBy.lastName;
-        this.product.createdBy.id = retProduct.createdBy.id;
-        this.product.createdBy.joinDate = retProduct.createdBy.registrationDate;
-      }
-      this.product.description = retProduct.description;
-      this.product.extra = retProduct.extra;
-      this.product.title = retProduct.name;
-      this.product.images = retProduct.images.length == 0 ? [image => "assets/images/product/placeholder.jpg"] : retProduct.images;
-      this.product.image = retProduct.image == null ? "assets/images/product/placeholder.jpg" : retProduct.image;
-      this.product.categoryNameAr = retProduct.categoryNameAr;
-      this.product.short_description = retProduct.short_description;
-      this.product.price = retProduct.price;
-      this.product.description = retProduct.description;
-      this.product.CreatedDate = retProduct.created_at;
+      console.log('res: ', res);
+      this.product = res.response.data
+      // let retProduct = res.response.data;
+      // this.product.id = retProduct.id;
+      // this.product.city = retProduct.city;
+      // this.product.type = retProduct.type;
+      // this.product.name = retProduct.name;
+      // this.product.categoryName = retProduct.categoryName;
+      // if (retProduct.createdBy != null) {
+      //   this.product.createdBy = retProduct.createdBy;
+      //   this.product.createdBy.adsCount = retProduct.createdBy.adsCount ?? 0;
+      //   this.product.createdBy.city = retProduct.createdBy.city;
+      //   this.product.createdBy.firstName = retProduct.createdBy.firstName;
+      //   this.product.createdBy.lastName = retProduct.createdBy.lastName == null ? "" : retProduct.createdBy.lastName;
+      //   this.product.createdBy.id = retProduct.createdBy.id;
+      //   this.product.createdBy.joinDate = retProduct.createdBy.registrationDate;
+      // }
+      // this.product.description = retProduct.description;
+      // this.product.extra = retProduct.extra;
+      // this.product.title = retProduct.name;
+      // this.product.images = retProduct.images.length == 0 ? [image => "assets/images/product/placeholder.jpg"] : retProduct.images;
+      // this.product.image = retProduct.image == null ? "assets/images/product/placeholder.jpg" : retProduct.image;
+      // this.product.categoryNameAr = retProduct.categoryNameAr;
+      // this.product.short_description = retProduct.short_description;
+      // this.product.price = retProduct.price;
+      // this.product.description = retProduct.description;
+      // this.product.CreatedDate = retProduct.created_at;
       this.loading = false;
 
       document.body.scrollTop = 0;
@@ -163,21 +168,32 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
   /*chat*/
   onOpenChat() {
     if (this.cookie.checkUserProfile()) {
-      const checkChatAdsSub = this.productService.checkChatAds(this.product_id).subscribe(res => {
-        if (res.response.data) {
-          this.chatRoom = res.response.data
-          const nextPageByIdSub = this.ProfileService.nextPageById(undefined, res.response.data).subscribe(res2 => {
-            this.chatMessagesData = res2.response.data
-            this.showChat = true;
-            setTimeout(() => {
-              this.chatPS.directiveRef.scrollToBottom()
-            }, 100)
-            this.cdr.detectChanges()
-          })
-          this.unsubscribe.push(nextPageByIdSub)
-        }
-      })
-      this.unsubscribe.push(checkChatAdsSub)
+      if(this.product.createdBy.id === JSON.parse( this.cookie.getUserProfile())?.id){
+        Swal.fire({
+          title:this.TranslateService.instant('messages.ownChat'),
+          showConfirmButton: false,
+          timer:2500
+        })
+        return
+      }else{
+        const checkChatAdsSub = this.productService.checkChatAds(this.product_id).subscribe(res => {
+          this.showChat = true;
+          if (res.response.data) {
+            this.chatRoom = res.response.data
+            const nextPageByIdSub = this.ProfileService.nextPageById(undefined, res.response.data).subscribe(res2 => {
+              this.chatMessagesData = res2.response.data
+             
+              setTimeout(() => {
+                this.chatPS.directiveRef.scrollToBottom()
+              }, 100)
+              this.cdr.detectChanges()
+            })
+            this.unsubscribe.push(nextPageByIdSub)
+          }
+        })
+        this.unsubscribe.push(checkChatAdsSub)
+      }
+     
     } else {
       this.router.navigate(['/pages/login'])
     }
@@ -207,6 +223,7 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
       device_model: 'web',
       message: f.value.message,
       room: this.chatRoom,
+      recevier:this.product.createdBy.id,
       sender: JSON.parse(this.cookie.getUserProfile())?.id || undefined,
     }
     const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res => {
@@ -233,7 +250,7 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
       this.loadingReport = true
       this.modalService.open(content, { centered: true })
       const getSub = this.productService.reasons().subscribe(res => {
-        console.log('res: ', res);
+        
         this.reports = [...res.response.data,
         {
           "id": 'other',

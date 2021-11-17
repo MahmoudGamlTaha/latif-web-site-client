@@ -13,7 +13,7 @@ export class CookiesData{
     constructor(private cookiesService:CookieService){
     }
    public setToken(token:string){
-       this.cookiesService.set(this.tokenKey, token);
+       this.cookiesService.set(this.tokenKey, token, 1 );
    }
    public setUserId(userId){
       this.cookiesService.set(this.userKey, userId);
@@ -43,7 +43,7 @@ export class CookiesData{
    }
 
    public setUserProfile(profile){
-      this.cookiesService.set(this.userProfile, profile);
+      this.cookiesService.set(this.userProfile, profile,1);
    }
    public checkUserProfile() : boolean{
       let checkExist:boolean  = this.cookiesService.check(this.userProfile);
