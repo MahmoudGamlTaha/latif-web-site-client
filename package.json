@@ -66,6 +66,7 @@
     "ngx-bar-rating": "^2.0.0",
     "ngx-bootstrap": "^7.1.0",
     "ngx-cookie-service": "^2.1.0",
+    "ngx-dropzone": "^3.0.0",
     "ngx-infinite-scroll": "^10.0.0",
     "ngx-intl-tel-input": "^3.1.1",
     "ngx-isotope": "^0.1.7",

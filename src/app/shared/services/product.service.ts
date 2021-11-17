@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, startWith, delay } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
@@ -423,19 +423,28 @@ export class UserAdsService {
     return this.http.get<any>(url_)
   }
 
-  getDataByUrl(url:string): Observable<BasicResponse> {
+  getDataByUrl(url: string): Observable<BasicResponse> {
     let url_ = this.baseUrl + url;
     return this.http.get<any>(url_)
   }
 
-  createAds(userAdsRequest:  DynamicAdsRequest): Observable<BasicResponse> {
+  createAds(userAdsRequest: DynamicAdsRequest): Observable<BasicResponse> {
     let url_ = this.baseUrl + "/api/public/ads/create";
     url_ = url_.replace(/[?&]$/, "");
 
     const content_ = JSON.stringify(userAdsRequest);
-   
+
     return this.http.post<any>(url_, content_)
-}
+  }
+
+  upload(formData: FormData, module: string | null | undefined): Observable<any> {
+    let url_ = "http://194.163.180.99:8070/api/public/uploader/upload?";
+    if (module !== undefined && module !== null)
+      url_ += "module=" + encodeURIComponent("" + module) + "&";
+
+    url_ = url_.replace(/[?&]$/, "");
+    return this.http.post<any>(url_, formData)
+  }
 
 
 }
@@ -471,7 +480,7 @@ export enum AdType {
   ALL = "ALL",
 }
 
-export interface DynamicAdsRequest{
+export interface DynamicAdsRequest {
   external: boolean | undefined;
   type: string | undefined;
   userAds: [];

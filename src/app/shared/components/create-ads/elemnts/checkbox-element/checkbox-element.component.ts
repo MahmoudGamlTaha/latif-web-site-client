@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-checkbox-element',
@@ -12,6 +11,7 @@ export class CheckboxElementComponent implements OnInit {
   @Input() label:number;
   @Input() required:boolean;
   @Input() Name:string;
+  @Input() form:FormGroup;
 
   constructor() { }
 

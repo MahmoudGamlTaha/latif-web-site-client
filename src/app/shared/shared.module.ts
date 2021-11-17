@@ -9,12 +9,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartModalComponent } from './components/modal/cart-modal/cart-modal.component';
 import { CartVariationComponent } from './components/modal/cart-variation/cart-variation.component';
 import { CategoriesComponent } from './components/categories/categories.component';
-import { CategorySelectComponent } from './components/create-ads/elemnts/category-select/category-select.component';
 import { CheckboxElementComponent } from './components/create-ads/elemnts/checkbox-element/checkbox-element.component';
 import { CommonModule } from '@angular/common';
 import { CreateAdsComponent } from './components/create-ads/create-ads.component';
 import { DiscountPipe } from './pipes/discount.pipe';
-import {FileUploadModule} from 'ng2-file-upload';
 import { FooterFourComponent } from './footer/footer-four/footer-four.component';
 import { FooterOneComponent } from './footer/footer-one/footer-one.component';
 import { FooterThreeComponent } from './footer/footer-three/footer-three.component';
@@ -34,6 +32,7 @@ import { NewsletterComponent } from './components/modal/newsletter/newsletter.co
 import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { PaginationComponent } from '../shop/collection/widgets/pagination/pagination.component';
 import { ProductBoxFiveComponent } from './components/product/product-box-five/product-box-five.component';
@@ -45,7 +44,9 @@ import { ProductBoxVerticalComponent } from './components/product/product-box-ve
 import { ProductBoxVerticalSliderComponent } from './components/product/product-box-vertical-slider/product-box-vertical-slider.component';
 import { QuickViewComponent } from './components/modal/quick-view/quick-view.component';
 import { RouterModule } from '@angular/router';
+import { SelectElemnetMultipleComponent } from './components/create-ads/elemnts/select-elemnet-multiple/select-elemnet-multiple.component';
 import { SelectElemntComponent } from './components/create-ads/elemnts/select-elemnt/select-elemnt.component';
+import { SelectElemntUrlComponent } from './components/create-ads/elemnts/select-elemnt-url/select-elemnt-url.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SizeModalComponent } from './components/modal/size-modal/size-modal.component';
 import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
@@ -53,8 +54,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 import { TranslateModule } from '@ngx-translate/core';
 import { TypeRadioComponent } from './components/create-ads/elemnts/type-radio/type-radio.component';
 import { VideoModalComponent } from './components/modal/video-modal/video-modal.component';
-import { SelectElemntUrlComponent } from './components/create-ads/elemnts/select-elemnt-url/select-elemnt-url.component';
-import { SelectElemnetMultipleComponent } from './components/create-ads/elemnts/select-elemnet-multiple/select-elemnet-multiple.component';
 
 // Header and Footer Components
 // Components
@@ -100,7 +99,6 @@ import { SelectElemnetMultipleComponent } from './components/create-ads/elemnts/
     GridComponent,
     PaginationComponent,
     CreateAdsComponent,
-    CategorySelectComponent,
     TypeRadioComponent,
     InputElementComponent,
     CheckboxElementComponent,
@@ -123,7 +121,7 @@ import { SelectElemnetMultipleComponent } from './components/create-ads/elemnts/
     TranslateModule,
     NgSelectModule,
     ReactiveFormsModule,
-
+    NgxDropzoneModule
 
   ],
   exports: [

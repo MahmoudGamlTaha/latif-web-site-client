@@ -2,5 +2,7 @@
     <label for="">{{label}}</label>
     <ng-select  [formControl]="control"  [items]="listArr" [bindLabel]="TranslateService.currentLang ==='en' ? 'label':'label'"  bindValue="code" [attr.required]="required" [multiple]="true" [closeOnSelect]="false">
     </ng-select>
-
+    <div class="invalid-feedback" [ngClass]="{'d-block':form?.invalid && form?.touched && control.invalid}">
+        {{'common.required' | translate}}
+    </div>
 </div>

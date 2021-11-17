@@ -95,8 +95,7 @@ export class SettingsComponent implements OnInit {
 
   onAddAds(){
     if(this.cookie.checkUserProfile()){
-      this.modalService.open(CreateAdsComponent, { centered: true,size:'lg' })
-     
+      this.modalService.open(CreateAdsComponent, { size:'lg' })
     }else{
       this.router.navigate(['/pages/login'])
     }

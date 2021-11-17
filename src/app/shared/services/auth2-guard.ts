@@ -24,7 +24,8 @@ export class AppRouteGuard2 implements CanActivate, CanActivateChild {
         }else{
             this._router.navigate([''])
             return false;
-        }       
+        }  
+        return true;     
     }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

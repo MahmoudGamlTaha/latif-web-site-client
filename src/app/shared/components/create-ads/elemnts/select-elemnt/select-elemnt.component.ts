@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { UserAdsService } from '../../../../services/product.service';
 import { take } from 'rxjs/operators';
@@ -17,6 +17,7 @@ export class SelectElemntComponent implements OnInit {
   @Input() required: boolean;
   @Input() listArr = []
   @Input() multiple: boolean;
+  @Input() form:FormGroup;
 
 
 

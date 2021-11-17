@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -15,13 +15,14 @@ export class SelectElemnetMultipleComponent implements OnInit {
   @Input() required: boolean;
   @Input() listArr = []
   @Input() multiple: boolean;
+  @Input() form:FormGroup;
 
 
   constructor(
     public TranslateService:TranslateService 
   ) { }
   ngOnInit(): void {
-    console.log(this.listArr);
+    
   }
 
 }

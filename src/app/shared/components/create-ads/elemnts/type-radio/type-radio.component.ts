@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-type-radio',
@@ -8,12 +7,11 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./type-radio.component.scss']
 })
 export class TypeRadioComponent implements OnInit {
-
-
   @Input() control: FormControl;
   @Input() options:[];
   @Input() label:number;
   @Input() required:boolean;
+  @Input() form:FormGroup;
 
   loading = false
   constructor( ) { }

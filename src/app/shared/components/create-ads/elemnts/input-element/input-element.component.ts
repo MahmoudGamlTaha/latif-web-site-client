@@ -1,9 +1,9 @@
-import { Component, Input, NgZone, OnInit } from '@angular/core';
-import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { Cloudinary } from '@cloudinary/angular-5.x';
-import { FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { SharedService } from '../../../../services/shared.service';
+import { UserAdsService } from '../../../../services/product.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-input-element',
@@ -17,18 +17,51 @@ export class InputElementComponent implements OnInit {
   @Input() inputType:string;
   @Input() Name:string;
   @Input() multiple:boolean;
+  @Input() adsTypes:string;
+  @Input() form:FormGroup;
+  
 
- 
+
   constructor(
-    
+    private UserAdsService:UserAdsService,
+    private SharedService:SharedService
   ) { 
 
   }
 
   ngOnInit(): void {
-   console.log(this.inputType);
+   
+   
+   
+  }
+  
+  files: File[] = [];
+  formData = new FormData();
+  uploadedLinks = []
+  onSelect(event) {
+
+    this.files.push(...event.addedFiles);
+    let observables = [];
+    for (var i = 0; i < this.files.length; i++) {
+      this.formData = new FormData();
+      this.formData.append("file", this.files[i]);
+      observables.push(this.UserAdsService.upload(this.formData,this.adsTypes));
+    }
+   
+    const forkJoinSub = forkJoin(observables)
+      .subscribe((dataArray: any) => {
+        for (let index = 0; index < dataArray.length; index++) {
+         
+         this.uploadedLinks.push(dataArray[index]['response']['data'][0])
+         this.SharedService.sendFiles.next(this.uploadedLinks)
+
+        }
+      });
 
   }
   
- 
+  onRemove(event) {
+    
+    this.files.splice(this.files.indexOf(event), 1);
+  }
 }

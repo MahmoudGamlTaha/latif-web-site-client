@@ -1,6 +1,8 @@
 <div class="form-group" *ngIf="!loading">
     <label for="">{{label}}</label>
-    <ng-select  [formControl]="control"  [items]="listUrlArr"   [bindLabel]="TranslateService.currentLang ==='en' ? 'name':'nameAr'"  bindValue="code" [attr.required]="required" [multiple]="multiple">
+    <ng-select  [formControl]="control"  [items]="listUrlArr"   [bindLabel]="TranslateService.currentLang ==='en' ? 'name':'nameAr'"  bindValue="code" [required]="required" [multiple]="multiple">
     </ng-select>
-
+    <div class="invalid-feedback" [ngClass]="{'d-block':form?.invalid && form?.touched && control.invalid}">
+        {{'common.required' | translate}}
+    </div>
 </div>

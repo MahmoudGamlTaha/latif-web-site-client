@@ -8,10 +8,12 @@ import { Observable } from 'rxjs';
 export class APIInterceptor implements HttpInterceptor {
     constructor(private cookie:CookiesData){}
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
         let header = {}
+        if(request.url.includes('194.163.180.99:8070')){
+        }else{
+            header['Content-Type'] = 'application/json; charset=utf-8';
+        }
         header['Accept'] = '*/*';
-        header['Content-Type'] = 'application/json; charset=utf-8';
         if (this.cookie.checkToken()) {
             header['Authorization'] = `${this.cookie.getToken()}`;
         }

@@ -13,7 +13,7 @@ export class AuthService {
 
   login(loginRequest: LoginRequest): Observable<any> {
     const content_ = JSON.stringify(loginRequest);
-    return this._http.post<any>(server.url + "login", content_)
+    return this._http.post<any>(server.url + "/login", content_)
   }
 
   logout(userId): Observable<any> {

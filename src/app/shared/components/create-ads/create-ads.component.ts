@@ -1,4 +1,4 @@
-import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 import { AppBaseComponent } from '../app-base/app-base.component';
@@ -13,7 +13,7 @@ import { UserAdsService } from '../../services/product.service';
   templateUrl: './create-ads.component.html',
   styleUrls: ['./create-ads.component.scss']
 })
-export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDestroy {
+export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDestroy,AfterViewChecked {
   loading = false;
   onSave = false;
   adsTypes = []
@@ -21,18 +21,22 @@ export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDe
   
   myForm: FormGroup;
   formMap = []
-  
+  images;
   constructor(
     injector: Injector,
     public modal: NgbActiveModal,
     public TranslateService: TranslateService,
     private UserAdsService: UserAdsService,
     private fb: FormBuilder,
+    private cdr:ChangeDetectorRef,
     private SharedService:SharedService
   ) {
     super(injector)
   }
 
+  ngAfterViewChecked(): void {
+    this.cdr.detectChanges()
+  }
   ngOnInit(): void {
     this.myForm = this.fb.group({
       adsType:  [''],
@@ -74,14 +78,22 @@ export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDe
       this.loading = false
     })
     this.unsubscribe.push(getSub)
+
+
+    this.SharedService.sendFiles.subscribe(res =>{
+      console.log('res: ', res);
+      this.images = res
+    })
   }
 
   onChangeType(e) {
+    
     const getCreateFormSub = this.UserAdsService.getCreateForm(e?.code, undefined).subscribe(res => {
         this.formMap = res.response.data.form
     })
     this.unsubscribe.push(getCreateFormSub)
   }
+
 
   onSubmit() {
     this.onSave = true
@@ -95,6 +107,8 @@ export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDe
         arr.push(Object.assign( {id: key,value: Array.isArray(value[key])? value[key].toString() : value[key]}));
       }
     }
+
+    arr.push({id:'images',value:this.images})
     
     let body :any= {
       external:true,
@@ -104,12 +118,12 @@ export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDe
     const createAdsSub =  this.UserAdsService.createAds(body).subscribe(res =>{
      this.onSave = false;
      this.modal.close()
+     window.location.reload();
      Swal.fire({
       title:res.message,
       showConfirmButton: false,
       timer:2500
     })
-    window.location.reload();
     })
     this.unsubscribe.push(createAdsSub)
   }

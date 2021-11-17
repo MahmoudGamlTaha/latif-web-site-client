@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { UserAdsService } from '../../../../services/product.service';
 import { take } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class SelectElemntUrlComponent implements OnInit {
   @Input() multiple: boolean;
   @Input() Name: string;
   @Input() url: string;
+  @Input() form:FormGroup;
 
   
   loading = false
@@ -29,6 +30,7 @@ export class SelectElemntUrlComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.form);
     this.getData()
   }
 

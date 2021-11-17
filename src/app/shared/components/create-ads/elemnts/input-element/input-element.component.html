@@ -1,12 +1,34 @@
-<div class="form-group" >
-    <label for="">{{label}}</label>
-    <input 
-    [type]="
-    (inputType ==='string' ? 'text' : null) 
-    || (inputType ==='money' ? 'number' : null) 
-    || (inputType ==='Integer' ? 'number' : null) 
-    || (inputType ==='file'  
-    || inputType ==='files'? 'file' : null)
-    "
-     class="form-control" [formControl]="control" [name]="Name" [required]="required" [multiple]="multiple">
-</div>
+
+
+
+<ng-container *ngIf="inputType ==='files'; else elseTemplate">
+    <div class="mt-4" >
+        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+            <ngx-dropzone-label>
+                <div>
+                    <h3>{{label}}</h3>
+                </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-image-preview>
+        </div>
+    </div>
+    
+</ng-container>
+<ng-template #elseTemplate>
+    <div class="form-group"  *ngIf="inputType !=='file';e">
+        <label for="">{{label}}</label>
+        <input 
+        [type]="
+        (inputType ==='string' ? 'text' : null) 
+        || (inputType ==='money' ? 'number' : null) 
+        || (inputType ==='Integer' ? 'number' : null) 
+        "
+         class="form-control" [formControl]="control" [name]="Name" [required]="required" [multiple]="multiple">
+         <div class="invalid-feedback" [ngClass]="{'d-block':form?.invalid && form?.touched && control.invalid}">
+            {{'common.required' | translate}}
+        </div>
+    </div>
+  
+</ng-template>

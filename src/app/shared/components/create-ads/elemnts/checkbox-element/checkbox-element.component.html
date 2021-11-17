@@ -4,4 +4,7 @@
     <label class="d-block mb-0" [for]="Name">
         <input  class="checkbox_animated" [id]="Name" type="checkbox" [formControl]="control"  [required]="required">  {{label}} 
     </label>
+    <div class="invalid-feedback" [ngClass]="{'d-block':form?.invalid && form?.touched && control.invalid}">
+        {{'common.required' | translate}}
+    </div>
 </div>

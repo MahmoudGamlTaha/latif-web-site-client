@@ -8,5 +8,7 @@
             </label>
         </ng-container>
     </div>
-
+    <div class="invalid-feedback" [ngClass]="{'d-block':form?.invalid && form?.touched && control.invalid}">
+        {{'common.required' | translate}}
+    </div>
 </div>

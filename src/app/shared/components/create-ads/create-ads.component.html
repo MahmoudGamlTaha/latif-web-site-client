@@ -13,60 +13,63 @@
                         <div class="form-group">
                             <label for="">نوع الاعلانات</label>
                             <ng-select formControlName="adsType" [items]="adsTypes" (change)="onChangeType($event)"
-                                required="" [bindLabel]="TranslateService.currentLang ==='en' ? 'name': 'nameAr'"
+                                required [bindLabel]="TranslateService.currentLang ==='en' ? 'name': 'nameAr'"
                                 bindValue="code">
                             </ng-select>
+                           
+                            <div class="invalid-feedback" [ngClass]="{'d-block':myForm?.invalid && myForm?.touched &&  myForm.controls.adsType.errors?.required}">
+                                {{'common.required' | translate}}
+                            </div>
                         </div>
                     </div>
                     <ng-container *ngFor="let item of formMap" >
                         <app-select-elemnt class="col-12"
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
                             *ngIf="item.type === 'select' && !item?.multi" [control]="myForm.get(item.name)"
-                            [required]="item.required" [listArr]="item?.options" [multiple]="item?.multi">
+                            [required]="item.required" [listArr]="item?.options" [multiple]="item?.multi" [form]="myForm">
                         </app-select-elemnt>
 
                         <app-select-elemnet-multiple class="col-12"
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
                             *ngIf="item.type === 'select' && item?.multi" [control]="myForm.get(item.name)"
-                            [required]="item.required" [listArr]="item?.options"></app-select-elemnet-multiple>
+                            [required]="item.required" [listArr]="item?.options" [form]="myForm"></app-select-elemnet-multiple>
 
                         <app-select-elemnt-url class="col-12"
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
                             *ngIf="item.type ===  'url_option'" [control]="myForm.get(item.name)"
-                            [required]="item.required" [multiple]="item?.multi" [Name]="item.name" [url]="item.url">
+                            [required]="item.required" [multiple]="item?.multi" [Name]="item.name" [url]="item.url" [form]="myForm">
                         </app-select-elemnt-url>
 
                         <app-type-radio class="col-12" *ngIf="item.type === 'radiobutton'"
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
-                            [control]="myForm.get(item.name)" [options]="item.options" [required]="item.required">
+                            [control]="myForm.get(item.name)" [options]="item.options" [required]="item.required" [form]="myForm">
                         </app-type-radio>
 
                         <app-input-element class="col-12" [inputType]="item.type" [Name]="item.name"
                             *ngIf="item.type === 'string' || item.type === 'money' ||item.type === 'Integer'"
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
-                            [control]="myForm.get(item.name)" [required]="item.required">
+                            [control]="myForm.get(item.name)" [required]="item.required" [form]="myForm" >
                         </app-input-element>
 
                         <app-input-element class="col-12" [inputType]="item.type" [Name]="item.name"
                             *ngIf="item.name === 'image'"
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
-                            [control]="myForm.get(item.name)" [required]="item.required">
+                            [control]="myForm.get(item.name)" [required]="item.required" [form]="myForm">
                         </app-input-element>
 
 
                         <app-checkbox-element class="col-12" [Name]="item.name"
                             *ngIf="item.type === 'boolean' && item.label_ar "
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
-                            [control]="myForm.get(item.name)" [required]="item.required">
+                            [control]="myForm.get(item.name)" [required]="item.required" [form]="myForm">
                         </app-checkbox-element>
 
 
                         <app-input-element class="col-12" [inputType]="item.type" [Name]="item.name"
                             *ngIf="item.name === 'images'"
                             [label]="TranslateService.currentLang ==='en' ? item.label: item.label_ar"
-                            [control]="myForm.get(item.name)" [required]="item.required" [multiple]="true">
+                            [control]="myForm.get(item.name)" [required]="item.required" [multiple]="true" [adsTypes]="myForm.get('adsType').value" [form]="myForm">
                         </app-input-element>
-
 
                     </ng-container>
 
