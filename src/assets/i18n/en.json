@@ -132,7 +132,8 @@
 
   },
   "ads":{
-    "report":"Report Ad"
+    "report":"Report Ad",
+    "Adoption":"Adoption"
   },
   "messages":{
     "successfullyReported":"successfully Reported",

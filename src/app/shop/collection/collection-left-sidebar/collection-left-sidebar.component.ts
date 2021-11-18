@@ -16,6 +16,10 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public grid: string = 'col-xl-3 col-md-6';
   public layoutView: string = 'grid-view';
   public products: any[] = [];
+  public all_products: any[] = []
+  pageSize = 10
+  page = 0
+  public finished: boolean = false  // boolean when end of data is reached
   public brands: any[] = [];
   public colors: any[] = [];
   public size: any[] = [];
@@ -32,40 +36,55 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public adsFilter: adsFilter; 
   constructor(private route: ActivatedRoute, private router: Router,
     private viewScroller: ViewportScroller, public productService: UserAdsService) {   
-      // Get Query params..
-    
-        this.adsFilter = {type : "ALL"}  
-        this.route.queryParams.subscribe(params => {
-        this.brands = params.brand ? params.brand.split(",") : [];
-        this.colors = params.color ? params.color.split(",") : [];
-        this.size  = params.size ? params.size.split(",")  : [];
-        this.minPrice = params.minPrice ? params.minPrice : this.minPrice;
-        this.maxPrice = params.maxPrice ? params.maxPrice : this.maxPrice;
-        this.tags = [...this.brands, ...this.colors, ...this.size]; // All Tags Array
-        
-        this.category = params.category ? params.category : 0;
-        this.type = params.type?params.type : 0;
-        this.sortBy   = params.sortBy ? params.sortBy : 'ascending';
-        this.pageNo   = params.page ? params.page : this.pageNo;
-          if(params.category){
-            this.adsFilter.category = Number(this.category);  
-          }
-           this.productService.getFilterAds(this.adsFilter).subscribe((items:any)=>{
-             this.products = items.response.data;
-             this.loader = false;  
-             
-           });
-                      // Price Filter
-          //this.products = this.products.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice) 
-          // Paginate Products
-        //  this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
-         // this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
-        })
-      //})
+     
   }
 
+
+  getData(){
+     // Get Query params..
+    
+     this.adsFilter = {type : "ALL"}  
+     this.route.queryParams.subscribe(params => {
+     this.brands = params.brand ? params.brand.split(",") : [];
+     this.colors = params.color ? params.color.split(",") : [];
+     this.size  = params.size ? params.size.split(",")  : [];
+     this.minPrice = params.minPrice ? params.minPrice : this.minPrice;
+     this.maxPrice = params.maxPrice ? params.maxPrice : this.maxPrice;
+     this.tags = [...this.brands, ...this.colors, ...this.size]; // All Tags Array
+     
+     this.category = params.category ? params.category : 0;
+     this.type = params.type?params.type : 0;
+     this.sortBy   = params.sortBy ? params.sortBy : 'ascending';
+     this.pageNo   = params.page ? params.page : this.pageNo;
+       if(params.category){
+         this.adsFilter.category = Number(this.category);  
+       }
+        this.productService.getFilterAds(this.adsFilter,this.page,this.pageSize).subscribe((items:any)=>{
+          this.all_products = items.response.data;
+          this.loader = false;  
+          this.addItems()
+        });
+
+     })
+  }
+  addItems() {  
+    if(!this.all_products.length){
+      this.finished = true;
+      return
+    }
+    this.products = [...this.products,...this.all_products]
+    
+
+  }
+  
+  onScroll(){
+    this.pageSize += 10  
+    this.page +=1;
+    this.getData()  
+  }
   ngOnInit(): void {
     this.loader = true;
+    this.getData()  
   }
 
 

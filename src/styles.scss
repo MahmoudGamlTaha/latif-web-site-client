@@ -7,7 +7,25 @@
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #aaa #f3f3f3;
+}
 
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ededec;}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 20px;
+  border: 3px solid #f3f3f3;
+}
 html,
 body {
   height: 100%;

@@ -132,7 +132,8 @@
 
   },
   "ads":{
-    "report":"الابلاغ عن الإعلان"
+    "report":"الابلاغ عن الإعلان",
+    "Adoption":"تبنى"
   },
   "messages":{
     "successfullyReported":"تم الابلاغ بنجاع",

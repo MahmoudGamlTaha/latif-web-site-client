@@ -44,15 +44,18 @@ export class UserAdsService {
     this.userAds = this.http.get<any[]>(adsUrl);
     return this.userAds;
   }
-  public getFilterAds(adsFilter: adsFilter): Observable<any[]> {
-    let adsUrl = this.baseUrl + '/api/public/ads/nearest?pageSize=20';
+  public getFilterAds(adsFilter: adsFilter,page?: number | null | undefined, pageSize?: number | null | undefined): Observable<any[]> {
+    let adsUrl = this.baseUrl + '/api/public/ads/nearest?';
     if (adsFilter.category > 0) {
       adsUrl += '&category=' + adsFilter.category;
     }
     if (adsFilter.type != 'ALL') {
       adsUrl += '&type=' + adsFilter.type;
     }
-
+    if (page !== undefined && page !== null)
+    adsUrl += "&page=" + encodeURIComponent("" + page) + "&";
+    if (pageSize !== undefined && pageSize !== null)
+    adsUrl += "&pageSize=" + encodeURIComponent("" + pageSize) + "&";
 
     return this.http.get<any[]>(adsUrl);
   }
@@ -451,7 +454,7 @@ export class UserAdsService {
     url_ = url_.replace(/[?&]$/, "");
     const content_ = JSON.stringify(request);
     return this.http.post<any>(url_, content_)
-}
+  }
 
 
 }
