@@ -81,7 +81,6 @@ export class CreateAdsComponent extends AppBaseComponent implements OnInit, OnDe
 
 
     this.SharedService.sendFiles.subscribe(res =>{
-      console.log('res: ', res);
       this.images = res
     })
   }

@@ -31,6 +31,7 @@ import { SocialComponent } from './product/widgets/social/social.component';
 import { StockInventoryComponent } from './product/widgets/stock-inventory/stock-inventory.component';
 import { SuccessComponent } from './checkout/success/success.component';
 import { ThreeColumnComponent } from './product/three-column/three-column.component';
+import { TypeofPipe } from '../shared/pipes/typeOf.pipe';
 import { WishlistComponent } from './wishlist/wishlist.component';
 
 // Product Details Components
@@ -95,7 +96,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     WishlistComponent,
     CompareComponent,
     CheckoutComponent,
-    SuccessComponent
+    SuccessComponent,
+    TypeofPipe
   ],
   imports: [
     CommonModule,

@@ -1,14 +1,15 @@
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { SharedService } from './shared.service';
 
 @Injectable()
 export class MessagingService {
   currentMessage = new BehaviorSubject(null);
-  constructor(private angularFireMessaging: AngularFireMessaging) {
+  constructor(private angularFireMessaging: AngularFireMessaging,private SharedService:SharedService) {
     this.angularFireMessaging.messaging.subscribe(
       (_messaging) => {
-        console.log('_messaging: ', _messaging);
+        
         _messaging.onMessage = _messaging.onMessage.bind(_messaging);
         _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
       }
@@ -18,10 +19,11 @@ export class MessagingService {
   requestPermission() {
     this.angularFireMessaging.requestToken.subscribe(
       (token) => {
-        console.log(token);
+        
+        this.SharedService.sendFireBaseTokenToLogin.next(token)
       },
       (err) => {
-        console.error('Unable to get permission to notify.', err);
+        
       }
     );
   }
@@ -29,7 +31,7 @@ export class MessagingService {
   receiveMessage() {
     this.angularFireMessaging.messages.subscribe(
       (payload) => {
-        console.log("new message received. ", payload);
+        
         this.currentMessage.next(payload);
       })
   }

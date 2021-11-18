@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
       }
     }else{
       localStorage.setItem('lang','en')
+      this.translate.use('en')
     }
   }
   

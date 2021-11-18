@@ -30,7 +30,6 @@ export class SelectElemntUrlComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.form);
     this.getData()
   }
 

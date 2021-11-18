@@ -137,6 +137,18 @@
   "messages":{
     "successfullyReported":"تم الابلاغ بنجاع",
     "ownChat" :"هذا الاعلان خاص بك لذلك لا يمكنك اجراء محادثة"
+  },
+  "adsDetails":{
+    "short_description":"وصف مختصر",
+    "category":"الصنف",
+    "type":"النوع",
+    "SellerInfo":"معلومات البائع",
+    "NumberOfِAds":"عدد الإعلانات",
+    "joinDateFrom":"تاريخ التسجيل من",
+    "Description":"الوصف",
+    "Stock":"المخزون",
+    "AddToFavorites":"اضافة الى المفضلة",
+    "SecurePayment":"دفع امن"
   }
 
 }

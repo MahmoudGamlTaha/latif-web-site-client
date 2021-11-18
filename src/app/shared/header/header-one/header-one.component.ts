@@ -49,7 +49,6 @@ export class HeaderOneComponent implements OnInit {
   onLogout(){
     if(this.userProfile.id){
       // this._authService.logout(this.userProfile.id).subscribe(res =>{
-      //   console.log('res: ', res);
       // })
       this.cookieService.deleteAll();
       this.router.navigate(['/']).then(()=>{

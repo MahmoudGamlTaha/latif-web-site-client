@@ -9,12 +9,12 @@ export const environment = {
   paypal_token: 'PAYPAL_TOKEN',
   firebase: {
     apiKey: "AIzaSyCjKqhE2cxEV7_6SX0DABZWnax-XkV8x5k",
-    authDomain: "latifapp-4084e.firebaseapp.com",
-    projectId: "latifapp-4084e",
-    storageBucket: "latifapp-4084e.appspot.com",
-    messagingSenderId: "49792100598",
-    appId: "1:49792100598:web:6a82f4f911911bf0f524d7",
-    measurementId: "G-WQFZLHCCBJ"
+  authDomain: "latifapp-4084e.firebaseapp.com",
+  projectId: "latifapp-4084e",
+  storageBucket: "latifapp-4084e.appspot.com",
+  messagingSenderId: "49792100598",
+  appId: "1:49792100598:web:ba3b154c3069237ff524d7",
+  measurementId: "G-CHGV75S25S"
   }
 };
 

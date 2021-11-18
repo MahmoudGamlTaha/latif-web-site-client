@@ -62,7 +62,7 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
   getProductById(id: number) {
 
     const getAdsByIdSub = this.productService.getAdsById(id).subscribe((res: any) => {
-      console.log('res: ', res);
+      
       this.product = res.response.data
       // let retProduct = res.response.data;
       // this.product.id = retProduct.id;
@@ -279,4 +279,21 @@ export class ProductNoSidebarComponent extends AppBaseComponent implements OnIni
     })
     this.unsubscribe.push(makeReportSub)
   }
+
+  addToInterestList(){
+    const body:any = {
+      adId:this.product_id,
+      type:"INTEREST"
+    }
+    const addToInterestListSub =  this.productService.addToInterestList(body).subscribe(res =>{
+      Swal.fire({
+        title:res.message,
+        showConfirmButton: false,
+        timer:2500
+      })
+    })
+    this.unsubscribe.push(addToInterestListSub)
+
+  }
+  
 }

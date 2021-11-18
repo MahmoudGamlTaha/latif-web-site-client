@@ -137,6 +137,18 @@
   "messages":{
     "successfullyReported":"successfully Reported",
     "ownChat" :"This ad is your own so you can not hold a conversation"
+  },
+  "adsDetails":{
+    "short_description":"Short Description",
+    "category":"Category",
+    "type":"Type",
+    "SellerInfo":"Seller Info",
+    "NumberOfِAds":"Number of ads",
+    "joinDateFrom":"join Date from",
+    "Description":"Description",
+    "Stock":"Stock",
+    "AddToFavorites":"Add to Favorites",
+    "SecurePayment":"SecurePayment"
   }
 
 }

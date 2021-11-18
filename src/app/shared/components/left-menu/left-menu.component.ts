@@ -3,6 +3,7 @@ import { Menu, NavService } from '../../services/nav.service';
 
 import { CategoryService } from '../../services/category.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-left-menu',
@@ -13,7 +14,7 @@ export class LeftMenuComponent implements OnInit {
 
   public menuItems: Menu[];
 
-  constructor(private router: Router, public navServices: NavService, private categoryService:CategoryService) {
+  constructor(private router: Router, public navServices: NavService, private categoryService:CategoryService,public TranslateService:TranslateService) {
     this.menuItems = [] ; 
     this.getMenuCategory(0);
   }
@@ -60,7 +61,7 @@ export class LeftMenuComponent implements OnInit {
       menu.children = [];
     }
     
-    menu.title = element.name;
+    menu.title = this.TranslateService.currentLang ==='en' ? element.name : element.nameAr;
     menu.active = element.acive;
     menu.badge = false;
   

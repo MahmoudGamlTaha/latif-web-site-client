@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+
 import { ViewportScroller } from '@angular/common';
 
 @Component({
@@ -19,7 +20,9 @@ export class TapToTopComponent implements OnInit {
   @HostListener("window:scroll", [])
   onWindowScroll() {
     let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-  	if (number > 600) { 
+    
+  	if (number > 200) { 
+      
   	  this.show = true;
   	} else {
   	  this.show = false;

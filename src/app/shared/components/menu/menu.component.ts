@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
   }
   getMenuCategory(type:number){
     this.categoryService.getCategoryByTypeId(type).subscribe((categories :any)=>{
-      console.log('categories: ', categories);
+      
       let categoryTypes = categories.response.data;
       categoryTypes.forEach(element => {
        // 

@@ -446,6 +446,13 @@ export class UserAdsService {
     return this.http.post<any>(url_, formData)
   }
 
+  addToInterestList(request: ReportRequest): Observable<BasicResponse> {
+    let url_ = this.baseUrl + "/api/public/reportedAds/addToInterestList";
+    url_ = url_.replace(/[?&]$/, "");
+    const content_ = JSON.stringify(request);
+    return this.http.post<any>(url_, content_)
+}
+
 
 }
 

@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 })
 export class SharedService {
   sendFiles = new Subject()
+
+  sendFireBaseTokenToLogin = new Subject()
   constructor() { }
 
 }

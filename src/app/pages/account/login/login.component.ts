@@ -7,6 +7,7 @@ import { BasicResponse } from '../../../shared/models/reponse.model';
 import { CookiesData } from 'src/app/shared/services/cookies/CookiesData.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SharedService } from './../../../shared/services/shared.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,25 +25,33 @@ export class LoginComponent extends AppBaseComponent implements OnInit, OnDestro
 
   loginSub: Subscription
   profileSub: Subscription
+
+  firebaseToken;
   constructor(
     injector: Injector,
     private _authService: AuthService,
     private router: Router,
-    private cookie: CookiesData) {
+    private cookie: CookiesData,
+    private SharedService: SharedService
+  ) {
     super(injector);
   }
 
   ngOnInit(): void {
+    this.SharedService.sendFireBaseTokenToLogin.subscribe(res => {
+      this.firebaseToken = res
+    })
+
   }
 
   onSubmit(f: NgForm) {
     if (f.invalid) {
       return;
     }
-    
+
     const value = f.value;
 
-    let loginRequest: LoginRequest = { mobile: value.mobile?.number, password: value.password, token:'fpPvb_Lr9wH6DtowUzhjtT:APA91bEGtwRx40u91P5YEhDL2IvU-2X0gIcHsUKMg2_oz2jPCnLSOTNBps4iGot8DDQg3jjknYMY9PI_pAHuoR_6eAR1bgEX0ZQI_Oop-B_DDnQVwEGAaGfMCbzQBy2gKgod5vUj8QEl' }
+    let loginRequest: LoginRequest = { mobile: value.mobile?.number, password: value.password, token: this.firebaseToken }
 
     const loginSub = this._authService.login(loginRequest).subscribe((res: any) => {
       if (res) {
