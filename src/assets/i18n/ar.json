@@ -104,7 +104,13 @@
     "other":"اخرى",
     "yes":"نعم",
     "no":"لا",
-    "notFound":"لا يوجد"
+    "notFound":"لا يوجد",
+    "Category":"المجموعة",
+    "newProducts":"منتجات جديدة",
+    "pets":"حيوانات أليفة",
+    "PetCare":"عناية الحيوان",
+    "Services":"خدمات",
+    "Accessories":"اكسسوارات"
   },
   "btn": {
     "save": "حفظ",

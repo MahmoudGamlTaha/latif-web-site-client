@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { NewProductSlider } from '../../../data/slider';
 import { UserAds } from '../../../classes/UserAds';
 import { UserAdsService } from '../../../services/product.service';
@@ -27,6 +28,7 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
     filter.type = this.type;
     this.productService.getFilterAds(filter).subscribe((rawData:any) => {
       this.products = rawData.response.data;//.filter(item =>{ return item.type == this.type});
+      console.log(' this.products: ',  this.products);
       this.loading = false;
     });
   }

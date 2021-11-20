@@ -9,35 +9,43 @@
             <div class="container" *ngIf="product">
                 <div class="row">
                     <div class="col-lg-4">
-                        <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
-                            <ng-container *ngFor="let image of product?.images; index as i">
-                                <ng-template carouselSlide [id]="i">
-                                    <div>
-                                        <img [defaultImage]="'assets/images/product/placeholder.jpg'"
-                                            [lazyLoad]="image.image" [alt]="image.alt" class="img-fluid"
-                                            [src]="image.image">
+                        <ng-container *ngIf="product?.images.length; else elseTemplateImage">
+                            <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
+                                <ng-container *ngFor="let image of product?.images; index as i">
+                                    <ng-template carouselSlide [id]="i">
+                                        <div>
+                                            <img [defaultImage]="image.image ? image.image : 'assets/images/animal-placeholder.jpg'"
+                                                [lazyLoad]="image.image ? image.image : 'assets/images/animal-placeholder.jpg'" [alt]="image.alt" class="img-fluid"
+                                                [src]="image.image ? image.image : 'assets/images/animal-placeholder.jpg'"  onerror="this.src='assets/images/animal-placeholder.jpg';console.clear()">
+                                        </div>
+                                    </ng-template>
+                                </ng-container>
+                            </owl-carousel-o>
+                            <div class="row">
+                                <div class="col-12 p-0">
+                                    <div class="slider-nav no-border">
+                                        <owl-carousel-o [options]="ProductDetailsThumbConfig" class="product-slick">
+                                            <ng-container *ngFor="let image of product?.images; index as i">
+                                                <ng-template carouselSlide [id]="i">
+                                                    <div class="owl-thumb" [class.active]="i == activeSlide">
+                                                        <img [defaultImage]="image.image ? image.image : 'assets/images/animal-placeholder.jpg'"
+                                                            [lazyLoad]="image.image ? image.image : 'assets/images/animal-placeholder.jpg'" [alt]="product?.name"
+                                                            class="img-fluid details-imgs" [src]="image.image"
+                                                            (click)="owlCar.to(activeSlide = i.toString())" onerror="this.src='assets/images/animal-placeholder.jpg';console.clear()">
+                                                    </div>
+                                                </ng-template>
+                                            </ng-container>
+                                        </owl-carousel-o>
                                     </div>
-                                </ng-template>
-                            </ng-container>
-                        </owl-carousel-o>
-                        <div class="row">
-                            <div class="col-12 p-0">
-                                <div class="slider-nav no-border">
-                                    <owl-carousel-o [options]="ProductDetailsThumbConfig" class="product-slick">
-                                        <ng-container *ngFor="let image of product?.images; index as i">
-                                            <ng-template carouselSlide [id]="i">
-                                                <div class="owl-thumb" [class.active]="i == activeSlide">
-                                                    <img [defaultImage]="'assets/images/product/placeholder.jpg'"
-                                                        [lazyLoad]="image.image" [alt]="product?.name"
-                                                        class="img-fluid details-imgs" [src]="image.image"
-                                                        (click)="owlCar.to(activeSlide = i.toString())">
-                                                </div>
-                                            </ng-template>
-                                        </ng-container>
-                                    </owl-carousel-o>
                                 </div>
                             </div>
-                        </div>
+                        </ng-container>
+                        <ng-template #elseTemplateImage>
+                            <img [defaultImage]="'assets/images/animal-placeholder.jpg'"
+                                                [lazyLoad]="'assets/images/animal-placeholder.jpg'" alt="default" class="img-fluid"
+                                                [src]="'assets/images/animal-placeholder.jpg'"  onerror="this.src='assets/images/animal-placeholder.jpg';console.clear();">
+                        </ng-template>
+                        
                     </div>
                     <div class="col-lg-8">
                         <div class="row">
@@ -46,39 +54,39 @@
                                     <h2>{{ product?.name }}</h2>
                                     <div class="border-product">
                                         <h6 class="product-title"> {{'adsDetails.short_description' | translate}}</h6>
-                                        <p>{{product.short_description}}</p>
+                                        <p>{{product?.short_description}}</p>
                                     </div>
                                     <div class="single-product-tables border-product detail-section">
                                         <table>
                                             <tbody>
                                                 <tr>
                                                     <td>{{'adsDetails.category' | translate}}:</td>
-                                                    <td>{{product.categoryName}}</td>
+                                                    <td>{{ TranslateService.currentLang ==='en' ? product?.categoryName: product?.categoryNameAr }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{'adsDetails.type' | translate}}:</td>
-                                                    <td>{{product.type}}</td>
+                                                    <td>{{product?.type}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="border-product" *ngIf="product?.createdBy != null">
+                                    <div class="border-product" >
                                         <h6 class="product-title">{{'adsDetails.SellerInfo' | translate}}</h6>
                                         <div class="single-product-tables detail-section">
                                             <table>
                                                 <tbody>
                                                     <tr>
                                                         <td>{{'common.name' | translate}}:</td>
-                                                        <td> {{ product.createdBy?.firstName }} {{product.createdBy?.lastName}}
+                                                        <td> {{ product?.createdBy?.firstName }} {{product?.createdBy?.lastName}}
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td>{{'adsDetails.NumberOfِAds' | translate}}:</td>
-                                                        <td> {{product.createdBy?.adsCount}} ads</td>
+                                                        <td *ngIf="product?.createdBy?.adsCount"> {{product.createdBy?.adsCount}} ads</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td>{{'adsDetails.joinDateFrom' | translate}}:</td>
-                                                        <td> {{product.createdBy['registrationDate'] | date}}</td>
+                                                        <td *ngIf="product?.createdBy"> {{(product?.createdBy['registrationDate'] | date )}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -90,14 +98,14 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="product-right product-form-box">
-                                    <h3> {{product?.price | currency: productService.Currency?.currency:'symbol'}} </h3>
+                                    <h3> {{product?.price | currency: productService?.Currency?.currency:'symbol'}} </h3>
                                     <div class="product-description border-product">
         
                                         <h6 class="product-title">{{'adsDetails.Stock' | translate}}</h6>
                                         <div class="qty-box">
                                             <div class="input-group">
                                                 <input type="text" name="quantity" class="form-control input-number border"
-                                                    [value]="getDataFromArr(product.extra,'code','stock').value" disabled />
+                                                    [value]="getDataFromArr(product?.extra,'code','stock')?.value || 0" disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -188,33 +196,33 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <section class="tab-product m-0">
+                                <section class="tab-product m-0 pt-0">
                                     <div class="row">
                                         <div class="col-sm-12 col-lg-12">
                                             <ngb-tabset [type]="'tabs'" class="nav-material">
                                                 <ngb-tab>
-                                                    <ng-template ngbTabTitle> {{'common.info' | translate}}</ng-template>
+                                                    <ng-template ngbTabTitle> {{'profile.Info' | translate}}</ng-template>
                                                     <ng-template ngbTabContent>
                                                         <p>
                                                             <span class="border-product" >
                                                                 <div class="row">
-                                                                    <ng-container *ngFor="let info of product.extra">
+                                                                    <ng-container *ngFor="let info of product?.extra">
                                                                         <div class="col-md-4 col-sm-6 col-12 mb-2">
-                                                                            <strong>{{TranslateService.currentLang ==='en' ? info.name: info.name_ar }}</strong> :
-                                                                            <ng-container  *ngIf="(info.value | typeof) === 'string' || (info.value | typeof) === 'number'">
-                                                                                <ng-container *ngIf="info.value ==='N/A'; else elseTemplate">
+                                                                            <strong>{{TranslateService.currentLang ==='en' ? info?.name: info?.name_ar }}</strong> :
+                                                                            <ng-container  *ngIf="(info?.value | typeof) === 'string' || (info?.value | typeof) === 'number'">
+                                                                                <ng-container *ngIf="info?.value ==='N/A'; else elseTemplate">
                                                                                     {{'common.notFound' | translate}}
                                                                                 </ng-container>
                                                                                 <ng-template #elseTemplate>
-                                                                                    {{TranslateService.currentLang ==='en' ? info.value: info.value_ar }}
+                                                                                    {{TranslateService.currentLang ==='en' ? info?.value: info?.value_ar }}
                                                                                 </ng-template>
                                                                                 
                                                                                </ng-container>
-                                                                               <ng-container  *ngIf="(info.value | typeof) === 'boolean'">
-                                                                                <ng-container *ngIf="info.value">
+                                                                               <ng-container  *ngIf="(info?.value | typeof) === 'boolean'">
+                                                                                <ng-container *ngIf="info?.value">
                                                                                     {{'common.yes' | translate}}
                                                                                </ng-container>
-                                                                               <ng-container *ngIf="!info.value">
+                                                                               <ng-container *ngIf="!info?.value">
                                                                                    {{'common.no' | translate}}
                                                                               </ng-container>
                                                                                </ng-container>
@@ -232,7 +240,7 @@
                                                     <ng-template ngbTabTitle> {{'adsDetails.Description' | translate}}</ng-template>
                                                     <ng-template ngbTabContent>
                                                        <p>
-                                                        {{product.description}}
+                                                        {{product?.description}}
                                                        </p>
                                                     </ng-template>
                                                 </ngb-tab>
@@ -258,7 +266,7 @@
         <div class="px-4 py-2 d-flex justify-content-between align-items-center" [ngClass]="{'border-bottom': true}">
             <div class="d-flex align-items-center" *ngIf="true">
                 <img src="assets/images/icon/Blank-Avatar.png" class="rounded-circle avatar-xs" alt="" width="50">
-                <h5 class="font-size-15 mb-1 ml-2">{{product.createdBy?.firstName}}</h5>
+                <h5 class="font-size-15 mb-1 ml-2">{{product?.createdBy?.firstName}}</h5>
             </div>
             <div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"
@@ -274,10 +282,10 @@
                     (psScrollY)="onScrollEvent($event)">
                     <ul class="list-unstyled">
                         <li *ngFor="let data of chatMessagesData.slice().reverse()"
-                            [ngClass]="{'right': data.senderId === product.createdBy?.id}">
+                            [ngClass]="{'right': data?.senderId === product?.createdBy?.id}">
                             <div class="conversation-list">
                                 <div class="ctext-wrap">
-                                    {{ data.message }}
+                                    {{ data?.message }}
                                 </div>
 
                             </div>

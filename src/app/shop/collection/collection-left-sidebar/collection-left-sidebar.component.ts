@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
 import { UserAds } from '../../../shared/classes/UserAds';
 import { UserAdsService } from "../../../shared/services/product.service";
 import { ViewportScroller } from '@angular/common';
@@ -35,16 +36,17 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public loader: boolean;
   public adsFilter: adsFilter; 
   constructor(private route: ActivatedRoute, private router: Router,
-    private viewScroller: ViewportScroller, public productService: UserAdsService) {   
+    private viewScroller: ViewportScroller, public productService: UserAdsService,public TranslateService:TranslateService) {   
      
   }
 
 
   getData(){
+
      // Get Query params..
-    
      this.adsFilter = {type : "ALL"}  
      this.route.queryParams.subscribe(params => {
+      this.loader = true;
      this.brands = params.brand ? params.brand.split(",") : [];
      this.colors = params.color ? params.color.split(",") : [];
      this.size  = params.size ? params.size.split(",")  : [];
@@ -61,6 +63,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
        }
         this.productService.getFilterAds(this.adsFilter,this.page,this.pageSize).subscribe((items:any)=>{
           this.all_products = items.response.data;
+          console.log(' this.all_products : ',  this.all_products );
           this.loader = false;  
           this.addItems()
         });
@@ -84,6 +87,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loader = true;
+    this.route.queryParams.subscribe(params => {
+    this.products = []
+    })
     this.getData()  
   }
 
@@ -104,6 +110,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   // SortBy Filter
   sortByFilter(value) {
+    console.log('value: ', value);
     this.router.navigate([], { 
       relativeTo: this.route,
       queryParams: { sortBy: value ? value : null},

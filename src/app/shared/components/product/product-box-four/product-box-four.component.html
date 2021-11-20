@@ -8,7 +8,7 @@
             <a [routerLink]="['/shop/product-user/', product.id]">
                 <img [defaultImage]="ImageSrc ? (ImageSrc? ImageSrc:'assets/images/product/placeholder.jpg') : 'assets/images/product/placeholder.jpg'" 
                      [lazyLoad]="product.images!= null && product.images[0] ?( product.images[0]? product.images[0]: 'assets/images/product/placeholder.jpg') :(ImageSrc? ImageSrc:'assets/images/product/placeholder.jpg')"  
-                     class="img-fluid lazy-loading product-size" alt="" onerror="this.src='assets/images/product/placeholder.jpg'" >
+                     class="img-fluid lazy-loading product-size" alt="" onerror="this.src='assets/images/product/placeholder.jpg';console.clear()" >
             </a>
         </div>
         <!-- <div class="back" *ngIf="onHowerChangeImage">

@@ -1,38 +1,27 @@
 <app-header-one [themeLogo]="themeLogo"></app-header-one>
 
-<!-- Home slider start-->
-<!-- <section class="p-0">
-  <app-slider 
-    [sliders]="sliders" 
-    [textClass]="'text-center'"
-    [category]="''"
-    [buttonClass]="'black-btn'"
-    [buttonText]="'shop now'"> 
-  </app-slider>
-</section> -- >
-<!-- Home slider End -->
 
 <!-- Categories start-->
-<div class="container">
+<div class="container" *ngIf="!loading_petCategories">
     <section class="section-b-space">
         <div class="row">
             <div class="col">
                 <div class="slide-6">
                     <owl-carousel-o [options]="CategorySliderConfig">
-                        <ng-container *ngFor="let category of petCategories">
+                        <ng-container *ngFor="let item of petCategories">
                           
                             <ng-template carouselSlide>
                                 <div class="category-block">
                                     <a [routerLink]="['/shop/collection/left/sidebar']"
-                                       [queryParams]="{ category: category.category.id}">
-                                        <div class="category-image">
-                                            <img [src]="category.category.iconSelect" alt="category.category.name" class="w-auto icon-size" onerror="this.src='assets/images/icon/pawprint.png';" >
+                                       [queryParams]="{ category: item?.category?.id}">
+                                        <div class="category-image" *ngIf="item?.category">
+                                            <img [src]="item?.category?.iconSelect?item?.category?.iconSelect:'assets/images/icon/pawprint.png'" [alt]="item.category.name" class="w-auto icon-size" onerror="this.src='assets/images/icon/pawprint.png';console.clear()" >
                                         </div>
                                     </a>
                                     <div class="category-details">
                                         <a [routerLink]="['/shop/collection/left/sidebar']"
-                                           [queryParams]="{ category: category.category.id}"> 
-                                            <h5>{{ TranslateService.currentLang ==='en' ? category.category.name : category.category.nameAr  }}</h5>
+                                           [queryParams]="{ category: item.category.id}"> 
+                                            <h5>{{ TranslateService.currentLang ==='en' ? item.category.name : item.category.nameAr  }}</h5>
                                         </a>
                                     </div>
                                 </div>
@@ -108,26 +97,26 @@
       <div class="row multiple-slider">
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
-              [title]="'Pets'"
+              [title]="'common.pets' | translate"
               [type]="'PETS'">    
             </app-product-box-vertical-slider>
           </div>
           
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
-              [title]="'Pet Care'"
+              [title]="'common.PetCare' | translate"
               [type]="'PET_CARE'">    
             </app-product-box-vertical-slider>
           </div>
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
-              [title]="'Services'"
+              [title]="'common.Services' | translate"
               [type]="'SERVICE'">    
             </app-product-box-vertical-slider>
           </div>
           <div class="col-lg-3 col-sm-6">
             <app-product-box-vertical-slider 
-              [title]="'Accesories'"
+              [title]="'common.Accessories' | translate"
               [type]="'ACCESSORIES'">    
             </app-product-box-vertical-slider>
           </div>
@@ -137,7 +126,7 @@
 <!-- product slider end -->
 
 <!-- category size -->
-<section class="p-0">
+<!-- <section class="p-0">
   <div class="container">
       <div class="row background">
           <div class="col" *ngFor="let size of sizes">
@@ -150,11 +139,11 @@
           </div>
       </div>
   </div>
-</section>
+</section> -->
 <!-- category size end-->
 
 <!-- Tab product start-->
-<div class="title1 section-t-space">
+<!-- <div class="title1 section-t-space">
   <h4>exclusive products</h4>
   <h2 class="title-inner1">special user Ads</h2>
 </div>
@@ -184,7 +173,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <!-- Tab product End -->
 
 <!-- blog section start-->

@@ -12,10 +12,10 @@
                   <div class="media" *ngFor="let product of products | slice:0:3 ">
                     <a [routerLink]="['/shop/product-user/', product.id]">
                       <img class="img-fluid w-auto img-slide-size"
-                           [defaultImage]="'assets/images/product/placeholder.jpg'" 
-                           [lazyLoad]="product.images==null?null:product.images[0]" alt="">
+                           [defaultImage]="product.images[0]?product.images[0].image:'assets/images/animal-placeholder.jpg'" 
+                           [lazyLoad]="product.images[0]?product.images[0].image:'assets/images/animal-placeholder.jpg'" alt="" onerror="this.src='assets/images/animal-placeholder.jpg';console.clear()"/>
                     </a>
-                    <div class="media-body align-self-center">
+                    <div class="media-body align-self-center mr-2">
                       <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
                       <a [routerLink]="['/shop/product-user/', product.id]">
                       <h6>{{ product.name | titlecase }}</h6></a>
@@ -36,10 +36,10 @@
                   <div class="media" *ngFor="let product of products | slice:3:6 ">
                     <a [routerLink]="['/shop/product-user/', product.id]">
                       <img class="img-fluid w-auto img-slide-size" 
-                           [defaultImage]="'assets/images/product/placeholder.jpg'" 
-                           [lazyLoad]="product.images==null?null:product?.images[0]?.image" alt="">
+                           [defaultImage]="product.images[0]?product.images[0].image:'assets/images/animal-placeholder.jpg'" 
+                           [lazyLoad]="product.images[0]?product.images[0].image:'assets/images/animal-placeholder.jpg'" alt="" onerror="this.src='assets/images/animal-placeholder.jpg';console.clear()"/>
                     </a>
-                    <div class="media-body align-self-center">
+                    <div class="media-body align-self-center mr-2">
                       <!-- <bar-rating [rate]="5" [readOnly]="true"></bar-rating> -->
                       <a [routerLink]="['/shop/product-user/', product.id]">
                       <h6>{{ product.name | titlecase }}</h6></a>

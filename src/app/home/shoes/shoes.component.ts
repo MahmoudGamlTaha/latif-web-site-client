@@ -23,7 +23,8 @@ export class ShoesComponent implements OnInit, OnDestroy {
   public current_page:number = 0;
   public CategorySliderConfig: any = CategorySlider;
   public ProductSliderConfig: any = ProductSlider;
-  
+
+  loading_petCategories = false
   constructor(public productService: UserAdsService, public blogService: BlogService, public categoryService: CategoryService, public TranslateService:TranslateService) {
     this.getProduct();
     this.getBlog();
@@ -45,10 +46,11 @@ public getProduct(){
   });
 }
 public getPetCategories(){
-  
+  this.loading_petCategories = true;
   this.categoryService.getPetCategory().subscribe((rawData:any)=> {
      this.petCategories = rawData.response.data;
-     
+     console.log('this.petCategories : ', this.petCategories );
+     this.loading_petCategories = false
   });
 }
 public getBlog(){

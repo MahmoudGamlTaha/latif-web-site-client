@@ -104,7 +104,13 @@
     "other":"Other",
     "yes":"Yes",
     "no":"No",
-    "notFound":"Not found"
+    "notFound":"Not found",
+    "Category":"Category",
+    "newProducts":"New Products",
+    "pets":"Pets",
+    "PetCare":"Pet Care",
+    "Services":"Services",
+    "Accessories":"Accessories"
   },
   "btn":{
     "save":"Save",

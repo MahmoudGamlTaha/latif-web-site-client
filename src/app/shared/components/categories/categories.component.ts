@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { UserAds } from '../../classes/UserAds';
 import { UserAdsService } from '../../services/product.service';
 
@@ -20,7 +21,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   get filterbyCategory() {
-    const category = [...new Set(this.products.map(product => product.type))]
+    const category = [...new Set(this.products.map(product => product?.type))]
     return category
   }
 

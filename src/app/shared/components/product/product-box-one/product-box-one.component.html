@@ -13,7 +13,7 @@
           [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/animal-placeholder.jpg'" 
           [lazyLoad]="ImageSrc ? ImageSrc : 'assets/images/animal-placeholder.jpg'" 
           class="img-fluid lazy-loading imgSize" 
-          [alt]="product.name"   onerror="this.src='assets/images/animal-placeholder.jpg'"/>
+          [alt]="product.name"   onerror="this.src='assets/images/animal-placeholder.jpg';console.clear()"/>
       </a>
     </div>
     <!-- <div class="back" *ngIf="onHowerChangeImage">

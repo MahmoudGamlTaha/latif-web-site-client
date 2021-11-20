@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
-import { UserAdsService } from "../../../shared/services/product.service";
-import { UserAds } from '../../../shared/classes/UserAds';
 import * as _ from 'lodash'
+
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+import { UserAds } from '../../../shared/classes/UserAds';
+import { UserAdsService } from "../../../shared/services/product.service";
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-collection-infinitescroll',
@@ -87,6 +89,7 @@ export class CollectionInfinitescrollComponent implements OnInit {
     // add another items
     this.addItemCount += 8;
     this.addItems();
+    alert(true)
   }
 
   // Append filter value to Url
