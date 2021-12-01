@@ -41,6 +41,8 @@ import { SearchComponent } from './search/search.component';
 import { SharedModule } from '../shared/shared.module';
 import { TypographyComponent } from './typography/typography.component';
 import { WishlistComponent } from './account/wishlist/wishlist.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 // Pages Components
 // Blog Components
@@ -79,6 +81,7 @@ import { WishlistComponent } from './account/wishlist/wishlist.component';
     MasonryGridThreeComponent,
     MasonryGridFourComponent,
     MasonryFullWidthComponent,
+    SubscribeComponent,
     
   ],
   imports: [
@@ -92,6 +95,7 @@ import { WishlistComponent } from './account/wishlist/wishlist.component';
     NgbModule,
     InfiniteScrollModule,
     PerfectScrollbarModule,
+    UiSwitchModule
   ]
 })
 export class PagesModule { }

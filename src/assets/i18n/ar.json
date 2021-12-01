@@ -93,7 +93,9 @@
     "chat": "محادثة",
     "language": "اللغة",
     "interests": "اهتمامتك",
-    "chatPlaceHolder": "اكتب الرسالة الخاصة بك..."
+    "chatPlaceHolder": "اكتب الرسالة الخاصة بك...",
+    "favourite":"المفضلة",
+    "active":"تفعيل"
   },
   "common": {
     "name": "الاسم",
@@ -117,7 +119,8 @@
     "send": "ارسال",
     "done": "تم",
     "createAccount": "إنشاء حساب",
-    "close":"اغلاق"
+    "close":"اغلاق",
+    "select":"اختر"
   },
   "auth": {
     "login": "تسجيل دخول",
@@ -156,6 +159,12 @@
     "Stock":"المخزون",
     "AddToFavorites":"اضافة الى المفضلة",
     "SecurePayment":"دفع امن"
+  },
+  "Subscribe":{
+    "title":"الاشتراك",
+    "for":"لكل",
+    "day":"يوم",
+    "numberOfUsers":"عدد المستخدمين"
   }
 
 }

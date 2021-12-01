@@ -33,53 +33,64 @@ export class ProfileComponent extends AppBaseComponent implements OnInit, OnDest
   chatData: []
 
   chatSubmit: boolean
-  userNameChat:string
+  userNameChat: string
   selectedUser
-  myInterestCategoriesArr= []
-  selectedInterestCategoriesArr:any= []
+  myInterestCategoriesArr = []
+  selectedInterestCategoriesArr: any = []
   @ViewChild('chatPS') chatPS: PerfectScrollbarComponent
   @ViewChild('f') f: NgForm
 
   reloadChat = true;
+
+  favouriteList = []
+  activeIdString = 'Info';
   constructor(
     injector: Injector,
     public ProfileService: ProfileService,
     private cookie: CookiesData,
-    public productService:UserAdsService,
-    private route: ActivatedRoute, 
+    public productService: UserAdsService,
+    private route: ActivatedRoute,
     private router: Router,
     private viewScroller: ViewportScroller,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
 
-    ) {
-      super(injector)
+  ) {
+    super(injector)
 
-      this.updateSvcForm = this.fb.group({
-        interests: this.fb.array([]),
-      });
-  
+    this.updateSvcForm = this.fb.group({
+      interests: this.fb.array([]),
+    });
+
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(res =>{
+      if(res['type'] === 'favourite'){
+        this.activeIdString = 'favourite'
+        this.products = []
+        this.all_products = []
+        this.favourite()
+      }
+    })
     if (this.cookie.checkUserProfile) this.userProfile = JSON.parse(this.cookie.getUserProfile())
   }
 
   // get my ads
 
-  myAds(){
-   const getSub =  this.ProfileService.myAds(String(this.page), String(this.pageSize)).subscribe(result => {
-      this.all_products = result.response.data 
-      this.addItems(this.start, this.pageSize)  
+  myAds() {
+    const getSub = this.ProfileService.myAds(String(this.page), String(this.pageSize)).subscribe(result => {
+      this.all_products = result.response.data
+      this.addItems(this.start, this.pageSize)
     })
     this.unsubscribe.push(getSub)
   }
   onScrollEvent(e) {
-    if(this.reloadChat){
+    if (this.reloadChat) {
       if (this.chatPS.directiveRef.position().y === 'start') {
-        const getSub =   this.ProfileService.nextPageById(this.chatMessagesData[this.chatMessagesData.length - 1]['id'], this.chatMessagesData[this.chatMessagesData.length - 1]['room']).subscribe(res2 => {
-          if(!res2.response.data.length) this.reloadChat = false
-          this.chatMessagesData = [ ...this.chatMessagesData,...res2.response.data]
+        const getSub = this.ProfileService.nextPageById(this.chatMessagesData[this.chatMessagesData.length - 1]['id'], this.chatMessagesData[this.chatMessagesData.length - 1]['room']).subscribe(res2 => {
+          if (!res2.response.data.length) this.reloadChat = false
+          this.chatMessagesData = [...this.chatMessagesData, ...res2.response.data]
           setTimeout(() => {
             this.cdr.detectChanges()
           }, 100);
@@ -89,86 +100,106 @@ export class ProfileComponent extends AppBaseComponent implements OnInit, OnDest
       }
     }
   }
-  myChat(){
-    const getSub =  this.ProfileService.myChat(String(this.page)).subscribe(result => {
-       this.chatData = result.response.data 
-       
-     })
-     this.unsubscribe.push(getSub)
-   }
+  myChat() {
+    const getSub = this.ProfileService.myChat(String(this.page)).subscribe(result => {
+      this.chatData = result.response.data
 
+    })
+    this.unsubscribe.push(getSub)
+  }
 
-   
-   nextPageById(message_id,room){
-     this.chatMessagesData = []
-    const getSub =  this.ProfileService.nextPageById(message_id,room).subscribe(result => {
-       this.chatMessagesData = result.response.data
-       setTimeout(() => {
+  favourite(){
+    const getSub = this.ProfileService.interested(String(this.page), String(this.pageSize)).subscribe(result => {
+      this.all_products = result.response.data
+      this.addItems(this.start, this.pageSize)
+    })
+    this.unsubscribe.push(getSub)
+  }
+  onRemoveFav(item){
+    console.log('item: ', item);
+    const getSub = this.ProfileService.removeInterested(item.id).subscribe(result => {
+      console.log('result: ', result);
+     
+    })
+    this.unsubscribe.push(getSub)
+  }
+  nextPageById(message_id, room) {
+    this.chatMessagesData = []
+    const getSub = this.ProfileService.nextPageById(message_id, room).subscribe(result => {
+      this.chatMessagesData = result.response.data
+      setTimeout(() => {
         this.chatPS.directiveRef.scrollToBottom()
       }, 200)
-     })
-     this.unsubscribe.push(getSub)
-   }
-   
-   categoryInterestGet(){
-    const getSub =  this.ProfileService.categoryInterestGet('0').subscribe(result => {
-       this.myInterestCategoriesArr = result.response.data 
-       this.myInterestCategoriesArr.forEach(v => {v.category.checked = false;});
-       
-       this.myInterestCategories()
-     })
-     this.unsubscribe.push(getSub)
-   }
-   
-   myInterestCategories(){
-    const getSub =  this.ProfileService.myInterestCategories().subscribe(result => {
-     this.selectedInterestCategoriesArr = result.response.data.map(({id}) =>(id))
-     this.myInterestCategoriesArr.map(x => {
-      this.selectedInterestCategoriesArr.indexOf(x.category.id) >= 0 ? x.category.checked = true : x.category.checked = false
-     })
-     this.selectedInterestCategoriesArr.map((x) => this.ssArray.push(this.fb.control(x)))
-     })
-     this.unsubscribe.push(getSub)
-   }
-   
-  addItems(index, sum) {  
-    if(this.products.length < this.all_products.length){
-      this.finished = true
-      for (let i = index; i < sum; ++i) {  
-        this.products = this.all_products
-      }  
-    }
-  
-  }
-  
-  onScroll(){
-    this.start = this.pageSize  
-    this.pageSize += 20  
-    this.myAds()  
+    })
+    this.unsubscribe.push(getSub)
   }
 
-  onChangeTabe(v){
-    if(v.nextId === 'MyAds'){
+  categoryInterestGet() {
+    const getSub = this.ProfileService.categoryInterestGet('0').subscribe(result => {
+      this.myInterestCategoriesArr = result.response.data
+      this.myInterestCategoriesArr.forEach(v => { v.category.checked = false; });
+
+      this.myInterestCategories()
+    })
+    this.unsubscribe.push(getSub)
+  }
+
+  myInterestCategories() {
+    const getSub = this.ProfileService.myInterestCategories().subscribe(result => {
+      this.selectedInterestCategoriesArr = result.response.data.map(({ id }) => (id))
+      this.myInterestCategoriesArr.map(x => {
+        this.selectedInterestCategoriesArr.indexOf(x.category.id) >= 0 ? x.category.checked = true : x.category.checked = false
+      })
+      this.selectedInterestCategoriesArr.map((x) => this.ssArray.push(this.fb.control(x)))
+    })
+    this.unsubscribe.push(getSub)
+  }
+
+  addItems(index, sum) {
+    if (this.products.length < this.all_products.length) {
+      this.finished = true
+      for (let i = index; i < sum; ++i) {
+        this.products = this.all_products
+      }
+    }
+
+  }
+
+  onScroll() {
+    this.start = this.pageSize
+    this.pageSize += 20
+    this.myAds()
+  }
+
+  onChangeTabe(v) {
+    if (v.nextId === 'MyAds') {
+      this.products = []
+      this.all_products = []
       this.myAds()
-    }else if(v.nextId === 'chat'){
+    } else if (v.nextId === 'chat') {
       this.myChat()
-    }else if(v.nextId === 'interests'){
+    } else if (v.nextId === 'interests') {
       this.categoryInterestGet()
     }
+    else if (v.nextId === 'favourite') {
+      this.products = []
+      this.all_products = []
+      this.favourite()
+    }
   }
 
-  messageSave(f:NgForm){
-    if(this.selectedUser){
-      const body :any ={
+  messageSave(f: NgForm) {
+    if (this.selectedUser) {
+      const body: any = {
         ad_item: this.selectedUser?.itemId,
         device_id: 'web',
         device_model: 'web',
         message: f.value.message,
-        room:  this.selectedUser?.room,
+        room: this.selectedUser?.room,
         sender: JSON.parse(this.cookie.getUserProfile())?.id || undefined
       }
-      const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res =>{
-        body['senderId'] =JSON.parse(this.cookie.getUserProfile())?.id 
+      const sndMsgSub = this.ProfileService.sndMsg(body).subscribe(res => {
+        body['senderId'] = JSON.parse(this.cookie.getUserProfile())?.id
         this.chatMessagesData.unshift(body)
         f.reset()
         setTimeout(() => {
@@ -177,7 +208,7 @@ export class ProfileComponent extends AppBaseComponent implements OnInit, OnDest
       })
       this.unsubscribe.push(sndMsgSub)
     }
-   
+
   }
 
   chatUsername(data) {
@@ -202,15 +233,19 @@ export class ProfileComponent extends AppBaseComponent implements OnInit, OnDest
       this.ssArray.removeAt(this.ssArray.value.findIndex(x => x === event.target.value))
     }
   }
-  onSubmitInterests(){
-    
-    const saveCategoryInterestSub = this.ProfileService.saveCategoryInterest(this.updateSvcForm.value.interests,this.userProfile.id).subscribe(res => {
-      
-      
-      
+  onSubmitInterests() {
+
+    const saveCategoryInterestSub = this.ProfileService.saveCategoryInterest(this.updateSvcForm.value.interests, this.userProfile.id).subscribe(res => {
+
+
+
 
     })
     this.unsubscribe.push(saveCategoryInterestSub)
   }
 
+  onChangeActive(e){
+    console.log('e: ', e);
+    
+  }
 }

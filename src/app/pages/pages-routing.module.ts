@@ -33,6 +33,7 @@ import { ProfileComponent } from './account/profile/profile.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ReviewComponent } from './review/review.component';
 import { SearchComponent } from './search/search.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
 import { TypographyComponent } from './typography/typography.component';
 import { WishlistComponent } from './account/wishlist/wishlist.component';
 
@@ -66,6 +67,11 @@ const routes: Routes = [
   { 
     path: 'profile', 
     component: ProfileComponent,
+    canActivate: [AppRouteGuard2]
+  },
+  { 
+    path: 'subscribe', 
+    component: SubscribeComponent,
     canActivate: [AppRouteGuard2]
   },
   { 

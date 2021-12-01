@@ -1,0 +1,29 @@
+<app-breadcrumb [title]="('Subscribe.title' | translate)" [breadcrumb]="('Subscribe.title' | translate)">
+</app-breadcrumb>
+<!-- personal deatail section start -->
+<section class="contact-page register-page section-b-space">
+    <div class="container">
+        <div class="row">
+            <ng-container *ngFor="let item of subscriptionArr">
+                <div class="col-md-4 mb-3">
+                    <div class="card box-shadow">
+                        <div class="card-body text-center">
+                            <h3 class="text-center mb-1">{{item.price  | currency:currency?.currency:'symbol'}}</h3>
+                            <h5 class="text-center mb-3 font-weight-bold text-muted"> {{'Subscribe.for' | translate}}
+                                {{item.periodInDays}} {{'Subscribe.day' | translate}}</h5>
+                            <h4 class=" text-center mb-3">
+                                {{TranslateService.currentLang ==='en' ? item.name: item.nameAr}}</h4>
+
+                            <div class="d-flex justify-content-lg-around flex-lg-row flex-column align-items-center">
+                                <p class="text-center text-muted"> <strong>{{'adsDetails.NumberOfِAds' | translate}}</strong> : {{item.adsNumber?item.adsNumber:0}}</p>
+                                <P class="text-center text-muted"> <strong>{{'Subscribe.numberOfUsers' | translate}} </strong>: {{item.numberUser?item.numberUser:0}}</P>
+                            </div>
+                            <button class="btn btn-solid px-5 py-2"> {{'btn.select' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</section>

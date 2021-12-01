@@ -93,7 +93,9 @@
     "chat": "Chat",
     "language": "Language",
     "interests": "Your interests",
-    "chatPlaceHolder":"Type your message..."
+    "chatPlaceHolder":"Type your message...",
+    "favourite":"Favourite",
+    "active":"Active"
   },
   "common": {
     "name": "Name",
@@ -117,7 +119,8 @@
     "send":"Send",
     "done":"Done",
     "createAccount": "Create Account",
-    "close":"Close"
+    "close":"Close",
+    "select":"Select"
   },
   "auth":{
     "login":"Login",
@@ -156,6 +159,13 @@
     "Stock":"Stock",
     "AddToFavorites":"Add to Favorites",
     "SecurePayment":"SecurePayment"
+  },
+  "Subscribe":{
+    "title":"Subscribe",
+    "for":"For every",
+    "day":"days",
+    "numberOfUsers":"Number Of Users"
   }
+
 
 }

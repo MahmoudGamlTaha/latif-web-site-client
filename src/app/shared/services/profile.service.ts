@@ -77,6 +77,23 @@ export class ProfileService {
     return this.http.post<any>(url_, content_)
   }
 
+
+  interested(page: string | null | undefined, pageSize: string | null | undefined): Observable<BasicResponse> {
+    let url_ = server.url + "/api/public/reportedAds/interested?";
+    if (page !== undefined && page !== null)
+      url_ += "page=" + encodeURIComponent("" + page) + "&";
+    if (pageSize !== undefined && pageSize !== null)
+      url_ += "pageSize=" + encodeURIComponent("" + pageSize) + "&";
+    url_ = url_.replace(/[?&]$/, "");
+    return this.http.get<any>(url_)
+
+  }
+  removeInterested(id): Observable<BasicResponse> {
+    let url_ = server.url + `/api/public/reportedAds/remove-by-item?id=${id}&type=2`;
+    return this.http.post<any>(url_,'')
+
+  }
+
 }
 
 

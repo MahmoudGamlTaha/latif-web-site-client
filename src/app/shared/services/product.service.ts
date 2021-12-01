@@ -20,7 +20,7 @@ const state = {
 })
 export class UserAdsService {
 
-  public Currency = { name: 'SAR', currency: 'SAR', price: 1 } // Default Currency
+  public Currency = { name: 'SAR ', currency: 'SAR ', price: 1 } // Default Currency
   public OpenCart: boolean = false;
   public userAds;
 

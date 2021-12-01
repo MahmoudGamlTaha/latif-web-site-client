@@ -10,6 +10,7 @@ export class AppBaseComponent implements OnDestroy{
   unsubscribe: Subscription[] = [];
 
   refresh = new Subject();
+  isLoading = false ;
 
   constructor(injector: Injector) { }
 
