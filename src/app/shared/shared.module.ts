@@ -15,7 +15,7 @@ import { CreateAdsComponent } from './components/create-ads/create-ads.component
 import { DiscountPipe } from './pipes/discount.pipe';
 import { FooterFourComponent } from './footer/footer-four/footer-four.component';
 import { FooterOneComponent } from './footer/footer-one/footer-one.component';
-import { FooterThreeComponent } from './footer/footer-three/footer-three.component';
+import { LatifFooterComponent } from './footer/latif-footer/latif-footer.component';
 import { FooterTwoComponent } from './footer/footer-two/footer-two.component';
 import { GridComponent } from '../shop/collection/widgets/grid/grid.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -69,7 +69,7 @@ import { VideoModalComponent } from './components/modal/video-modal/video-modal.
     HeaderTwoComponent,
     FooterTwoComponent,
     HeaderThreeComponent,
-    FooterThreeComponent,
+    LatifFooterComponent,
     HeaderFourComponent,
     FooterFourComponent,
     LeftMenuComponent,
@@ -139,7 +139,7 @@ import { VideoModalComponent } from './components/modal/video-modal/video-modal.
     HeaderTwoComponent,
     FooterTwoComponent,
     HeaderThreeComponent,
-    FooterThreeComponent,
+    LatifFooterComponent,
     HeaderFourComponent,
     FooterFourComponent,
     BreadcrumbComponent,

@@ -3,10 +3,10 @@ import { server } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer-three',
-  templateUrl: './footer-three.component.html',
-  styleUrls: ['./footer-three.component.scss']
+  templateUrl: './latif-footer.component.html',
+  styleUrls: ['./latif-footer.component.scss']
 })
-export class FooterThreeComponent implements OnInit {
+export class LatifFooterComponent implements OnInit {
 
   @Input() class: string; // Default class 
   @Input() mainFooter: boolean = true; // Default true 

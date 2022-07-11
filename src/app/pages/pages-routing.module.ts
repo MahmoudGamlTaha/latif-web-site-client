@@ -71,8 +71,7 @@ const routes: Routes = [
   },
   { 
     path: 'subscribe', 
-    component: SubscribeComponent,
-    canActivate: [AppRouteGuard2]
+    component: SubscribeComponent
   },
   { 
     path: 'contact', 

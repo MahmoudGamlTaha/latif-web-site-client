@@ -19,8 +19,9 @@ export const environment = {
 };
 
 export const server = {
-  url:'https://latifapp.herokuapp.com',
+ // url:'https://latifapp.herokuapp.com',
  // url:'http://localhost:8070/',
+  url: 'http://194.163.180.99:8070',
   name:'latif-app website'
 }
 /*
