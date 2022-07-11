@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { ToolsComponent } from './tools/tools.component';
-import { ShoesComponent } from './shoes/shoes.component';
+import { LatifHomeComponent } from './main/latif-home.component';
 // Widgest Components
 import { SliderComponent } from './widgets/slider/slider.component';
 import { BlogComponent } from './widgets/blog/blog.component';
@@ -16,7 +16,7 @@ import { CollectionComponent } from './widgets/collection/collection.component';
   declarations: [
     
     ToolsComponent,
-    ShoesComponent,
+    LatifHomeComponent,
     SliderComponent,
     BlogComponent,
     LogoComponent,

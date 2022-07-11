@@ -9,11 +9,11 @@ import { UserAds } from '../../shared/classes/UserAds';
 import { UserAdsService } from '../../shared/services/product.service';
 
 @Component({
-  selector: 'app-shoes',
-  templateUrl: './shoes.component.html',
-  styleUrls: ['./shoes.component.scss']
+  selector: 'app-latif',
+  templateUrl: './latif-home.component.html',
+  styleUrls: ['./latif-home.component.scss']
 })
-export class ShoesComponent implements OnInit, OnDestroy {
+export class LatifHomeComponent implements OnInit, OnDestroy {
 
   public themeLogo: string = 'https://res.cloudinary.com/highcoder/image/upload/v1621478193/pet-app/web/logo_xwhfvi.png'; // Change Logo
   

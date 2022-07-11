@@ -25,7 +25,7 @@ export class SubscribeComponent extends AppBaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSub()
+   this.getSub()
   }
 
   getSub(){

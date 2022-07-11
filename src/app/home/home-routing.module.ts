@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ToolsComponent } from './tools/tools.component';
-import { ShoesComponent } from './shoes/shoes.component';
+import { LatifHomeComponent } from './main/latif-home.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    component: ShoesComponent
+    component: LatifHomeComponent
   }
 ];
 

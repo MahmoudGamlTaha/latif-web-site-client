@@ -11,6 +11,7 @@ import { BlogService } from 'src/app/shared/services/blog.service';
 })
 export class BlogDetailsComponent implements OnInit {
   blog:Blog;
+  mainImage:string;
   constructor(private blogService:BlogService, private route:ActivatedRoute, private router:Router) { 
     this.blog = new Blog();    
   }
@@ -35,7 +36,7 @@ export class BlogDetailsComponent implements OnInit {
         this.blog.description = item.description;
         this.blog.CreatedAt = item.createdDate;
         
-       
+       this.mainImage = this.blog.image;
         if(item.user != null){
           this.blog.createdBy = item.user;
           this.blog.createdBy.avatar = item.user.avatar;
@@ -51,5 +52,11 @@ export class BlogDetailsComponent implements OnInit {
     });
  //   
    }
-
+  public changeImg(image:string){
+    alert(image);
+    this.mainImage = image;
+  }
+  public test(){
+    alert(88);
+  }
 }
